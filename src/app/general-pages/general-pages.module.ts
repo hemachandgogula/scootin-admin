@@ -12,13 +12,15 @@ import { AddPromocodesComponent } from './add-promocodes/add-promocodes.componen
 import { PromocodeListComponent } from './promocode-list/promocode-list.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { AddCategoriesComponent } from './add-categories/add-categories.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
-const routes : Routes = [
+const routes: Routes = [
   { path: 'blank-page', component: BlankPageComponent },
   { path: 'add-shop', component: AddShopComponent },
   { path: 'add-categories', component: AddCategoriesComponent },
   { path: 'add-deliverypeople', component: AddDeliverypeopleComponent },
   { path: 'add-promocode', component: AddPromocodesComponent },
+  { path: 'add-user', component: AddUserComponent },
   { path: 'shop-list', component: ShopListComponent },
   { path: 'categories-list', component: CategoriesListComponent },
   { path: 'deliverypeople-list', component: DeliverypeopleListComponent },
@@ -27,7 +29,7 @@ const routes : Routes = [
 ]
 
 @NgModule({
-  declarations: [BlankPageComponent, AddShopComponent, ShopListComponent, UserListComponent, DeliverypeopleListComponent, AddDeliverypeopleComponent, AddPromocodesComponent, PromocodeListComponent, CategoriesListComponent, AddCategoriesComponent],
+  declarations: [BlankPageComponent, AddShopComponent, ShopListComponent, UserListComponent, DeliverypeopleListComponent, AddDeliverypeopleComponent, AddPromocodesComponent, PromocodeListComponent, CategoriesListComponent, AddCategoriesComponent, AddUserComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
