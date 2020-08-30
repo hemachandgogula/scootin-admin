@@ -13,6 +13,7 @@ import { PromocodeListComponent } from './promocode-list/promocode-list.componen
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { AddCategoriesComponent } from './add-categories/add-categories.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { UploadShopComponent } from './upload-shop/upload-shop.component';
 
 const routes: Routes = [
   { path: 'blank-page', component: BlankPageComponent },
@@ -26,10 +27,11 @@ const routes: Routes = [
   { path: 'deliverypeople-list', component: DeliverypeopleListComponent },
   { path: 'promocode-list', component: PromocodeListComponent },
   { path: 'user-list', component: UserListComponent },
+  { path: 'upload-shop', component: UploadShopComponent }
 ]
 
 @NgModule({
-  declarations: [BlankPageComponent, AddShopComponent, ShopListComponent, UserListComponent, DeliverypeopleListComponent, AddDeliverypeopleComponent, AddPromocodesComponent, PromocodeListComponent, CategoriesListComponent, AddCategoriesComponent, AddUserComponent],
+  declarations: [BlankPageComponent, AddShopComponent, ShopListComponent, UserListComponent, DeliverypeopleListComponent, AddDeliverypeopleComponent, AddPromocodesComponent, PromocodeListComponent, CategoriesListComponent, AddCategoriesComponent, AddUserComponent,UploadShopComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

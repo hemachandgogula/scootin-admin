@@ -17,6 +17,7 @@ $white-smoke:       #f2f7f8;
 $violet:            #41478a;
 $darkslategray :    #2e383e;
 $dodger-blue :      #3498db;
+$dark-blue:         #0f3a5a;
 
 
 $colors: (
@@ -41,12 +42,12 @@ $colors: (
 
 
 $theme-colors: (
-  primary:         #b66dff,
+  primary:         #0f3a5a,
   secondary:       #d8d8d8,
-  success:         #1bcfb4,
+  success:         #1EAF7E,
   info:            #198ae3,
   warning:         #fed713,
-  danger:          #fe7c96,
+  danger:          #FF002C,
   light:           #f8f9fa,
   dark:            #3e4b5b
 );
@@ -94,10 +95,10 @@ $social-colors: (
 
 ////////// FONTS//
 
-$type1-light:     'ubuntu-light', sans-serif;
-$type1-regular:    'ubuntu-regular', sans-serif;
-$type1-medium:    'ubuntu-medium', sans-serif;
-$type1-bold:     'ubuntu-bold', sans-serif;
+$type1-light:     'Open Sans', sans-serif;
+$type1-regular:    'Open Sans', sans-serif;
+$type1-medium:    'Open Sans', sans-serif;
+$type1-bold:     'Open Sans', sans-serif;
 
 $default-font-size: .875rem; // 14px as base font size
 
@@ -107,7 +108,7 @@ $body-color: #343a40;
 ////////// FONT VARIABLES //////////
 
 ////////// SIDEBAR ////////
-$sidebar-width-lg: 260px;
+$sidebar-width-lg: 200px;
 $sidebar-width-mini: 185px;
 $sidebar-width-icon: 70px;
 
@@ -115,7 +116,7 @@ $sidebar-bg: $white;
 $sidebar-menu-color: #3e4b5b;
 $sidebar-submenu-color: #888;
 $sidebar-menu-active-bg: $white;
-$sidebar-menu-active-color: theme-color(primary);
+$sidebar-menu-active-color: $dark-blue;
 $sidebar-menu-hover-bg: darken($sidebar-bg, 1%);
 $sidebar-menu-hover-color: darken($sidebar-menu-color, 10%);
 $sidebar-submenu-hover-color: darken($sidebar-submenu-color, 20%);
@@ -147,10 +148,11 @@ $icon-only-menu-bg-light: $sidebar-bg;
 ///////// NAVBAR ////////
 
 $navbar-height: 70px;
-$navbar-bg: #fff;
-$navbar-menu-color: #9c9fa6;
+$navbar-bg: #0f3a5a;
+$navbar-menu-color: #ffff;
 $navbar-font-size: .875rem;
 $navbar-icon-font-size: 1.25rem;
+$navbar-search-bg:#ffffff26;
 
 ///////// NAVBAR ////////
 
@@ -245,9 +247,9 @@ $table-inverse-color: color(white);
 ////////// MEASUREMENT AND PROPERTY VARIABLES //////////
 
 $border-property: 1px solid $border-color;
-$card-spacing-y: 2.5rem;
-$card-padding-y: 2.5rem;
-$card-padding-x: 2.5rem;
+$card-spacing-y: 1.5rem;
+$card-padding-y: 1.5rem;
+$card-padding-x: 1.5rem;
 $card-border-radius: .3125rem;
 $card-description-color: #76838f;
 $grid-gutter-width: 40px;
