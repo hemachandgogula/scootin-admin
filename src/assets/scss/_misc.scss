@@ -46,7 +46,7 @@ body {
 }
 
 .content-wrapper {
-  background: $content-bg;
+  background: linear-gradient(to bottom, theme-color(primary) 20%, $content-bg 0);;
   padding: 2.75rem 2.25rem;
   width: 100%;
   @include flex-grow(1);
