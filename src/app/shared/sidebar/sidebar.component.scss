@@ -43,8 +43,7 @@
         cursor: pointer;
 
         i {
-          color: inherit;
-
+          color: $sidebar-menu-color;
           &.menu-icon {
             font-size: $sidebar-icon-font-size;
             line-height: 1;
@@ -111,7 +110,8 @@
         .nav-link {
           .menu-title {
             color: $sidebar-menu-active-color;
-            font-family: $type1-medium;            
+            font-family: $type1-medium;  
+            font-weight:bold;          
           }
           i {
             color: $dark-blue;
@@ -215,6 +215,7 @@
           }
           &.active {
             color: $sidebar-menu-active-color;
+            font-weight:bold; 
             background: transparent;
           }
           &:hover {
