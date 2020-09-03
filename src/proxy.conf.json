@@ -1,0 +1,10 @@
+{
+    "/auth/*": {
+        "target": "http://35.240.180.204",
+        "secure": false
+    },
+    "/order/orders/*": {
+        "target": "http://35.240.180.204",
+        "secure": false
+    }
+}
