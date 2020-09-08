@@ -25,7 +25,7 @@
             <span class="availability-status online"></span>
           </div>
           <div class="nav-profile-text">
-            <p class="mb-1 text-white">Vishal Darekar</p>
+            <p class="mb-1 text-white">{{userName}}</p>
           </div>
         </a>
         <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown">
@@ -40,7 +40,7 @@
           </a>
         </div>
       </li>
-      <li class="nav-item dropdown" ngbDropdown>
+      <!-- <li class="nav-item dropdown" ngbDropdown>
         <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" ngbDropdownToggle>
           <i class="mdi mdi-email-outline"></i>
           <span class="count-symbol bg-warning"></span>
@@ -144,7 +144,7 @@
         <a class="nav-link" href="javascript:;">
           <i class="mdi mdi-power"></i>
         </a>
-      </li>
+      </li> -->
       <!-- <li class="nav-item nav-settings d-none d-lg-block" (click)="toggleRightSidebar()">
         <a class="nav-link">
           <i class="mdi mdi-format-line-spacing"></i>

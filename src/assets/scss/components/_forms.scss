@@ -74,6 +74,13 @@ select {
   .file-upload-info {
     background: transparent;
   }
+  input[type='file'] {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+  }
 }
 sub{
   color:color(gray-light);

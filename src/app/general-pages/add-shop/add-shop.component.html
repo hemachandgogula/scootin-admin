@@ -2,67 +2,31 @@
   <div class="card">
     <div class="card-header d-flex justify-content-between">
       <h4 class="card-title m-0">Add New Shop</h4>
-      <button class="btn btn-sm btn-light btn-outline-secondary text-dark" routerLink="/general-pages/upload-shop"><i class="mdi mdi-upload"></i> UPLOAD FILE</button>
+      <button class="btn btn-sm btn-light btn-outline-secondary text-success font-weight-bold"
+        routerLink="/general-pages/upload-shop"><i class="mdi mdi-upload"></i> UPLOAD FILE</button>
     </div>
     <div class="card-body">
-      <form class="form-sample">
+      <form class="form-sample" [formGroup]="addShopForm">
         <p class="card-description">
           Shop info
         </p>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">First Name</label>
+              <label class="col-sm-4 col-form-label">Name</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" formControlName="name" />
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Last Name</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Category</label>
               <div class="col-sm-8">
-                <select class="form-control">
-                  <option>Category1</option>
-                  <option>Category2</option>
-                  <option>Category3</option>
-                  <option>Category4</option>
+                <select class="form-control" formControlName="category_id">
+                  <option vlaue='' selected>--Select--</option>
+                  <option *ngFor="let c of categoryList" [value]="c.id">{{c.name}}</option>
                 </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Membership</label>
-              <div class="col-sm-4">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value=""
-                      checked>
-                    Free
-                    <i class="input-helper"></i>
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2"
-                      value="option2">
-                    Professional
-                    <i class="input-helper"></i>
-                  </label>
-                </div>
               </div>
             </div>
           </div>
@@ -72,7 +36,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Open Time</label>
               <div class="col-sm-8">
-                <select class="form-control">
+                <select class="form-control" formControlName="open_time">
                   <option>10.30</option>
                   <option>10.00</option>
                   <option>11.00</option>
@@ -85,7 +49,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Close Time</label>
               <div class="col-sm-8">
-                <select class="form-control">
+                <select class="form-control" formControlName="close_time">
                   <option>10.00</option>
                   <option>10.45</option>
                   <option>11.00</option>
@@ -95,20 +59,79 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Shop Landline Number</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" />
+        <p class="card-description">
+          Owner info
+        </p>
+        <div formGroupName="owner">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">First Name</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="first_name" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Last Name</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="last_name" />
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Cell Number</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" />
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Email</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="email" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Mobile Number</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="mobile_number" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Password</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="password" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Aadhar Number</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="aadhar_card" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Pancard</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="pan_card" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">GST Number</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="gst_info" />
+                </div>
               </div>
             </div>
           </div>
@@ -116,65 +139,55 @@
         <p class="card-description">
           Address
         </p>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Address 1</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" />
+        <div formGroupName="address">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Address 1</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="address_line_1" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">State</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="state_id" />
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">State</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" />
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Address 2</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="address_line_2" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Postcode</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="pincode" />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Address 2</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Postcode</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">City</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Country</label>
-              <div class="col-sm-8">
-                <select class="form-control">
-                  <option>America</option>
-                  <option>Italy</option>
-                  <option>Russia</option>
-                  <option>Britain</option>
-                </select>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">City</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="city" />
+                </div>
               </div>
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
@@ -189,15 +202,19 @@
               <label class="col-sm-4 col-form-label">Shop Banner Image</label>
               <div class="col-sm-8">
                 <div class="d-flex">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [value]="selectedFile" disabled>
+                  <input type="file" class="form-control" (change)="uploadBannerImage($event.target.files)">
                   <button class="btn btn-light btn-sm">Browse</button>
                 </div>
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
               </div>
             </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isShopAdded">
+              <strong>Successfully!</strong> created the new shop.
+            </div>
             <div>
-              <button class="btn btn-success btn-sm">SAVE</button>
-              <button class="btn btn-success btn-sm">SUBMIT</button>
+              <button class="btn btn-success btn-sm" (click)="addShop()">SAVE</button>
+              <button class="btn btn-success btn-sm" type="reset">RESET</button>
             </div>
           </div>
         </div>

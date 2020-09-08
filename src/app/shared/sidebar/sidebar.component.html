@@ -10,7 +10,7 @@
 
     <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
       <a class="nav-link" (click)="shopCollapsed = !shopCollapsed"  [attr.aria-expanded]="shopCollapsed" aria-controls="auth">
-        <span class="menu-title">Shops</span>
+        <span class="menu-title">Shop Management</span>
         <i class="menu-arrow"></i>
         <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
       </a>
@@ -31,6 +31,19 @@
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-deliverypeople" routerLinkActive="active" #blankPage="routerLinkActive"> Add People </a></li>
           <li class="nav-item"> <a class="nav-link" routerLink="general-pages/deliverypeople-list" routerLinkActive="active" #login="routerLinkActive"> People List </a></li>
+         </ul>
+      </div>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
+      <a class="nav-link" (click)="riderCollapsed = !riderCollapsed"  [attr.aria-expanded]="riderCollapsed" aria-controls="auth">
+        <span class="menu-title">Rider</span>
+        <i class="menu-arrow"></i>
+        <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
+      </a>
+      <div class="collapse" id="auth" [ngbCollapse]="!riderCollapsed">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-rider" routerLinkActive="active" #blankPage="routerLinkActive"> Add Rider </a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/rider-list" routerLinkActive="active" #login="routerLinkActive"> Rider List </a></li>
          </ul>
       </div>
     </li>
