@@ -2,6 +2,9 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category';
+import { UtilityService } from 'src/app/services/utility.service';
+import { Media } from 'src/app/models/media';
+import { ShopService } from 'src/app/services/shop.service';
 
 @Component({
   selector: 'app-add-shop',
@@ -29,7 +32,9 @@ export class AddShopComponent implements OnInit, AfterViewInit {
 
   addShopForm: FormGroup;
   categoryList: Category[] = [];
-  constructor(private _fb: FormBuilder, private categoryService: CategoryService) { }
+  selectedFile: string = '';
+  isShopAdded: boolean = false;
+  constructor(private _fb: FormBuilder, private categoryService: CategoryService, private utility: UtilityService, private shopService: ShopService) { }
 
   ngOnInit() {
     this.categoryService.getAllCategory().subscribe((res: Category[]) => {
@@ -43,31 +48,25 @@ export class AddShopComponent implements OnInit, AfterViewInit {
       latitude: [''],
       longitude: [''],
       category_id: [''],
+      media_id: [''],
       owner: this._fb.group({
         last_name: [''],
         first_name: [''],
         email: [''],
         mobile_number: [''],
         password: [''],
-        banner_image: [''],
         aadhar_card: [''],
         pan_card: [''],
         gst_info: [''],
         city: [''],
-        fcm_id: [''],
-        active: [''],
-        deleted: [''],
-        id: ['']
+        fcm_id: ['']
       }),
       address: this._fb.group({
-        addressType: [''],
         address_line_1: [''],
         address_line_2: [''],
         city: [''],
-        id: [''],
         pincode: [''],
-        state_id: [''],
-        userInfoId: ['']
+        state_id: ['']
       })
     })
   }
@@ -80,5 +79,17 @@ export class AddShopComponent implements OnInit, AfterViewInit {
       this.mapOptions);
     this.marker.setMap(this.map);
   }
-
+  uploadBannerImage(file) {
+    this.selectedFile = file.item(0).name;
+    this.utility.uploadImage(file.item(0)).subscribe((res: Media) => {
+      this.addShopForm.patchValue({
+        media_id: res.id
+      });
+    })
+  }
+  addShop() {
+    this.shopService.addShop(this.addShopForm.value).subscribe(res => {
+      this.isShopAdded = res.status;
+    });
+  }
 }

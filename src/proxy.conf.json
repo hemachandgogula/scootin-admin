@@ -10,5 +10,13 @@
     "/category/*": {
         "target": "http://35.240.180.204",
         "secure": false
+    },
+    "/shops/*": {
+        "target": "http://35.240.180.204",
+        "secure": false
+    },
+    "/media/*": {
+        "target": "http://35.240.180.204",
+        "secure": false
     }
 }

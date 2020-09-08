@@ -32,67 +32,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let s of shopList">
                 <td>
                   <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image">
-                  Shop 1
+                  {{s.name}}
                 </td>
                 <td>
-                  Bangalore
-                </td>
-                <td>
-                  <label class="badge badge-success">Open</label>
-                </td>
-                <td class="d-flex justify-content-around">
-                  <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                  <i class="mdi mdi-delete mdi-24px text-danger"></i>                  
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <img src="assets/images/faces/face4.jpg" class="mr-2" alt="image">
-                  Subway
-                </td>
-                <td>
-                  Bangalore
+                  {{s.address.addressLine1}},
+                  {{s.address.addressLine2}},
+                  {{s.address.stateDetails.name}},
+                  {{s.address.stateDetails.countryDetails.name}}
                 </td>
                 <td>
                   <label class="badge badge-success">Open</label>
-                </td>
-                <td class="d-flex justify-content-around">
-                  <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                  <i class="mdi mdi-delete mdi-24px text-danger"></i>                  
-                </td>
-              </tr>
-              <tr>
-
-                <td>
-                  <img src="assets/images/faces/face3.jpg" class="mr-2" alt="image">
-                  Dominos
-                </td>
-                <td>
-                  Bangalore
-                </td>
-                <td>
-                  <label class="badge badge-success">Open</label>
-                </td>
-                <td class="d-flex justify-content-around">
-                  <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                  <i class="mdi mdi-delete mdi-24px text-danger"></i>                  
-                </td>
-              </tr>
-              <tr>
-
-                <td>
-                  <img src="assets/images/faces/face4.jpg" class="mr-2" alt="image">
-                  MAC'D
-                </td>
-                <td>
-                  Bangalore
-                </td>
-
-                <td>
-                  <label class="badge badge-danger">Close</label>
                 </td>
                 <td class="d-flex justify-content-around">
                   <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
