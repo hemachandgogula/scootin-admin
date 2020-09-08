@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (!this.checkSession()) {
-      console.log("Invalid")
       this.router.navigate(['/user-pages/login']);
       sessionStorage.clear();
     }
@@ -32,8 +31,7 @@ export class AuthGuard implements CanActivate {
   checkSession() {
     let loggedinUser = localStorage.getItem('userDetails');
     if (loggedinUser != '' && loggedinUser != undefined && loggedinUser != null) {
-      this.authService.loggedInUser.next(JSON.parse(loggedinUser));
-      this.authService.isLoggedIn = true;
+      this.authService.loggedInUser = JSON.parse(loggedinUser);
       this.authService.accessToken = JSON.parse(loggedinUser).token;
       return true;
     } else {

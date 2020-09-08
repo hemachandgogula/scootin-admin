@@ -12,22 +12,26 @@ import { UtilityService } from './utility.service';
 })
 export class AuthenticationService {
 
-  loggedInUser: BehaviorSubject<LoginResponse> = new BehaviorSubject<LoginResponse>(null);
-  isLoggedIn: boolean = false;
-  accessToken: string;
-  constructor(private _http: HttpClient,private utility:UtilityService) { }
+  loggedInUser: LoginResponse = {
+    id: null,
+    role: '',
+    token: '',
+    user: ''
+  };
+  accessToken: string='';
+  constructor(private _http: HttpClient, private utility: UtilityService) { }
 
   login(request: LoginRequest) {
-    return this._http.post<any>(environment.apiURL + '/auth/login', request).pipe(
-      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
-    )
-  } 
-  refreshToken(){
-    return this._http.post<any>(environment.apiURL + '/auth/refresh', {}).pipe(
+    return this._http.post<any>(environment.apiURL + '/auth/login/admin', request).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
-  logout(){
+  refreshToken(request) {
+    return this._http.post<any>(environment.apiURL + '/auth/refresh/admin', request).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
+  logout() {
     return Observable.throw("");
   }
 }

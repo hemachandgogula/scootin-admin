@@ -6,9 +6,10 @@ import {
     HttpInterceptor,
     HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { finalize, catchError, switchMap, filter, take } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
+import { LoginResponse } from '../models/response/login-response';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -21,26 +22,35 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        return next.handle(this.addToken(request, this.authService.accessToken)).pipe(
-            catchError(error => {
-                if (error instanceof HttpErrorResponse)
-                    switch (error.status) {
-                        case 401:
-                            return this.handle401Error(request, next);
-                    }
-                return Observable.throw(error);
-            })
-        );
+        if (!(request.url.includes('/auth/login/admin') || request.url.includes('/auth/refresh/admin')))
+            return next.handle(this.addToken(request, this.authService.accessToken)).pipe(
+                catchError(error => {
+                    if (error instanceof HttpErrorResponse)
+                        switch (error.status) {
+                            case 401:
+                                return this.unAuthorizedError(request, next);
+                            case 403:
+                                return this.unAuthorizedError(request, next);
+                        }
+                    return throwError(error);
+                })
+            );
+        else
+            return next.handle(request);
     }
-    handle401Error(req: HttpRequest<any>, next: HttpHandler) {
+    unAuthorizedError(req: HttpRequest<any>, next: HttpHandler) {
         if (!this.isRefreshingToken) {
             this.isRefreshingToken = true;
             this.tokenSubject.next(null);
-            return this.authService.refreshToken().pipe(
-                switchMap((newToken: string) => {
-                    if (newToken) {
-                        this.tokenSubject.next(newToken);
-                        return next.handle(this.addToken(req, newToken));
+            let request = {
+                auth: this.authService.accessToken
+            }
+            return this.authService.refreshToken(request).pipe(
+                switchMap((newTokenResponse: LoginResponse) => {
+                    if (newTokenResponse.token) {
+                        this.authService.accessToken = newTokenResponse.token;
+                        this.tokenSubject.next(newTokenResponse.token);
+                        return next.handle(this.addToken(req, newTokenResponse.token));
                     }
                     return this.authService.logout();
                 }),

@@ -6,5 +6,9 @@
     "/order/orders/*": {
         "target": "http://35.240.180.204",
         "secure": false
+    },
+    "/category/*": {
+        "target": "http://35.240.180.204",
+        "secure": false
     }
 }

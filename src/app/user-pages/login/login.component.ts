@@ -20,14 +20,14 @@ export class LoginComponent implements OnInit {
       user: ['', Validators.required],
       pwd: ['', Validators.required]
     })
-    if (this.authService.isLoggedIn)
+    if (this.authService.loggedInUser)
       this.router.navigate(['/dashboard']);
   }
 
   login() {
     if (this.loginForm.valid)
       this.authService.login(this.loginForm.value).subscribe((res: LoginResponse) => {
-        this.authService.loggedInUser.next(res);
+        this.authService.loggedInUser = res;
         this.authService.accessToken = res.token;
         localStorage.setItem('userDetails', JSON.stringify(res));
         this.router.navigate(['/dashboard']);

@@ -17,6 +17,7 @@ import { UploadShopComponent } from './upload-shop/upload-shop.component';
 import { AddRiderComponent } from './add-rider/add-rider.component';
 import { RiderListComponent } from './rider-list/rider-list.component';
 import { AuthGuard } from '../shared/guard/auth.guard';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'blank-page', component: BlankPageComponent, canActivate: [AuthGuard] },
@@ -40,6 +41,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule,
     NgbModule
   ]
 })

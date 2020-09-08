@@ -1,11 +1,14 @@
-import { Component, OnInit,AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-add-shop',
   templateUrl: './add-shop.component.html',
   styleUrls: ['./add-shop.component.scss']
 })
-export class AddShopComponent implements OnInit ,AfterViewInit{
+export class AddShopComponent implements OnInit, AfterViewInit {
 
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
   map: google.maps.Map;
@@ -23,9 +26,50 @@ export class AddShopComponent implements OnInit ,AfterViewInit{
     position: this.coordinates,
     map: this.map,
   });
-  constructor() { }
+
+  addShopForm: FormGroup;
+  categoryList: Category[] = [];
+  constructor(private _fb: FormBuilder, private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.categoryService.getAllCategory().subscribe((res: Category[]) => {
+      this.categoryList = res;
+    })
+    this.addShopForm = this._fb.group({
+      name: [''],
+      city: [''],
+      open_time: [''],
+      close_time: [''],
+      latitude: [''],
+      longitude: [''],
+      category_id: [''],
+      owner: this._fb.group({
+        last_name: [''],
+        first_name: [''],
+        email: [''],
+        mobile_number: [''],
+        password: [''],
+        banner_image: [''],
+        aadhar_card: [''],
+        pan_card: [''],
+        gst_info: [''],
+        city: [''],
+        fcm_id: [''],
+        active: [''],
+        deleted: [''],
+        id: ['']
+      }),
+      address: this._fb.group({
+        addressType: [''],
+        address_line_1: [''],
+        address_line_2: [''],
+        city: [''],
+        id: [''],
+        pincode: [''],
+        state_id: [''],
+        userInfoId: ['']
+      })
+    })
   }
   ngAfterViewInit() {
     this.mapInitializer();
