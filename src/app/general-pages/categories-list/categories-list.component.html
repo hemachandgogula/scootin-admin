@@ -22,22 +22,20 @@
                   <th>
                      Name	
                   </th>
-                  <th width="300">
+                  <th width="300" class="text-center">
                      Action
                   </th>
                   
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngFor="let cat of categoryList">
                   <td>
-                    Test
+                    {{cat.name}}
                   </td>
-                  <td>
-                    <a class="table-btn btn btn-icon btn-success"><i
-                        class="fa fa-pencil-square-o"></i></a>
-                <button class="table-btn btn btn-icon btn-danger" form="resource-delete-9"><i
-                        class="fa fa-trash-o"></i></button>
+                  <td class="d-flex justify-content-around">
+                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
+                    <i class="mdi mdi-delete mdi-24px text-danger"></i>                  
                   </td>
                  
                 </tr>
