@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
       user: ['', Validators.required],
       pwd: ['', Validators.required]
     })
-    if (this.authService.loggedInUser)
+    if (this.authService.checkSession())
       this.router.navigate(['/dashboard']);
   }
 

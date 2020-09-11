@@ -18,5 +18,13 @@
     "/media/*": {
         "target": "http://35.240.180.204",
         "secure": false
+    },
+    "/rider/*": {
+        "target": "http://35.240.180.204",
+        "secure": false
+    },
+    "/user/*": {
+        "target": "http://35.240.180.204",
+        "secure": false
     }
 }
