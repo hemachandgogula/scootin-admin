@@ -1,30 +1,37 @@
 {
     "/auth/*": {
-        "target": "http://35.240.180.204",
-        "secure": false
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
     },
     "/order/orders/*": {
-        "target": "http://35.240.180.204",
-        "secure": false
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
     },
     "/category/*": {
-        "target": "http://35.240.180.204",
-        "secure": false
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
     },
     "/shops/*": {
-        "target": "http://35.240.180.204",
-        "secure": false
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
     },
     "/media/*": {
-        "target": "http://35.240.180.204",
-        "secure": false
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
     },
     "/rider/*": {
-        "target": "http://35.240.180.204",
-        "secure": false
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
     },
     "/user/*": {
-        "target": "http://35.240.180.204",
-        "secure": false
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
     }
 }
