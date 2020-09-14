@@ -4,15 +4,15 @@
       <div class="card-header d-flex align-items-baseline">
         <h4 class="card-title mr-2">Shop List</h4>
         <div class="input-group w-25">
-          <div class="input-group-prepend">
-            <div class="input-group-text" id="btnGroupAddon">
-              <i class="mdi mdi-magnify"></i>
+            <div class="input-group-prepend">
+                <div class="input-group-text" id="btnGroupAddon">
+                    <i class="mdi mdi-magnify"></i>
+                </div>
             </div>
-          </div>
-          <input type="text" class="form-control bg-light" placeholder="Search" aria-label="Search"
-            aria-describedby="btnGroupAddon">
+            <input type="text" class="form-control bg-light" placeholder="Search" aria-label="Search"
+                aria-describedby="btnGroupAddon">
         </div>
-      </div>
+    </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table">
@@ -23,7 +23,7 @@
                   Restaturant Name
                 </th>
                 <th>
-                  Address
+                  Service Area
                 </th>
                 <th>
                   Status
@@ -44,7 +44,7 @@
                   {{s.address.stateDetails.countryDetails.name}}
                 </td>
                 <td>
-                  <label class="badge badge-success">Open</label>
+                  <label class="badge badge-success">Enable</label>
                 </td>
                 <td class="d-flex justify-content-around">
                   <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
@@ -53,6 +53,7 @@
               </tr>
             </tbody>
           </table>
+          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import { Rider } from 'src/app/models/rider';
 export class RiderListComponent implements OnInit {
 
   riderList: Rider[] = [];
+  page=1;
   constructor(private riderService: RiderService) { }
 
   ngOnInit() {

@@ -10,7 +10,7 @@
 
     <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
       <a class="nav-link" (click)="shopCollapsed = !shopCollapsed"  [attr.aria-expanded]="shopCollapsed" aria-controls="auth">
-        <span class="menu-title">Shop Management</span>
+        <span class="menu-title">Shop</span>
         <i class="menu-arrow"></i>
         <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
       </a>
@@ -22,10 +22,17 @@
       </div>
     </li>
     <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
+      <a class="nav-link" routerLinkActive routerLink="general-pages/order-list" (click)="orderCollapsed = !orderCollapsed"  [attr.aria-expanded]="orderCollapsed" aria-controls="auth">
+        <span class="menu-title">Orders</span>
+        <!-- <i class="menu-arrow"></i> -->
+        <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
+      </a>
+    </li>
+    <!-- <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
       <a class="nav-link" (click)="deliveryCollapsed = !deliveryCollapsed"  [attr.aria-expanded]="deliveryCollapsed" aria-controls="auth">
         <span class="menu-title">Delivery People</span>
         <i class="menu-arrow"></i>
-        <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
+        <i class="mdi mdi-medical-bag menu-icon"></i>
       </a>
       <div class="collapse" id="auth" [ngbCollapse]="!deliveryCollapsed">
         <ul class="nav flex-column sub-menu">
@@ -33,7 +40,7 @@
           <li class="nav-item"> <a class="nav-link" routerLink="general-pages/deliverypeople-list" routerLinkActive="active" #login="routerLinkActive"> People List </a></li>
          </ul>
       </div>
-    </li>
+    </li> -->
     <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
       <a class="nav-link" (click)="riderCollapsed = !riderCollapsed"  [attr.aria-expanded]="riderCollapsed" aria-controls="auth">
         <span class="menu-title">Rider</span>
@@ -74,18 +81,83 @@
       </div>
     </li>
     <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
-      <a class="nav-link" (click)="categoriesCollapsed = !categoriesCollapsed"  [attr.aria-expanded]="categoriesCollapsed" aria-controls="auth">
-        <span class="menu-title">Categories</span>
+      <a class="nav-link" (click)="itemCollapsed = !itemCollapsed"  [attr.aria-expanded]="itemCollapsed" aria-controls="auth">
+        <span class="menu-title">Items</span>
         <i class="menu-arrow"></i>
         <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
       </a>
-      <div class="collapse" id="auth" [ngbCollapse]="!categoriesCollapsed">
+      <div class="collapse" id="auth" [ngbCollapse]="!itemCollapsed">
         <ul class="nav flex-column sub-menu">
-          <!-- <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-categories" routerLinkActive="active" #blankPage="routerLinkActive"> Add Categories </a></li> -->
-          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/categories-list" routerLinkActive="active" #login="routerLinkActive"> Categories List </a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-item" routerLinkActive="active" #blankPage="routerLinkActive"> Add Item </a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/item-list" routerLinkActive="active" #login="routerLinkActive"> Items List </a></li>
          </ul>
       </div>
     </li>
+    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
+      <a class="nav-link" routerLinkActive routerLink="general-pages/payment-history" (click)="paymentCollapsed = !paymentCollapsed"  [attr.aria-expanded]="paymentCollapsed" aria-controls="auth">
+        <span class="menu-title">Payment History</span>
+        <!-- <i class="menu-arrow"></i> -->
+        <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
+      </a>
+      <!-- <div class="collapse" id="auth" [ngbCollapse]="!paymentCollapsed">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-item" routerLinkActive="active" #blankPage="routerLinkActive"> Add Item </a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/item-list" routerLinkActive="active" #login="routerLinkActive"> Items List </a></li>
+         </ul>
+      </div> -->
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
+      <a class="nav-link" (click)="roleCollapsed = !roleCollapsed"  [attr.aria-expanded]="roleCollapsed" aria-controls="auth">
+        <span class="menu-title">Role/Permission</span>
+        <i class="menu-arrow"></i>
+        <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
+      </a>
+      <div class="collapse" id="auth" [ngbCollapse]="!roleCollapsed">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-role" routerLinkActive="active" #blankPage="routerLinkActive"> Add Role </a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/role-list" routerLinkActive="active" #login="routerLinkActive"> Roles List </a></li>
+         </ul>
+      </div>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
+      <a class="nav-link" (click)="saCollapsed = !saCollapsed"  [attr.aria-expanded]="saCollapsed" aria-controls="auth">
+        <span class="menu-title">Service Area</span>
+        <i class="menu-arrow"></i>
+        <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
+      </a>
+      <div class="collapse" id="auth" [ngbCollapse]="!saCollapsed">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-service-area" routerLinkActive="active" #blankPage="routerLinkActive"> Add Service Area </a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/service-area-list" routerLinkActive="active" #login="routerLinkActive"> Service Area List </a></li>
+         </ul>
+      </div>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
+      <a class="nav-link" (click)="employeeCollapsed = !employeeCollapsed"  [attr.aria-expanded]="employeeCollapsed" aria-controls="auth">
+        <span class="menu-title">Employee</span>
+        <i class="menu-arrow"></i>
+        <!-- <i class="mdi mdi-medical-bag menu-icon"></i> -->
+      </a>
+      <div class="collapse" id="auth" [ngbCollapse]="!employeeCollapsed">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-employee" routerLinkActive="active" #blankPage="routerLinkActive"> Add Employee </a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/employee-list" routerLinkActive="active" #login="routerLinkActive"> Employee List </a></li>
+         </ul>
+      </div>
+    </li>
+    <!-- <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
+      <a class="nav-link" (click)="categoriesCollapsed = !categoriesCollapsed"  [attr.aria-expanded]="categoriesCollapsed" aria-controls="auth">
+        <span class="menu-title">Categories</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-medical-bag menu-icon"></i> 
+      </a>
+      <div class="collapse" id="auth" [ngbCollapse]="!categoriesCollapsed">
+        <ul class="nav flex-column sub-menu">
+           <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-categories" routerLinkActive="active" #blankPage="routerLinkActive"> Add Categories </a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="general-pages/categories-list" routerLinkActive="active" #login="routerLinkActive"> Categories List </a></li>
+         </ul>
+      </div>
+    </li> -->
    
     <!-- <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive || register.isActive || error404.isActive || error500.isActive }">
       <a class="nav-link" (click)="samplePagesCollapsed = !samplePagesCollapsed"  [attr.aria-expanded]="samplePagesCollapsed" aria-controls="auth">

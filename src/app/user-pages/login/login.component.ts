@@ -12,12 +12,19 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  roles=[
+    {key:'Admin',value:'Admin'},
+    {key:'Admin',value:'Super Admin'},
+    {key:'Admin',value:'Developer'}
+  ]
 
   constructor(private _fb: FormBuilder, private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     this.loginForm = this._fb.group({
       user: ['', Validators.required],
+      role: ['', Validators.required],
+      serviceArea: ['', Validators.required],
       pwd: ['', Validators.required]
     })
     if (this.authService.checkSession())

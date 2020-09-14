@@ -13,7 +13,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Name</label>
+              <label class="col-sm-4 col-form-label">Shop Name</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" formControlName="name" />
               </div>
@@ -21,27 +21,20 @@
           </div>
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Category</label>
+              <label class="col-sm-4 col-form-label">Shop Owner`s Name</label>
               <div class="col-sm-8">
-                <select class="form-control" formControlName="category_id">
-                  <option vlaue='' selected>--Select--</option>
-                  <option *ngFor="let c of categoryList" [value]="c.id">{{c.name}}</option>
-                </select>
+                <input type="text" class="form-control" />
               </div>
             </div>
           </div>
+
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Open Time</label>
               <div class="col-sm-8">
-                <select class="form-control" formControlName="open_time">
-                  <option>10.30</option>
-                  <option>10.00</option>
-                  <option>11.00</option>
-                  <option>11.30</option>
-                </select>
+                <app-select-dropdown></app-select-dropdown>
               </div>
             </div>
           </div>
@@ -49,93 +42,99 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Close Time</label>
               <div class="col-sm-8">
-                <select class="form-control" formControlName="close_time">
-                  <option>10.00</option>
-                  <option>10.45</option>
-                  <option>11.00</option>
-                  <option>12.00</option>
-                </select>
+                <app-select-dropdown></app-select-dropdown>
               </div>
             </div>
           </div>
         </div>
-        <p class="card-description">
-          Owner info
-        </p>
-        <div formGroupName="owner">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label">First Name</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="first_name" />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Last Name</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="last_name" />
-                </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Shop Landline Number</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control">
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Email</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="email" />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Mobile Number</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="mobile_number" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Password</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="password" />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Aadhar Number</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="aadhar_card" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Pancard</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="pan_card" />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label">GST Number</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="gst_info" />
-                </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Cell Number</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control">
               </div>
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">GST Number</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Upload GST Reference</label>
+              <div class="col-sm-8">
+                <div class="d-flex">
+                  <input type="text" class="form-control" disabled>
+                  <input type="file" class="form-control">
+                  <button class="btn btn-light btn-sm">Browse</button>
+                </div>
+                <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">PAN Number</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Upload PAN Reference</label>
+              <div class="col-sm-8">
+                <div class="d-flex">
+                  <input type="text" class="form-control" disabled>
+                  <input type="file" class="form-control">
+                  <button class="btn btn-light btn-sm">Browse</button>
+                </div>
+                <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Service Area</label>
+              <div class="col-sm-8">
+                <app-select-dropdown></app-select-dropdown>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Category</label>
+              <div class="col-sm-8">
+                <app-select-dropdown></app-select-dropdown>
+                <!-- <select class="form-control" formControlName="category_id">
+                  <option vlaue='' selected>--Select--</option>
+                  <option *ngFor="let c of categoryList" [value]="c.id">{{c.name}}</option>
+                </select> -->
+              </div>
+            </div>
+          </div>
+        </div>        
         <p class="card-description">
           Address
         </p>
@@ -153,7 +152,7 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">State</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="state_id" />
+                  <app-select-dropdown></app-select-dropdown>
                 </div>
               </div>
             </div>
@@ -197,7 +196,20 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 d-flex align-items-end flex-column">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Discount</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" placeholder="Fixed" />
+              </div>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" placeholder="Percentage"/>
+              </div>
+            </div>
+          </div>          
+        </div>
+        <div class="row">
+          <div class="col-md-6">
             <div class="form-group row mb-auto">
               <label class="col-sm-4 col-form-label">Shop Banner Image</label>
               <div class="col-sm-8">
@@ -209,13 +221,10 @@
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
               </div>
             </div>
-            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isShopAdded">
-              <strong>Successfully!</strong> created the new shop.
-            </div>
-            <div>
-              <button class="btn btn-success btn-sm" (click)="addShop()">SAVE</button>
-              <button class="btn btn-success btn-sm" type="reset">RESET</button>
-            </div>
+          </div>
+          <div class="col-md-6 text-right">
+            <button class="btn btn-success btn-sm">SAVE</button>
+            <button class="btn btn-success btn-sm" (click)="addShop()">Submit</button>
           </div>
         </div>
       </form>

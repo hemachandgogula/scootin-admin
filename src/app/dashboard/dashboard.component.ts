@@ -11,9 +11,9 @@ export class DashboardComponent implements OnInit {
   constructor(private orderService:OrderService) { }
 
   ngOnInit() {
-    this.orderService.getAllReceivedOrders().subscribe(res=>{
-      console.log(res);
-    })
+    // this.orderService.getAllReceivedOrders().subscribe(res=>{
+    //   console.log(res);
+    // })
   }
 
   date: Date = new Date();

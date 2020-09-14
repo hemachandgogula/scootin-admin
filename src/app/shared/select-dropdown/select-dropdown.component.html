@@ -1,0 +1,12 @@
+<!-- <div ngbDropdown class="d-inline-block">
+  <button class="btn btn-outline-primary" id="sortMenu" ngbDropdownToggle>{{selectedSortOrder}}</button>
+  <div class="dropdown-menu" aria-labelledby="sortMenu">
+    <button class="dropdown-item" *ngFor="let sortOrder of sortOrders" (click)="ChangeSortOrder(sortOrder)" >{{sortOrder}}</button>
+  </div>
+</div> -->
+<div ngbDropdown class="d-inline-block w-100">
+  <button class="btn border w-100 text-left" id="dropdownBasic1" ngbDropdownToggle>{{selectedValue}}</button>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+    <button ngbDropdownItem (click)="ChangeSortOrder(l)" *ngFor="let l of list">{{l.value}}</button>
+  </div>
+</div>

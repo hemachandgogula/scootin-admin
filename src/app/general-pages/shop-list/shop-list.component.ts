@@ -9,6 +9,7 @@ import { ShopService } from 'src/app/services/shop.service';
 export class ShopListComponent implements OnInit {
 
   shopList
+  page=1
 
   constructor(private shopService: ShopService) { }
 
