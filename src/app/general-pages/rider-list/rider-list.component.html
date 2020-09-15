@@ -28,7 +28,7 @@
                                     Mobile
                                 </th>
                                 <th>
-                                    Email
+                                    Service Area
                                 </th>
                                 <th>
                                     Status
@@ -52,8 +52,8 @@
                                     {{rider.email}}
                                 </td>
                                 <td>
-                                    <label class="badge badge-success" *ngIf="rider.active">Active</label>
-                                    <label class="badge badge-danger" *ngIf="!rider.active">In Active</label>
+                                    <label class="badge badge-success" *ngIf="rider.active">Enable</label>
+                                    <label class="badge badge-danger" *ngIf="!rider.active">Disable</label>
                                 </td>
                                 <td class="d-flex justify-content-around">
                                     <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
@@ -62,6 +62,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
                 </div>
             </div>
         </div>

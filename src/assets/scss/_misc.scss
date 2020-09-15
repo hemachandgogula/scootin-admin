@@ -97,3 +97,6 @@ code {
     }
   }
 }
+.form-control:disabled{
+  background-color: $white;
+}

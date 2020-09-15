@@ -7,7 +7,7 @@
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" (click)="toggleSidebar()">
       <span class="mdi mdi-menu"></span>
     </button>
-    <div class="search-field d-none d-md-block">
+    <!-- <div class="search-field d-none d-md-block">
       <form class="d-flex align-items-center h-100" action="#">
         <div class="input-group">
           <div class="input-group-prepend bg-transparent">
@@ -16,7 +16,7 @@
           <input type="text" class="form-control bg-transparent border-0 text-white" placeholder="Search projects">
         </div>
       </form>
-    </div>
+    </div> -->
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item nav-profile dropdown" ngbDropdown>
         <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>
@@ -27,8 +27,13 @@
           <div class="nav-profile-text">
             <p class="mb-1 text-white">{{userName}}</p>
           </div>
+        </a>        
+      </li>
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>
+          <i class="mdi mdi-power"></i>
         </a>
-        <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown">
+        <div class="dropdown-menu navbar-dropdown dropdown-menu-right" ngbDropdownMenu aria-labelledby="profileDropdown">
           <a class="dropdown-item" href="javascript:;">
             <i class="mdi mdi-cached mr-2 text-success"></i>
             Activity Log

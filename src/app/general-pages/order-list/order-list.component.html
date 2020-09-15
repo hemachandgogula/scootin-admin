@@ -1,0 +1,151 @@
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-header d-flex flex-row align-items-baseline justify-content-between">
+        <h4 class="card-title m-0">Order List</h4>
+        <div class="input-group w-25">
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="btnGroupAddon">
+              <i class="mdi mdi-magnify"></i>
+            </div>
+          </div>
+          <input type="text" class="form-control bg-light" placeholder="Search" aria-label="Search"
+            aria-describedby="btnGroupAddon">
+        </div>
+        <div class="d-flex flex-row justify-content-between w-50">
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio1">Incoming</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio2">Outgoing</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio3">Completed</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio4">Pending</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio5">Cancelled</label>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" style="margin-top:30px">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  Order ID
+                </th>
+                <th>
+                  Customer Name
+                </th>
+                <th>
+                  Restaurant Name
+                </th>
+                <th>
+                  Delivery People
+                </th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  ID1254
+                </td>
+                <td>
+                  Name
+                </td>
+                <td>
+                  Name 
+                </td>
+                <td>
+                  Delivery
+                </td>
+                <td>
+                  1254
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  ID1254
+                </td>
+                <td>
+                  Name
+                </td>
+                <td>
+                  Name 
+                </td>
+                <td>
+                  Delivery
+                </td>
+                <td>
+                  1254
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  ID1254
+                </td>
+                <td>
+                  Name
+                </td>
+                <td>
+                  Name 
+                </td>
+                <td>
+                  Delivery
+                </td>
+                <td>
+                  1254
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  ID1254
+                </td>
+                <td>
+                  Name
+                </td>
+                <td>
+                  Name 
+                </td>
+                <td>
+                  Delivery
+                </td>
+                <td>
+                  1254
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  ID1254
+                </td>
+                <td>
+                  Name
+                </td>
+                <td>
+                  Name 
+                </td>
+                <td>
+                  Delivery
+                </td>
+                <td>
+                  1254
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+        </div>
+      </div>
+    </div>
+
+  </div>

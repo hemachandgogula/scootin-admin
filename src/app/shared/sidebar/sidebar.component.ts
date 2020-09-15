@@ -14,6 +14,12 @@ export class SidebarComponent implements OnInit {
   public promocodeCollapsed = false;
   public categoriesCollapsed = false;
   public riderCollapsed = false;
+  public orderCollapsed = false;
+  public itemCollapsed = false;
+  public roleCollapsed = false;
+  public saCollapsed = false;
+  public employeeCollapsed = false;
+  public paymentCollapsed = false;
 
   constructor() { }
 
