@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddServiceAreaComponent implements OnInit {
 
+  lat = 40.73061;
+  lng = -73.935242;
+  radius: string = "5";
   constructor() { }
 
   ngOnInit() {
+  }
+  setRadius() {
+    return parseFloat(this.radius) * 1000;
   }
 
 }
