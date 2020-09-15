@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this._fb.group({
       user: ['', Validators.required],
-      role: ['', Validators.required],
-      serviceArea: ['', Validators.required],
+      //role: [''],
+      //serviceArea: ['', Validators.required],
       pwd: ['', Validators.required]
     })
     if (this.authService.checkSession())

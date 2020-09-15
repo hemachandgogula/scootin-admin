@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category';
@@ -13,22 +13,8 @@ import { ShopService } from 'src/app/services/shop.service';
 })
 export class AddShopComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
-  map: google.maps.Map;
   lat = 40.73061;
   lng = -73.935242;
-
-  coordinates = new google.maps.LatLng(this.lat, this.lng);
-
-  mapOptions: google.maps.MapOptions = {
-    center: this.coordinates,
-    zoom: 8
-  };
-
-  marker = new google.maps.Marker({
-    position: this.coordinates,
-    map: this.map,
-  });
 
   addShopForm: FormGroup;
   categoryList: Category[] = [];
@@ -71,14 +57,8 @@ export class AddShopComponent implements OnInit, AfterViewInit {
     })
   }
   ngAfterViewInit() {
-    this.mapInitializer();
   }
 
-  mapInitializer() {
-    this.map = new google.maps.Map(this.gmap.nativeElement,
-      this.mapOptions);
-    this.marker.setMap(this.map);
-  }
   uploadBannerImage(file) {
     this.selectedFile = file.item(0).name;
     this.utility.uploadImage(file.item(0)).subscribe((res: Media) => {

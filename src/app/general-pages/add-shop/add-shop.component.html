@@ -192,7 +192,9 @@
             <div class="form-group row">
               <label class="col-12 col-form-label">Shop Location <i class="mdi mdi-crosshairs-gps"></i></label>
               <div class="col-sm-12">
-                <div #mapContainer id="map"></div>
+                <agm-map [latitude]="lat" [longitude]="lng">
+                  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                </agm-map>
               </div>
             </div>
           </div>

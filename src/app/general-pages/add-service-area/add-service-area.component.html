@@ -4,7 +4,7 @@
       <h4 class="card-title m-0">Add Service Area</h4>
     </div>
     <div class="card-body">
-      <form class="form-sample">
+      <form class="form-sample" [formGroup]="addServiceAreaForm">
         <p class="card-description">
           Service Area info
         </p>
@@ -13,7 +13,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Service Area</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" formControlName="name"/>
               </div>
             </div>
           </div>
@@ -21,14 +21,24 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Radius</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" formControlName="serviceRadius" />
               </div>
             </div>
           </div>
         </div>
         <div class="row">
+          <div class="col-md-6">
+            <agm-map [latitude]="marker.lat" [longitude]="marker.lng">
+              <agm-marker [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="true" (dragEnd)="selectMarker($event)"></agm-marker>
+              <agm-circle [latitude]="marker.lat" [longitude]="marker.lng" [radius]="setRadius()" [fillColor]="'red'"
+                [circleDraggable]="false" [editable]="false">
+              </agm-circle>
+            </agm-map>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-md-12 text-right">
-            <button class="btn btn-success btn-sm">SUBMIT</button>
+            <button class="btn btn-success btn-sm" (click)="addServiceArea()">SUBMIT</button>
           </div>
         </div>
       </form>

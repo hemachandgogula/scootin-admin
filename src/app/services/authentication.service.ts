@@ -35,14 +35,14 @@ export class AuthenticationService {
     return Observable.throw("");
   }
   checkSession() {
-    // let loggedinUser = localStorage.getItem('userDetails');
-    // if (loggedinUser != '' && loggedinUser != undefined && loggedinUser != null) {
-    //   this.loggedInUser = JSON.parse(loggedinUser);
-    //   this.accessToken = JSON.parse(loggedinUser).token;
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    return true;
+    let loggedinUser = localStorage.getItem('userDetails');
+    if (loggedinUser != '' && loggedinUser != undefined && loggedinUser != null) {
+      this.loggedInUser = JSON.parse(loggedinUser);
+      this.accessToken = JSON.parse(loggedinUser).token;
+      return true;
+    } else {
+      return false;
+    }
+    //return true;
   }
 }

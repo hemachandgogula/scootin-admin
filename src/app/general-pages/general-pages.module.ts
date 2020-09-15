@@ -29,6 +29,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { AgmCoreModule } from '@agm/core';
 
 const routes: Routes = [
   { path: 'blank-page', component: BlankPageComponent, canActivate: [AuthGuard] },
@@ -85,6 +86,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBV57UA9d4G4J1Z2XnZFiGykdv0ZLcaAuI'
+    }),
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
