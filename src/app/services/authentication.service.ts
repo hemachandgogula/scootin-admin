@@ -43,6 +43,5 @@ export class AuthenticationService {
     } else {
       return false;
     }
-    //return true;
   }
 }
