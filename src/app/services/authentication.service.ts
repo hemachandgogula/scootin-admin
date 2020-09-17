@@ -12,13 +12,13 @@ import { UtilityService } from './utility.service';
 })
 export class AuthenticationService {
 
-  loggedInUser: LoginResponse = {
+  loggedInUser: BehaviorSubject<LoginResponse> = new BehaviorSubject<LoginResponse>({
     id: null,
     role: '',
     token: '',
     user: ''
-  };
-  accessToken: string='';
+  });
+  accessToken: string = '';
   constructor(private _http: HttpClient, private utility: UtilityService) { }
 
   login(request: LoginRequest) {
@@ -37,7 +37,7 @@ export class AuthenticationService {
   checkSession() {
     let loggedinUser = localStorage.getItem('userDetails');
     if (loggedinUser != '' && loggedinUser != undefined && loggedinUser != null) {
-      this.loggedInUser = JSON.parse(loggedinUser);
+      this.loggedInUser.next(JSON.parse(loggedinUser));
       this.accessToken = JSON.parse(loggedinUser).token;
       return true;
     } else {

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid)
       this.authService.login(this.loginForm.value).subscribe((res: LoginResponse) => {
-        this.authService.loggedInUser = res;
+        this.authService.loggedInUser.next(res);
         this.authService.accessToken = res.token;
         localStorage.setItem('userDetails', JSON.stringify(res));
         this.router.navigate(['/dashboard']);

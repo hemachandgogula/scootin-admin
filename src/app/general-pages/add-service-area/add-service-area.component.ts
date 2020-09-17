@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServiceAreaService } from 'src/app/services/service-area.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-add-service-area',
@@ -13,7 +14,7 @@ export class AddServiceAreaComponent implements OnInit {
   radius: string = "5";
   addServiceAreaForm: FormGroup;
   marker = { lat: 40.73061, lng: -73.935242 }
-  constructor(private _fb: FormBuilder, private service: ServiceAreaService) { }
+  constructor(private _fb: FormBuilder, private service: ServiceAreaService,private utility:UtilityService) { }
 
   ngOnInit() {
     this.addServiceAreaForm = this._fb.group({
@@ -27,16 +28,17 @@ export class AddServiceAreaComponent implements OnInit {
     return parseFloat(this.addServiceAreaForm.value.serviceRadius) * 1000;
   }
   selectMarker(event) {
-    this.marker.lat = parseFloat(event.latLng.lat());
-    this.marker.lng = parseInt(event.latLng.lng());
+    this.marker.lat = parseFloat(event.coords.lat);
+    this.marker.lng = parseInt(event.coords.lng);
     this.addServiceAreaForm.patchValue({
-      latitude: event.latLng.lat(),
-      longitude: event.latLng.lng()
+      latitude: event.coords.lat,
+      longitude: event.coords.lng
     })
   }
   addServiceArea() {
     this.service.addServiceArea(this.addServiceAreaForm.value).subscribe(res => {
-      console.log(res);
+     this.utility.showSuccess("Successfully added");
+     this.addServiceAreaForm.reset();
     })
   }
 

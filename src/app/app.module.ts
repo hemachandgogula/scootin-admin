@@ -18,6 +18,9 @@ import { ContentAnimateDirective } from './shared/directives/content-animate.dir
 import { TodoListComponent } from './apps/todo-list/todo-list.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxUiLoaderModule, NgxUiLoaderHttpModule, NgxUiLoaderHttpConfig } from 'ngx-ui-loader';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule
   ],
   providers: [ThemeService, {
     provide: HTTP_INTERCEPTORS,

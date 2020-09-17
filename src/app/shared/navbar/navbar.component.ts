@@ -18,7 +18,9 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userName = this.authService.loggedInUser.user;
+    this.authService.loggedInUser.subscribe(res => {
+      this.userName = res.user;
+    });
   }
 
   // toggle sidebar in small devices
