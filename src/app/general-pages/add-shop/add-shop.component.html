@@ -162,7 +162,7 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">State</label>
                 <div class="col-sm-8">
-                  <app-select-dropdown [list]="stateList" [parentForm]="addShopForm.address"[controlName]="'state_id'">
+                  <app-select-dropdown [list]="stateList" [parentForm]="addShopForm.controls['address']"[controlName]="'state_id'">
                   </app-select-dropdown>
                 </div>
               </div>

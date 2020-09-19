@@ -29,20 +29,21 @@ export class AddShopComponent implements OnInit, AfterViewInit {
   openTime: Dropdown[] = [
     { key: '10:30', value: '10:30' }
   ]
-  stateList: Dropdown[] = [
-    { key: '23', value: 'State' }
-  ]
+  stateList: Dropdown[] = [];
   closeTime: Dropdown[] = [
     { key: '10:30', value: '10:30' }
   ]
-  constructor(private _fb: FormBuilder,private serviceAreaService:ServiceAreaService, private categoryService: CategoryService, private utility: UtilityService, private shopService: ShopService) { }
+  constructor(private _fb: FormBuilder, private serviceAreaService: ServiceAreaService, private categoryService: CategoryService, private utility: UtilityService, private shopService: ShopService) { }
 
   ngOnInit() {
     this.categoryService.getAllCategory().subscribe((res: Category[]) => {
       this.categoryList = this.utility.generateDropDownList('id', 'name', res);
     });
-    this.serviceAreaService.getAllServiceArea().subscribe((res:ServiceArea[])=>{
-      this.serviceAreaList=this.utility.generateDropDownList('name','name',res);
+    this.serviceAreaService.getAllServiceArea().subscribe((res: ServiceArea[]) => {
+      this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
+    })
+    this.utility.getAllState().subscribe((res: any[]) => {
+      this.stateList = this.utility.generateDropDownList('id', 'name', res);
     })
     this.addShopForm = this._fb.group({
       name: [''],
@@ -88,13 +89,13 @@ export class AddShopComponent implements OnInit, AfterViewInit {
           break;
         case 'gst':
           this.selectedGSTFile = file.item(0).name;
-          this.addShopForm.patchValue({
+          this.addShopForm.get('owner').patchValue({
             gst_info_id: res.id
           });
           break;
         case 'pan':
           this.selectedPANFile = file.item(0).name;
-          this.addShopForm.patchValue({
+          this.addShopForm.get('owner').patchValue({
             pan_id: res.id
           });
           break;

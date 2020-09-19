@@ -20,6 +20,11 @@ export class UtilityService {
       catchError((error: HttpErrorResponse) => this.handleError(error))
     )
   }
+  getAllState() {
+    return this._http.get<any>(environment.apiURL + '/register/get-all-states').pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error))
+    )
+  }
   showSuccess(message: string) {
     this.toastr.success(message, 'Success');
   }
