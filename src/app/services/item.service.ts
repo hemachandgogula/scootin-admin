@@ -3,23 +3,24 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UtilityService } from './utility.service';
-import { AddRiderRequest } from '../models/request/add-rider-request';
+import { AddItemRequest } from '../models/request/add-item-request';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RiderService {
+export class ItemService {
 
   constructor(private _http: HttpClient, private utility: UtilityService) { }
 
-  getAllRider() {
-    return this._http.get<any>(environment.apiURL + '/register/rider/get-all').pipe(
+  getAllItem(serviceId: number) {
+    return this._http.get<any>(environment.apiURL + '/product/get-all/' + serviceId).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
-  addRider(request: AddRiderRequest) {
-    return this._http.post<any>(environment.apiURL + '/register/rider/add',request).pipe(
+  addItem(request: AddItemRequest) {
+    return this._http.post<any>(environment.apiURL + '/product/add/' + request.shopManagementId, request).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
+
 }

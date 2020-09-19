@@ -10,21 +10,31 @@ import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { finalize, catchError, switchMap, filter, take } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
 import { LoginResponse } from '../models/response/login-response';
+import { UtilityService } from '../services/utility.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     isRefreshingToken: boolean = false;
     tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
-    constructor(private authService: AuthenticationService) { }
+    constructor(private authService: AuthenticationService, private utility: UtilityService) { }
 
     addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
-        return req.clone({ setHeaders: { Authorization: token } })
+        return req.clone({ setHeaders: { Authorization: "Bearer " + token } })
     }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         if (!(request.url.includes('/auth/login/admin') || request.url.includes('/auth/refresh/admin')))
             return next.handle(this.addToken(request, this.authService.accessToken)).pipe(
                 catchError(error => {
+                    if (error.error instanceof ErrorEvent) {
+                        this.utility.showError(error.error.message);
+                    }
+                    else {
+                        if (error.error)
+                            this.utility.showError(error.error.error);
+                        else
+                            this.utility.showError(error.statusText);
+                    }
                     if (error instanceof HttpErrorResponse)
                         switch (error.status) {
                             case 401:
@@ -32,6 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
                             case 403:
                                 return this.unAuthorizedError(request, next);
                         }
+
                     return throwError(error);
                 })
             );

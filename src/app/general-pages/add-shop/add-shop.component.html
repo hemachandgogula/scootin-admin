@@ -19,11 +19,20 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+
+          <div class="col-md-6" formGroupName="owner">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Owner`s Name</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" formControlName="first_name" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6" formGroupName="owner">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Password</label>
+              <div class="col-sm-8">
+                <input type="password" class="form-control" formControlName="password" />
               </div>
             </div>
           </div>
@@ -34,7 +43,8 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Open Time</label>
               <div class="col-sm-8">
-                <app-select-dropdown></app-select-dropdown>
+                <app-select-dropdown [list]="openTime" [parentForm]="addShopForm"[controlName]="'open_time'">
+                </app-select-dropdown>
               </div>
             </div>
           </div>
@@ -42,7 +52,8 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Close Time</label>
               <div class="col-sm-8">
-                <app-select-dropdown></app-select-dropdown>
+                <app-select-dropdown [list]="closeTime" [parentForm]="addShopForm"[controlName]="'close_time'">
+                </app-select-dropdown>
               </div>
             </div>
           </div>
@@ -52,7 +63,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Landline Number</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="shop_land_line">
               </div>
             </div>
           </div>
@@ -66,11 +77,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" formGroupName="owner">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">GST Number</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="gst_info">
               </div>
             </div>
           </div>
@@ -79,8 +90,8 @@
               <label class="col-sm-4 col-form-label">Upload GST Reference</label>
               <div class="col-sm-8">
                 <div class="d-flex">
-                  <input type="text" class="form-control" disabled>
-                  <input type="file" class="form-control">
+                  <input type="text" class="form-control" [value]="selectedGSTFile" disabled>
+                  <input type="file" class="form-control" (change)="uploadImage($event.target.files,'gst')">
                   <button class="btn btn-light btn-sm">Browse</button>
                 </div>
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
@@ -90,11 +101,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" formGroupName="owner">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">PAN Number</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="pan_card">
               </div>
             </div>
           </div>
@@ -103,8 +114,8 @@
               <label class="col-sm-4 col-form-label">Upload PAN Reference</label>
               <div class="col-sm-8">
                 <div class="d-flex">
-                  <input type="text" class="form-control" disabled>
-                  <input type="file" class="form-control">
+                  <input type="text" class="form-control" [value]="selectedPANFile" disabled>
+                  <input type="file" class="form-control" (change)="uploadImage($event.target.files,'pan')">
                   <button class="btn btn-light btn-sm">Browse</button>
                 </div>
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
@@ -118,7 +129,8 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Service Area</label>
               <div class="col-sm-8">
-                <app-select-dropdown></app-select-dropdown>
+                <app-select-dropdown [list]="serviceAreaList" [parentForm]="addShopForm"
+                  [controlName]="'service_area_id'"></app-select-dropdown>
               </div>
             </div>
           </div>
@@ -126,15 +138,13 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Category</label>
               <div class="col-sm-8">
-                <app-select-dropdown></app-select-dropdown>
-                <!-- <select class="form-control" formControlName="category_id">
-                  <option vlaue='' selected>--Select--</option>
-                  <option *ngFor="let c of categoryList" [value]="c.id">{{c.name}}</option>
-                </select> -->
+                <app-select-dropdown [list]="categoryList" [parentForm]="addShopForm"[controlName]="'category_id'">
+                </app-select-dropdown>
+
               </div>
             </div>
           </div>
-        </div>        
+        </div>
         <p class="card-description">
           Address
         </p>
@@ -152,7 +162,8 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">State</label>
                 <div class="col-sm-8">
-                  <app-select-dropdown></app-select-dropdown>
+                  <app-select-dropdown [list]="stateList" [parentForm]="addShopForm.address"[controlName]="'state_id'">
+                  </app-select-dropdown>
                 </div>
               </div>
             </div>
@@ -193,7 +204,7 @@
               <label class="col-12 col-form-label">Shop Location <i class="mdi mdi-crosshairs-gps"></i></label>
               <div class="col-sm-12">
                 <agm-map [latitude]="lat" [longitude]="lng">
-                  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                  <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="selectMarker($event)"></agm-marker>
                 </agm-map>
               </div>
             </div>
@@ -205,10 +216,10 @@
                 <input type="text" class="form-control" placeholder="Fixed" />
               </div>
               <div class="col-sm-4">
-                <input type="text" class="form-control" placeholder="Percentage"/>
+                <input type="text" class="form-control" placeholder="Percentage" formControlName="discount_amount" />
               </div>
             </div>
-          </div>          
+          </div>
         </div>
         <div class="row">
           <div class="col-md-6">
@@ -216,8 +227,8 @@
               <label class="col-sm-4 col-form-label">Shop Banner Image</label>
               <div class="col-sm-8">
                 <div class="d-flex">
-                  <input type="text" class="form-control" [value]="selectedFile" disabled>
-                  <input type="file" class="form-control" (change)="uploadBannerImage($event.target.files)">
+                  <input type="text" class="form-control" [value]="selectedBannerFile" disabled>
+                  <input type="file" class="form-control" (change)="uploadImage($event.target.files,'banner')">
                   <button class="btn btn-light btn-sm">Browse</button>
                 </div>
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>

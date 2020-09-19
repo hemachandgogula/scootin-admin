@@ -24,12 +24,22 @@
         "secure": true,
         "changeOrigin": true
     },
-    "/rider/*": {
+    "/register/*": {
         "target": "https://ferrous-agency-286401.el.r.appspot.com",
         "secure": true,
         "changeOrigin": true
     },
     "/user/*": {
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
+    },
+    "/rider/*": {
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
+    },
+    "/product/*": {
         "target": "https://ferrous-agency-286401.el.r.appspot.com",
         "secure": true,
         "changeOrigin": true

@@ -4,83 +4,48 @@
       <div class="card-header d-flex align-items-baseline">
         <h4 class="card-title mr-2">Area List</h4>
         <div class="input-group w-25">
-            <div class="input-group-prepend">
-                <div class="input-group-text" id="btnGroupAddon">
-                    <i class="mdi mdi-magnify"></i>
-                </div>
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="btnGroupAddon">
+              <i class="mdi mdi-magnify"></i>
             </div>
-            <input type="text" class="form-control bg-light" placeholder="Search" aria-label="Search"
-                aria-describedby="btnGroupAddon">
-        </div>
-    </div>     
-        <div class="card-body">
-          <div class="table-responsive" style="margin-top:30px">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>
-                    Area Name
-                  </th>
-                  <th>
-                    Radius
-                  </th>
-
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    Name 1
-                  </td>
-                  <td>
-                    2
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Name 1
-                  </td>
-                  <td>
-                    2
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Name 1
-                  </td>
-                  <td>
-                    2
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Name 1
-                  </td>
-                  <td>
-                    2
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
           </div>
+          <input type="text" class="form-control bg-light" placeholder="Search" aria-label="Search"
+            aria-describedby="btnGroupAddon">
         </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" style="margin-top:30px">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  Area Name
+                </th>
+                <th>
+                  Radius
+                </th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of serviceAreaList">
+                <td>
+                  {{s.name}}
+                </td>
+                <td>
+                  {{s.serviceRadius}}
+                </td>
+                <td class="d-flex justify-content-around">
+                  <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
+                  <i class="mdi mdi-delete mdi-24px text-danger"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5"
+            [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+        </div>
+      </div>
     </div>
 
   </div>

@@ -5,8 +5,8 @@
   </div>
 </div> -->
 <div ngbDropdown class="d-inline-block w-100">
-  <button class="btn border w-100 text-left" id="dropdownBasic1" ngbDropdownToggle>{{selectedValue}}</button>
-  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+  <button class="btn border w-100 text-left" [id]="controlName" ngbDropdownToggle>{{selectedValue}}</button>
+  <div ngbDropdownMenu [attr.aria-labelledby]="controlName">
     <button ngbDropdownItem (click)="ChangeSortOrder(l)" *ngFor="let l of list">{{l.value}}</button>
   </div>
 </div>

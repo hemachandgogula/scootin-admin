@@ -20,6 +20,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule, NgxUiLoaderHttpConfig } from 'ngx-ui-loader';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 
 @NgModule({

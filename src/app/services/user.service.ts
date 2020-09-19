@@ -12,7 +12,7 @@ export class UserService {
   constructor(private _http: HttpClient, private utility: UtilityService) { }
 
   getAllUser() {
-    return this._http.get<any>(environment.apiURL + '/user/user-details?offset=5&pageNumber=1&pageSize=10').pipe(
+    return this._http.get<any>(environment.apiURL + '/user/get-all?offset=5&pageNumber=1&pageSize=10').pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }

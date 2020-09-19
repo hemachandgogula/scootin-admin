@@ -3,23 +3,30 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UtilityService } from './utility.service';
-import { AddRiderRequest } from '../models/request/add-rider-request';
+import { AddRoleRequest } from '../models/request/add-role-request';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RiderService {
+export class RoleService {
 
   constructor(private _http: HttpClient, private utility: UtilityService) { }
 
-  getAllRider() {
-    return this._http.get<any>(environment.apiURL + '/register/rider/get-all').pipe(
+  getAllAdmin() {
+    return this._http.get<any>(environment.apiURL + '/register/admins/get-all').pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
-  addRider(request: AddRiderRequest) {
-    return this._http.post<any>(environment.apiURL + '/register/rider/add',request).pipe(
+  addRole(request: AddRoleRequest) {
+    return this._http.post<any>(environment.apiURL + '/register/admin/add', request).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
+
+  getAllRoles(){    
+    return this._http.get<any>(environment.apiURL + '/register/get-all-roles').pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
+
 }
