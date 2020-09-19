@@ -5,6 +5,9 @@ import { Category } from 'src/app/models/category';
 import { UtilityService } from 'src/app/services/utility.service';
 import { Media } from 'src/app/models/media';
 import { ShopService } from 'src/app/services/shop.service';
+import { Dropdown } from 'src/app/models/dropdown';
+import { ServiceAreaService } from 'src/app/services/service-area.service';
+import { ServiceArea } from 'src/app/models/service-area';
 
 @Component({
   selector: 'app-add-shop',
@@ -13,39 +16,54 @@ import { ShopService } from 'src/app/services/shop.service';
 })
 export class AddShopComponent implements OnInit, AfterViewInit {
 
-  lat = 40.73061;
-  lng = -73.935242;
+  lat = 0;
+  lng = 0;
 
   addShopForm: FormGroup;
-  categoryList: Category[] = [];
-  selectedFile: string = '';
-  isShopAdded: boolean = false;
-  constructor(private _fb: FormBuilder, private categoryService: CategoryService, private utility: UtilityService, private shopService: ShopService) { }
+  categoryList: Dropdown[] = [];
+  serviceAreaList: Dropdown[] = [];
+  selectedGSTFile: string = '';
+  selectedPANFile: string = '';
+  selectedBannerFile: string = '';
+
+  openTime: Dropdown[] = [
+    { key: '10:30', value: '10:30' }
+  ]
+  stateList: Dropdown[] = [
+    { key: '23', value: 'State' }
+  ]
+  closeTime: Dropdown[] = [
+    { key: '10:30', value: '10:30' }
+  ]
+  constructor(private _fb: FormBuilder,private serviceAreaService:ServiceAreaService, private categoryService: CategoryService, private utility: UtilityService, private shopService: ShopService) { }
 
   ngOnInit() {
     this.categoryService.getAllCategory().subscribe((res: Category[]) => {
-      this.categoryList = res;
+      this.categoryList = this.utility.generateDropDownList('id', 'name', res);
+    });
+    this.serviceAreaService.getAllServiceArea().subscribe((res:ServiceArea[])=>{
+      this.serviceAreaList=this.utility.generateDropDownList('name','name',res);
     })
     this.addShopForm = this._fb.group({
       name: [''],
-      city: [''],
       open_time: [''],
       close_time: [''],
       latitude: [''],
       longitude: [''],
       category_id: [''],
-      media_id: [''],
+      shop_banner_media_id: [''],
+      shop_land_line: [''],
+      discount_amount: [''],
+      discount_type: [''],
+      service_area_id: [''],
       owner: this._fb.group({
         last_name: [''],
         first_name: [''],
-        email: [''],
-        mobile_number: [''],
         password: [''],
-        aadhar_card: [''],
+        pan_id: [''],
         pan_card: [''],
-        gst_info: [''],
-        city: [''],
-        fcm_id: ['']
+        gst_info_id: [''],
+        gst_info: ['']
       }),
       address: this._fb.group({
         address_line_1: [''],
@@ -59,17 +77,47 @@ export class AddShopComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
   }
 
-  uploadBannerImage(file) {
-    this.selectedFile = file.item(0).name;
+  uploadImage(file, type) {
     this.utility.uploadImage(file.item(0)).subscribe((res: Media) => {
-      this.addShopForm.patchValue({
-        media_id: res.id
-      });
+      switch (type) {
+        case 'banner':
+          this.selectedBannerFile = file.item(0).name;
+          this.addShopForm.patchValue({
+            shop_banner_media_id: res.id
+          });
+          break;
+        case 'gst':
+          this.selectedGSTFile = file.item(0).name;
+          this.addShopForm.patchValue({
+            gst_info_id: res.id
+          });
+          break;
+        case 'pan':
+          this.selectedPANFile = file.item(0).name;
+          this.addShopForm.patchValue({
+            pan_id: res.id
+          });
+          break;
+      }
+
     })
   }
   addShop() {
     this.shopService.addShop(this.addShopForm.value).subscribe(res => {
-      this.isShopAdded = res.status;
+      if (res.status) {
+        this.addShopForm.reset();
+        this.utility.showSuccess("Successfully added")
+      } else {
+        this.utility.showError("Failed to add shop");
+      }
     });
+  }
+  selectMarker(event) {
+    this.lat = parseFloat(event.coords.lat);
+    this.lng = parseInt(event.coords.lng);
+    this.addShopForm.patchValue({
+      latitude: event.coords.lat,
+      longitude: event.coords.lng
+    })
   }
 }
