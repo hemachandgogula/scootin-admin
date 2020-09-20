@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -9,8 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     NgbModule
   ],
-  declarations: [SelectDropdownComponent
+  declarations: [SelectDropdownComponent, ConfirmDialogComponent
   ],
-  exports: [SelectDropdownComponent]
+  exports: [SelectDropdownComponent,ConfirmDialogComponent  ]
 })
 export class SharedModule { }

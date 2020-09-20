@@ -22,5 +22,9 @@ export class ItemService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
-
+  // deleteItem(id) {
+  //   return this._http.delete<any>(environment.apiURL + '/product/add/').pipe(
+  //     catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+  //   )
+  // }
 }

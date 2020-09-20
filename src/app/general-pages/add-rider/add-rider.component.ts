@@ -23,11 +23,16 @@ export class AddRiderComponent implements OnInit {
     { key: 'M', value: 'Male' },
     { key: 'F', value: 'Female' }
   ]
+  stateList: Dropdown[] = [];
+  selectedCountry: string = 'India';
   constructor(private fb: FormBuilder, private serviceAreaService: ServiceAreaService, private riderService: RiderService, private utility: UtilityService) { }
 
   ngOnInit() {
     this.serviceAreaService.getAllServiceArea().subscribe((res: ServiceArea[]) => {
       this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
+    })
+    this.utility.getAllState().subscribe((res: any[]) => {
+      this.stateList = this.utility.generateDropDownList('id', 'name', res);
     })
     this.addRiderForm = this.fb.group({
       lastName: [''],
@@ -43,7 +48,15 @@ export class AddRiderComponent implements OnInit {
       drivingLicenceMediaId: ['1'],
       latitude: ['0'],
       longitude: ['0'],
-      serviceAreaId: ['']
+      serviceAreaId: [''],
+      address: this.fb.group({
+        addressType: ['DELIVERY'],
+        address_line_1: [''],
+        address_line_2: [''],
+        city: [''],
+        pincode: [''],
+        state_id: ['']
+      })
     })
   }
   uploadImage(file, type) {
@@ -62,19 +75,21 @@ export class AddRiderComponent implements OnInit {
           });
           break;
         case 'profile':
-          console.log(this.utility.convertToBase64(file.item(0)))
+          this.riderPhoto = file.item(0).name;
           this.addRiderForm.patchValue({
             profileMediaId: res.id
           });
           break;
       }
-
     })
+  }
+  setCountry($event) {
+
   }
   addRider() {
     if (this.addRiderForm.valid) {
       this.riderService.addRider(this.addRiderForm.value).subscribe(res => {
-        if(res){
+        if (res) {
           this.addRiderForm.reset();
           this.utility.showSuccess("Successfully Added");
         }

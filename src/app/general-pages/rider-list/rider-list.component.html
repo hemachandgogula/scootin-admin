@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header d-flex align-items-baseline">
                 <h4 class="card-title mr-2">Rider List</h4>
-                <div class="input-group w-25">
+                <!-- <div class="input-group w-25">
                     <div class="input-group-prepend">
                         <div class="input-group-text" id="btnGroupAddon">
                             <i class="mdi mdi-magnify"></i>
@@ -11,7 +11,7 @@
                     </div>
                     <input type="text" class="form-control bg-light" placeholder="Search" aria-label="Search"
                         aria-describedby="btnGroupAddon">
-                </div>
+                </div> -->
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -57,7 +57,7 @@
                                 </td>
                                 <td class="d-flex justify-content-around">
                                     <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
+                                    <i class="mdi mdi-delete mdi-24px text-danger" (click)="deleteRider(r.id)"></i>
                                 </td>
                             </tr>
                         </tbody>
@@ -68,3 +68,4 @@
         </div>
     </div>
 </div>
+<app-confirm-dialog></app-confirm-dialog> 
