@@ -18,6 +18,8 @@ export class AuthenticationService {
     token: '',
     user: ''
   });
+  loggedUserRole: string;
+  loggedUserServiceArea: number;
   accessToken: string = '';
   constructor(private _http: HttpClient, private utility: UtilityService) { }
 

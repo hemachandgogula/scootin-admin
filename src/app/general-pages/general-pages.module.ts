@@ -31,6 +31,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { AgmCoreModule } from '@agm/core';
 
+
 const routes: Routes = [
   { path: 'blank-page', component: BlankPageComponent, canActivate: [AuthGuard] },
   { path: 'add-shop', component: AddShopComponent, canActivate: [AuthGuard] },

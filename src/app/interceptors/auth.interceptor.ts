@@ -47,7 +47,20 @@ export class AuthInterceptor implements HttpInterceptor {
                 })
             );
         else
-            return next.handle(request);
+            return next.handle(request).pipe(
+                catchError(error => {
+                    if (error.error instanceof ErrorEvent) {
+                        this.utility.showError(error.error.message);
+                    }
+                    else {
+                        if (error.error)
+                            this.utility.showError(error.error.error);
+                        else
+                            this.utility.showError(error.statusText);
+                    }
+                    return throwError(error);
+                })
+            );
     }
     unAuthorizedError(req: HttpRequest<any>, next: HttpHandler) {
         if (!this.isRefreshingToken) {

@@ -27,11 +27,37 @@ export class AddShopComponent implements OnInit, AfterViewInit {
   selectedBannerFile: string = '';
 
   openTime: Dropdown[] = [
-    { key: '10:30', value: '10:30' }
+    { key: '10:00', value: '10:00' },
+    { key: '10:30', value: '10:30' },
+    { key: '11:00', value: '11:00' },
+    { key: '11:30', value: '11:30' },
+    { key: '12:30', value: '12:30' },
+    { key: '12:30', value: '12:30' },
+    { key: '13:30', value: '13:30' },
+    { key: '13:30', value: '13:30' },
+    { key: '14:30', value: '14:30' },
+    { key: '14:30', value: '14:30' },
+    { key: '15:30', value: '15:30' },
+    { key: '15:30', value: '15:30' },
+    { key: '16:30', value: '16:30' },
+    { key: '16:30', value: '16:30' }
   ]
   stateList: Dropdown[] = [];
   closeTime: Dropdown[] = [
-    { key: '10:30', value: '10:30' }
+    { key: '10:00', value: '10:00' },
+    { key: '10:30', value: '10:30' },
+    { key: '11:00', value: '11:00' },
+    { key: '11:30', value: '11:30' },
+    { key: '12:30', value: '12:30' },
+    { key: '12:30', value: '12:30' },
+    { key: '13:30', value: '13:30' },
+    { key: '13:30', value: '13:30' },
+    { key: '14:30', value: '14:30' },
+    { key: '14:30', value: '14:30' },
+    { key: '15:30', value: '15:30' },
+    { key: '15:30', value: '15:30' },
+    { key: '16:30', value: '16:30' },
+    { key: '16:30', value: '16:30' }
   ]
   constructor(private _fb: FormBuilder, private serviceAreaService: ServiceAreaService, private categoryService: CategoryService, private utility: UtilityService, private shopService: ShopService) { }
 
