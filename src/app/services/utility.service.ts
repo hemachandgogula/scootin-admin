@@ -25,6 +25,11 @@ export class UtilityService {
       catchError((error: HttpErrorResponse) => this.handleError(error))
     )
   }
+  getAllRole() {
+    return this._http.get<any>(environment.apiURL + '/register/get-all-roles').pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error))
+    )
+  }
   showSuccess(message: string) {
     this.toastr.success(message, 'Success');
   }

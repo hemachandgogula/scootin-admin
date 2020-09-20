@@ -12,10 +12,10 @@
             <input type="text" class="form-control form-control-lg" formControlName="user" placeholder="User ID">
           </div>
           <div class="form-group">
-            <app-select-dropdown [placeholder]="'Role'" [list]="roles"></app-select-dropdown>
+            <app-select-dropdown [placeholder]="'Role'" [list]="roleList" (valueChange)="roleChange($event)"></app-select-dropdown>
           </div>
           <div class="form-group">
-            <app-select-dropdown [placeholder]="'Service Area'" [list]="serviceAreaList"></app-select-dropdown>
+            <app-select-dropdown [placeholder]="'Service Area'" [list]="serviceAreaList" (valueChange)="serviceAreaChange($event)"></app-select-dropdown>
           </div>
           <div class="form-group">
             <input type="password" class="form-control form-control-lg" formControlName="pwd" placeholder="Password">
