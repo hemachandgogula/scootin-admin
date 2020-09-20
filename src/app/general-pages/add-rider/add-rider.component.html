@@ -9,13 +9,13 @@
                     Rider info
                 </p>
                 <div class="row">
-                    <div class="col-md-6">                        
+                    <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">First Name</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" formControlName="firstName"/>
+                                        <input type="text" class="form-control" formControlName="firstName" />
                                     </div>
                                 </div>
                             </div>
@@ -31,20 +31,23 @@
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Gender</label>
                                     <div class="col-sm-8">
-                                        <app-select-dropdown [list]="genderList" [parentForm]="addRiderForm"[controlName]="'gender'"></app-select-dropdown>
+                                        <app-select-dropdown [list]="genderList" [parentForm]="addRiderForm"
+                                            [controlName]="'gender'"></app-select-dropdown>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Upload Rider Photo</label>
                             <div class="col-sm-6">
-                                <div class="file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                                <div
+                                    class="file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
                                     <i class="mdi mdi-upload"></i>
                                     UPLOAD
-                                    <input type="file" name="file" class="form-control" (change)="uploadImage($event.target.files,'profile')"/>
+                                    <input type="file" name="file" class="form-control"
+                                        (change)="uploadImage($event.target.files,'profile')" />
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -58,7 +61,8 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Service Area</label>
                             <div class="col-sm-8">
-                                <app-select-dropdown [list]="serviceAreaList" [parentForm]="addRiderForm"[controlName]="'serviceAreaId'"></app-select-dropdown>
+                                <app-select-dropdown [list]="serviceAreaList" [parentForm]="addRiderForm"
+                                    [controlName]="'serviceAreaId'"></app-select-dropdown>
                             </div>
                         </div>
                     </div>
@@ -66,7 +70,7 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Phone Number</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" formControlName="mobileNumber"/>
+                                <input type="text" class="form-control" formControlName="mobileNumber" />
                             </div>
                         </div>
                     </div>
@@ -76,7 +80,7 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Email</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" formControlName="email"/>
+                                <input type="text" class="form-control" formControlName="email" />
                             </div>
                         </div>
                     </div>
@@ -84,126 +88,122 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Password</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" formControlName="password"/>
+                                <input type="text" class="form-control" formControlName="password" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Rider DL Number</label>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" formControlName="drivingLicence">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Rider DL Number</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" formControlName="drivingLicence">
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Upload DL Reference</label>
-                        <div class="col-sm-8">
-                          <div class="d-flex">
-                            <input type="text" class="form-control" disabled>
-                            <input type="file" class="form-control" (change)="uploadImage($event.target.files,'dl')">
-                            <button class="btn btn-light btn-sm">Browse</button>
-                          </div>
-                          <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Upload DL Reference</label>
+                            <div class="col-sm-8">
+                                <div class="d-flex">
+                                    <input type="text" class="form-control" disabled [value]="selectedDLFile">
+                                    <input type="file" class="form-control"
+                                        (change)="uploadImage($event.target.files,'dl')">
+                                    <button class="btn btn-light btn-sm">Browse</button>
+                                </div>
+                                <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
+                            </div>
+
                         </div>
-          
-                      </div>
                     </div>
-                  </div>
-                  <div class="row">
+                </div>
+                <div class="row">
                     <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Aadhar Card Number</label>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" formControlName="aadharCard">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Aadhar Card Number</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" formControlName="aadharCard">
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Upload Aadhar Reference</label>
-                        <div class="col-sm-8">
-                          <div class="d-flex">
-                            <input type="text" class="form-control" disabled>
-                            <input type="file" class="form-control" (change)="uploadImage($event.target.files,'aadhar')">
-                            <button class="btn btn-light btn-sm">Browse</button>
-                          </div>
-                          <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Upload Aadhar Reference</label>
+                            <div class="col-sm-8">
+                                <div class="d-flex">
+                                    <input type="text" class="form-control" disabled [value]="selectedAadharFile">
+                                    <input type="file" class="form-control"
+                                        (change)="uploadImage($event.target.files,'aadhar')">
+                                    <button class="btn btn-light btn-sm">Browse</button>
+                                </div>
+                                <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
+                            </div>
+
                         </div>
-          
-                      </div>
                     </div>
-                  </div>
+                </div>
                 <p class="card-description">
                     Address
                 </p>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Address Line 1</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" formControlName="lastName" />
+                <div formGroupName="address">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Address Line 1</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" formControlName="address_line_1" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">State</label>
+                                <div class="col-sm-8">
+                                    <app-select-dropdown [list]="stateList" [parentForm]="addRiderForm.controls['address']"[controlName]="'state_id'" (valueChange)="setCountry($event)"></app-select-dropdown>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">State</label>
-                            <div class="col-sm-8">
-                                <app-select-dropdown></app-select-dropdown>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Address Line 2</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" formControlName="address_line_2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Postal code</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" formControlName="pincode" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">City</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" formControlName="city" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Country</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" [value]="selectedCountry" disabled>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Address Line 2</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" formControlName="lastName" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Postal code</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control"  />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Landmark</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Country</label>
-                            <div class="col-sm-8">
-                                <app-select-dropdown></app-select-dropdown>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">City</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-12 text-right">
                         <button class="btn btn-success btn-sm">SAVE</button>
                         <button class="btn btn-success btn-sm" (click)="addRider()">SUBMIT</button>
                     </div>

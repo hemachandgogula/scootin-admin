@@ -28,7 +28,7 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <agm-map [latitude]="marker.lat" [longitude]="marker.lng">
+            <agm-map [latitude]="marker.lat" [longitude]="marker.lng" [zoom]="8">
               <agm-marker [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="true" (dragEnd)="selectMarker($event)"></agm-marker>
               <agm-circle [latitude]="marker.lat" [longitude]="marker.lng" [radius]="setRadius()" [fillColor]="'red'"
                 [circleDraggable]="false" [editable]="false">

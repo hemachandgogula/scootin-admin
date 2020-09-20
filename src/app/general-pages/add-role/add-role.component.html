@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">User ID</label>
+              <label class="col-sm-4 col-form-label">User Name</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" formControlName="firstName" />
               </div>
@@ -20,24 +20,24 @@
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Role</label>
-              <div class="col-sm-8 d-flex flex-row justify-content-between">
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="Admin" formControlName="role">
-                    <label class="custom-control-label" for="customRadio1">Admin</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="Super Admin" formControlName="role">
-                    <label class="custom-control-label" for="customRadio2">Super Admin</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="Developer" formControlName="role">
-                    <label class="custom-control-label" for="customRadio3">Developer</label>
+              <div class="col-sm-8 d-flex flex-column justify-content-between">
+                  <div class="custom-control custom-radio" *ngFor="let r of roleList;let i=index">
+                    <input type="radio" [id]="'customRadio'+i" name="role" class="custom-control-input" [value]="r.key" formControlName="role">
+                    <label class="custom-control-label" [for]="'customRadio'+i">{{r.value}}</label>
                   </div>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Mobile Number</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control"  formControlName="mobileNumber"/>
+              </div>
+            </div>
+          </div>
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Password</label>
@@ -46,9 +46,19 @@
               </div>
             </div>
           </div>
+         
         </div>
         <div class="row">
           <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Email</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control"  formControlName="email"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6" *ngIf="!isSuperAdmin()">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Service Area</label>
               <div class="col-sm-8">
@@ -56,6 +66,7 @@
               </div>
             </div>
           </div>
+          
         </div>
         <div class="row">
           <div class="col-md-12 text-right">

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from 'src/app/models/item';
 import { ItemService } from 'src/app/services/item.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-item-list',
@@ -8,11 +10,21 @@ import { ItemService } from 'src/app/services/item.service';
 })
 export class ItemListComponent implements OnInit {
   page = 1;
-  itemList: any[] = [];
+  itemList: Item[] = [];
   constructor(private itemService: ItemService) { }
 
   ngOnInit() {
-    this.itemService.getAllItem(4552).subscribe(res => {
+    this.getItemList();
+  }
+  // deleteItem(id) {
+  //   this.itemService.deleteItem(id).subscribe(res => {
+  //     this.utility.showSuccess("Successfully Deleted");
+  //     this.getItemList();
+  //   });
+  // }
+
+  getItemList() {
+    this.itemService.getAllItem(4552).subscribe((res: Item[]) => {
       this.itemList = res;
     })
   }

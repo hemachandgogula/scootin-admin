@@ -22,4 +22,9 @@ export class RiderService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
+  deleteRider(id) {
+    return this._http.delete<any>(environment.apiURL + '/register/rider/delete/'+id).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
 }

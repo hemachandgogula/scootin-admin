@@ -17,7 +17,12 @@ export class ShopService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
-  getAllShop(){
+  deleteShop(id: number) {
+    return this._http.delete<any>(environment.apiURL + '/shops/delete/' + id).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
+  getAllShop() {
     return this._http.get<any>(environment.apiURL + '/shops/get-all-shop?offset=5&pageNumber=1&pageSize=5').pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )

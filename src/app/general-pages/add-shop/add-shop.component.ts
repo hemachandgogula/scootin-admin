@@ -93,6 +93,7 @@ export class AddShopComponent implements OnInit, AfterViewInit {
         gst_info: ['']
       }),
       address: this._fb.group({
+        addressType:['SHOP'],
         address_line_1: [''],
         address_line_2: [''],
         city: [''],

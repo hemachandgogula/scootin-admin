@@ -22,8 +22,12 @@ export class RoleService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
-
-  getAllRoles(){    
+  deleteUser(id: number) {
+    return this._http.delete<any>(environment.apiURL + '/register/admin/delete/' + id).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
+  getAllRoles() {
     return this._http.get<any>(environment.apiURL + '/register/get-all-roles').pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )

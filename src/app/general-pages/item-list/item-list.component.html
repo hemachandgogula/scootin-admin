@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header d-flex align-items-baseline">
         <h4 class="card-title mr-2">Item List</h4>
-        <div class="input-group w-25">
+        <!-- <div class="input-group w-25">
             <div class="input-group-prepend">
                 <div class="input-group-text" id="btnGroupAddon">
                     <i class="mdi mdi-magnify"></i>
@@ -11,142 +11,53 @@
             </div>
             <input type="text" class="form-control bg-light" placeholder="Search" aria-label="Search"
                 aria-describedby="btnGroupAddon">
+        </div> -->
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" style="margin-top:30px">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  Category Name
+                </th>
+                <th>
+                  Item Name
+                </th>
+                <th>
+                  Value
+                </th>
+                <th>
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of itemList">
+                <td>
+                  {{i.categoryDetails.name}}
+                </td>
+                <td>
+                  {{i.title}}
+                </td>
+                <td>
+                  {{i.price}}
+                </td>
+                <td>
+                  <label class="badge badge-success" *ngIf="i.active">Available</label>
+                  <label class="badge badge-danger" *ngIf="!i.active">UnAvailable</label>
+                </td>
+                <!-- <td class="d-flex justify-content-around">
+                  <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
+                  <i class="mdi mdi-delete mdi-24px text-danger"></i>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5"
+            [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
         </div>
-    </div>
-        <div class="card-body">
-          <div class="table-responsive" style="margin-top:30px">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>
-                    Category Name
-                  </th>
-                  <th>
-                    Item Name
-                  </th>
-                  <th>
-                    Value
-                  </th>
-                  <th>
-                    Status
-                  </th>
-
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    Category 1
-                  </td>
-                  <td>
-                    Item 1
-                  </td>
-                  <td>
-                    $234
-                  </td>
-                  <td>
-                    <label class="badge badge-success">Available</label>
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Category 1
-                  </td>
-                  <td>
-                    Item 1
-                  </td>
-                  <td>
-                    $234
-                  </td>
-                  <td>
-                    <label class="badge badge-success">Available</label>
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Category 1
-                  </td>
-                  <td>
-                    Item 1
-                  </td>
-                  <td>
-                    $234
-                  </td>
-                  <td>
-                    <label class="badge badge-success">Available</label>
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Category 1
-                  </td>
-                  <td>
-                    Item 1
-                  </td>
-                  <td>
-                    $234
-                  </td>
-                  <td>
-                    <label class="badge badge-success">Available</label>
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Category 1
-                  </td>
-                  <td>
-                    Item 1
-                  </td>
-                  <td>
-                    $234
-                  </td>
-                  <td>
-                    <label class="badge badge-success">Available</label>
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Category 1
-                  </td>
-                  <td>
-                    Item 1
-                  </td>
-                  <td>
-                    $234
-                  </td>
-                  <td>
-                    <label class="badge badge-success">Available</label>
-                  </td>
-                  <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger"></i>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
-          </div>
-        </div>
+      </div>
     </div>
 
   </div>

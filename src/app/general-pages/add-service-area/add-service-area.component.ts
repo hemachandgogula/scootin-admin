@@ -11,9 +11,8 @@ import { UtilityService } from 'src/app/services/utility.service';
 export class AddServiceAreaComponent implements OnInit {
 
 
-  radius: string = "5";
   addServiceAreaForm: FormGroup;
-  marker = { lat: 40.73061, lng: -73.935242 }
+  marker = { lat: 28.207609, lng: 79.826660 }
   constructor(private _fb: FormBuilder, private service: ServiceAreaService,private utility:UtilityService) { }
 
   ngOnInit() {
