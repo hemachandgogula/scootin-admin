@@ -32,7 +32,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let s of shopList">
+              <tr *ngFor="let s of shopList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                 <td>
                   <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image">
                   {{s.name}}
@@ -53,7 +53,9 @@
               </tr>
             </tbody>
           </table>
-          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+          <!-- <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination> -->
+          <!-- <ngb-pagination *ngIf="shopList != null && shopList.length>0" [collectionSize]="shopList.length" [(page)]="page" [maxSize]="pageSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> -->
+          <ngb-pagination class="d-flex justify-content-center" *ngIf="shopList != null && shopList.length>0" [collectionSize]="shopList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
         </div>
       </div>
     </div>

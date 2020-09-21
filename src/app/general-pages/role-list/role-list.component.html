@@ -36,7 +36,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let r of roleList">
+                <tr *ngFor="let r of roleList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                   <td>
                     {{r.first_name}}
                   </td>
@@ -56,8 +56,9 @@
                 </tr>
               </tbody>
             </table>
-            <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5"
-              [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+            <!-- <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5"
+              [rotate]="true" [boundaryLinks]="true"></ngb-pagination> -->
+              <ngb-pagination class="d-flex justify-content-center" *ngIf="roleList != null && roleList.length>0" [collectionSize]="roleList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
           </div>
         </div>
       </div>

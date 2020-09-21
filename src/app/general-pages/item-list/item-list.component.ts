@@ -10,6 +10,7 @@ import { UtilityService } from 'src/app/services/utility.service';
 })
 export class ItemListComponent implements OnInit {
   page = 1;
+  pageSize = 10;
   itemList: Item[] = [];
   constructor(private itemService: ItemService) { }
 
