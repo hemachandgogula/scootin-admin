@@ -37,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let rider of riderList">
+                            <tr *ngFor="let rider of riderList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td>
                                     {{rider.id}}
                                 </td>
@@ -62,7 +62,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+                    <ngb-pagination class="d-flex justify-content-center" *ngIf="riderList != null && riderList.length>0" [collectionSize]="riderList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
       <h4 class="card-title m-0">Add Employee</h4>
     </div>
     <div class="card-body">
-      <form class="form-sample">
+      <form class="form-sample" [formGroup]="addEmployeeForm">
         <p class="card-description">
           Employee info
         </p>
@@ -13,7 +13,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">First Name</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" formControlName="firstName"/>
               </div>
             </div>
           </div>
@@ -21,7 +21,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Last Name</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" formControlName="lastName"/>
               </div>
             </div>
           </div>
@@ -31,7 +31,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Phone Number</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" formControlName="mobileNumber"/>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Email</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" formControlName="email"/>
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Description</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="description">
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Status</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="employeeStatus">
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@
         <div class="row">
           <div class="col-md-12 text-right">
             <button class="btn btn-success btn-sm">SAVE</button>
-            <button class="btn btn-success btn-sm">SUBMIT</button>
+            <button class="btn btn-success btn-sm" (click)="onSubmit()">SUBMIT</button>
           </div>
         </div>
       </form>

@@ -12,6 +12,7 @@ export class ShopListComponent implements OnInit {
 
   shopList
   page = 1
+  pageSize = 10;
 
   constructor(private shopService: ShopService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 
@@ -32,6 +33,7 @@ export class ShopListComponent implements OnInit {
   getShops() {
     this.shopService.getAllShop().subscribe(res => {
       this.shopList = res;
+      console.log(this.shopList.length);
     })
   }
 
