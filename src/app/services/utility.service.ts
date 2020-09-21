@@ -20,6 +20,14 @@ export class UtilityService {
       catchError((error: HttpErrorResponse) => this.handleError(error))
     )
   }
+
+  deleteImage(id: any) {
+    return this._http.delete<any>(environment.apiURL + '/media/delete/' + id).pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error))
+    )
+  }
+
+
   getAllState() {
     return this._http.get<any>(environment.apiURL + '/register/get-all-states').pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error))

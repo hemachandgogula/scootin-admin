@@ -41,7 +41,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Upload Rider Photo</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" *ngIf="!imgURL">
                                 <div
                                     class="file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
                                     <i class="mdi mdi-upload"></i>
@@ -50,8 +50,14 @@
                                         (change)="uploadImage($event.target.files,'profile')" />
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <img [src]="riderPhoto">
+                            <div class="col-md-6" *ngIf="imgURL">
+                                <div
+                                    class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                                    <span class="close" (click)="deleteProfile()">&times;</span>
+                                    <img [src]="imgURL" style="width: 10rem;
+                                    height: 10rem;">
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -160,7 +166,9 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">State</label>
                                 <div class="col-sm-8">
-                                    <app-select-dropdown [list]="stateList" [parentForm]="addRiderForm.controls['address']"[controlName]="'state_id'" (valueChange)="setCountry($event)"></app-select-dropdown>
+                                    <app-select-dropdown [list]="stateList"
+                                        [parentForm]="addRiderForm.controls['address']" [controlName]="'state_id'"
+                                        (valueChange)="setCountry($event)"></app-select-dropdown>
                                 </div>
                             </div>
                         </div>
