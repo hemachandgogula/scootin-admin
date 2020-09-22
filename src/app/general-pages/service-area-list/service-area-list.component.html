@@ -37,7 +37,7 @@
                 </td>
                 <td class="d-flex justify-content-around">
                   <i class="mdi mdi-pencil-box mdi-24px text-primary c-pointer" data-toggle="modal"
-                  data-target="#editModal" (click)="editServiceArea=s"></i>
+                    data-target="#editModal" (click)="editServiceArea=s"></i>
                   <i class="mdi mdi-delete mdi-24px text-danger c-pointer" (click)="deleteServiceArea(s.id)"></i>
                 </td>
               </tr>
@@ -45,26 +45,30 @@
           </table>
           <!-- <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5"
             [rotate]="true" [boundaryLinks]="true"></ngb-pagination> -->
-            <ngb-pagination class="d-flex justify-content-center" *ngIf="serviceAreaList != null && serviceAreaList.length>0" [collectionSize]="serviceAreaList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+          <ngb-pagination class="d-flex justify-content-center"
+            *ngIf="serviceAreaList != null && serviceAreaList.length>0" [collectionSize]="serviceAreaList.length"
+            [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
         </div>
       </div>
     </div>
 
   </div>
-  <app-confirm-dialog></app-confirm-dialog> 
-  <div class="modal" tabindex="-1" role="dialog" id="editModal" tabindex="-1" role="dialog"
-    aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Service Area</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <app-add-service-area [edit]="true" [editServiceArea]="editServiceArea" (updated)="getServiceArea()"></app-add-service-area>
-            </div>
-        </div>
+</div>
+<app-confirm-dialog></app-confirm-dialog>
+<div class="modal" tabindex="-1" role="dialog" id="editModal" tabindex="-1" role="dialog"
+  aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Service Area</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-add-service-area [edit]="true" [editServiceArea]="editServiceArea" (updated)="getServiceArea()">
+        </app-add-service-area>
+      </div>
     </div>
+  </div>
 </div>
