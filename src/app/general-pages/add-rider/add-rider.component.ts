@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Dropdown } from 'src/app/models/dropdown';
 import { Media } from 'src/app/models/media';
+import { Rider } from 'src/app/models/rider';
 import { ServiceArea } from 'src/app/models/service-area';
 import { RiderService } from 'src/app/services/rider.service';
 import { ServiceAreaService } from 'src/app/services/service-area.service';
@@ -13,7 +14,34 @@ import { UtilityService } from 'src/app/services/utility.service';
   styleUrls: ['./add-rider.component.scss']
 })
 export class AddRiderComponent implements OnInit {
-
+  @Output() updated:EventEmitter<boolean>=new EventEmitter<boolean>();
+  @Input() edit: boolean = false;
+  @Input() set editRider(editRider: Rider) {
+    this.addRiderForm.patchValue({
+      lastName: editRider.lastName,
+      firstName: editRider.firstName,
+      gender: editRider,
+      email: '',
+      mobileNumber: '',
+      password: '',
+      profileMediaId: '',
+      aadharCard: '',
+      aadharCardMediaId: '',
+      drivingLicence: '',
+      drivingLicenceMediaId: '',
+      latitude: '',
+      longitude: '',
+      serviceAreaId: [''],
+      address: {
+        addressType: 'DELIVERY',
+        address_line_1: '',
+        address_line_2: '',
+        city: '',
+        pincode: '',
+        state_id: ''
+      }
+    })
+  }
   addRiderForm: FormGroup;
   serviceAreaList: Dropdown[] = [];
   selectedDLFile: string = '';

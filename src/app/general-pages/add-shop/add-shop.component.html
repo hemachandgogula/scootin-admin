@@ -1,6 +1,6 @@
 <div class="col-12 grid-margin">
   <div class="card">
-    <div class="card-header d-flex justify-content-between">
+    <div class="card-header d-flex justify-content-between" *ngIf="!edit">
       <h4 class="card-title m-0">Add New Shop</h4>
       <button class="btn btn-sm btn-light btn-outline-secondary text-success font-weight-bold"
         routerLink="/general-pages/upload-shop"><i class="mdi mdi-upload"></i> UPLOAD FILE</button>
@@ -43,7 +43,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Open Time</label>
               <div class="col-sm-8">
-                <app-select-dropdown [list]="openTime" [parentForm]="addShopForm"[controlName]="'open_time'">
+                <app-select-dropdown [list]="openTime" [parentForm]="addShopForm" [controlName]="'open_time'" [selected]="addShopForm.value.open_time">
                 </app-select-dropdown>
               </div>
             </div>
@@ -52,7 +52,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Close Time</label>
               <div class="col-sm-8">
-                <app-select-dropdown [list]="closeTime" [parentForm]="addShopForm"[controlName]="'close_time'">
+                <app-select-dropdown [list]="closeTime" [parentForm]="addShopForm" [controlName]="'close_time'" [selected]="addShopForm.value.close_time">
                 </app-select-dropdown>
               </div>
             </div>
@@ -130,7 +130,7 @@
               <label class="col-sm-4 col-form-label">Service Area</label>
               <div class="col-sm-8">
                 <app-select-dropdown [list]="serviceAreaList" [parentForm]="addShopForm"
-                  [controlName]="'service_area_id'"></app-select-dropdown>
+                  [controlName]="'service_area_id'" [selected]="addShopForm.value.service_area_id"></app-select-dropdown>
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Category</label>
               <div class="col-sm-8">
-                <app-select-dropdown [list]="categoryList" [parentForm]="addShopForm"[controlName]="'category_id'">
+                <app-select-dropdown [list]="categoryList" [parentForm]="addShopForm" [controlName]="'category_id'" [selected]="addShopForm.value.category_id">
                 </app-select-dropdown>
 
               </div>
@@ -162,7 +162,8 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">State</label>
                 <div class="col-sm-8">
-                  <app-select-dropdown [list]="stateList" [parentForm]="addShopForm.controls['address']"[controlName]="'state_id'">
+                  <app-select-dropdown [list]="stateList" [parentForm]="addShopForm.controls['address']"
+                    [controlName]="'state_id'" [selected]="addShopForm.value.address.state_id">
                   </app-select-dropdown>
                 </div>
               </div>
@@ -204,7 +205,8 @@
               <label class="col-12 col-form-label">Shop Location <i class="mdi mdi-crosshairs-gps"></i></label>
               <div class="col-sm-12">
                 <agm-map [latitude]="lat" [longitude]="lng">
-                  <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="selectMarker($event)"></agm-marker>
+                  <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true"
+                    (dragEnd)="selectMarker($event)"></agm-marker>
                 </agm-map>
               </div>
             </div>
@@ -237,8 +239,9 @@
             </div>
           </div>
           <div class="col-md-6 text-right">
-            <button class="btn btn-success btn-sm">SAVE</button>
-            <button class="btn btn-success btn-sm" (click)="addShop()">Submit</button>
+            <button class="btn btn-success btn-sm" *ngIf="!edit">SAVE</button>
+            <button class="btn btn-success btn-sm" (click)="updateShop()" *ngIf="edit" data-dismiss="modal">UPDATE</button>
+            <button class="btn btn-success btn-sm" (click)="addShop()" *ngIf="!edit">Submit</button>
           </div>
         </div>
       </form>

@@ -14,6 +14,8 @@ export class ShopListComponent implements OnInit {
   page = 1
   pageSize = 10;
 
+  editShop;
+
   constructor(private shopService: ShopService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit() {
