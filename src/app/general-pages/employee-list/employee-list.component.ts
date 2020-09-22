@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { UtilityService } from 'src/app/services/utility.service';
+import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -11,7 +12,8 @@ export class EmployeeListComponent implements OnInit {
   page = 1;
   pageSize = 10;
   employee: any = [];
-  constructor(private empService: EmployeeService, private utility: UtilityService) { }
+  editEmployee;
+  constructor(private empService: EmployeeService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit() {
     this.getAllEmployees();
@@ -21,23 +23,21 @@ export class EmployeeListComponent implements OnInit {
     this.empService.getAllEmployees().subscribe(
       (employee: any) => {
         this.employee = employee;
-      },
-      (error: any) => {
-        this.utility.showError("Failed to load Employees");
       }
     )
   }
 
-  deleteEmployee(employeeId:any) {
-    this.empService.deleteEmployeeById(employeeId).subscribe(
-      (res: any) => {
-        this.utility.showSuccess("Employee Deleted successfully");
-        this.getAllEmployees();
-      },
-      (error: any) => {
-        this.utility.showError("Failed to load Employees");
-      }
-    )
+  deleteEmployee(employeeId: any) {
+    this.confirmDialogService.confirmThis("Are you sure to delete?", () => {
+      this.empService.deleteEmployeeById(employeeId).subscribe(
+        (res: any) => {
+          this.utility.showSuccess("Employee Deleted successfully");
+          this.getAllEmployees();
+        }
+      )
+    }, () => {
+    })
+
   }
 
 }

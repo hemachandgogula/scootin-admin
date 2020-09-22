@@ -22,6 +22,11 @@ export class RoleService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
+  updateRole(request: AddRoleRequest, roleId: number) {
+    return this._http.post<any>(environment.apiURL + '/register/admin/update/' + roleId, request).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
   deleteUser(id: number) {
     return this._http.delete<any>(environment.apiURL + '/register/admin/delete/' + id).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))

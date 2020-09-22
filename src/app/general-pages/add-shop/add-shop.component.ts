@@ -33,27 +33,27 @@ export class AddShopComponent implements OnInit, AfterViewInit {
         latitude: editShop.latitude,
         longitude: editShop.longitude,
         category_id: editShop.categoryDetails.id,
-        shop_banner_media_id: editShop.shopBannerReference ? editShop.shopBannerReference.id : '1',
+        shop_banner_media_id: editShop.shopBannerReference ? editShop.shopBannerReference.id : null,
         shop_land_line: editShop.shopOwner.mobile_number,
         discount_amount: editShop.amount,
         discount_type: editShop.discountType,
         service_area_id: editShop.serviceID.id,
         owner: {
-          last_name: editShop.shopOwner ? editShop.shopOwner.last_name : '',
-          first_name: editShop.shopOwner ? editShop.shopOwner.first_name : '',
-          password: editShop.shopOwner ? editShop.shopOwner.password : '',
-          pan_id: editShop.shopOwner.panReference ? editShop.shopOwner.panReference.id : '1',
-          pan_card: editShop.shopOwner ? editShop.shopOwner.pan_card : '',
-          gst_info_id: editShop.shopOwner.gstInfoReference ? editShop.shopOwner.gstInfoReference.id : '1',
-          gst_info: ''
+          last_name: editShop.shopOwner ? editShop.shopOwner.last_name : null,
+          first_name: editShop.shopOwner ? editShop.shopOwner.first_name : null,
+          password: editShop.shopOwner ? editShop.shopOwner.password : null,
+          pan_id: editShop.shopOwner.panReference ? editShop.shopOwner.panReference.id : null,
+          pan_card: editShop.shopOwner ? editShop.shopOwner.pan_card : null,
+          gst_info_id: editShop.shopOwner.gstInfoReference ? editShop.shopOwner.gstInfoReference.id : null,
+          gst_info: null
         },
         address: {
           addressType: 'SHOP',
-          address_line_1: editShop.address ? editShop.address.addressLine1 : '',
-          address_line_2: editShop.address ? editShop.address.addressLine2 : '',
-          city: editShop.address ? editShop.address.city : '',
-          pincode: editShop.address ? editShop.address.pincode : '',
-          state_id: editShop.address ? editShop.address.stateDetails.id : ''
+          address_line_1: editShop.address ? editShop.address.addressLine1 : null,
+          address_line_2: editShop.address ? editShop.address.addressLine2 : null,
+          city: editShop.address ? editShop.address.city : null,
+          pincode: editShop.address ? editShop.address.pincode : null,
+          state_id: editShop.address ? editShop.address.stateDetails.id : null
         }
       });
     }
@@ -169,33 +169,33 @@ export class AddShopComponent implements OnInit, AfterViewInit {
       this.stateList = this.utility.generateDropDownList('id', 'name', res);
     })
     this.addShopForm = this._fb.group({
-      name: [''],
-      open_time: [''],
-      close_time: [''],
-      latitude: [''],
-      longitude: [''],
-      category_id: [''],
-      shop_banner_media_id: [''],
-      shop_land_line: [''],
-      discount_amount: [''],
-      discount_type: [''],
-      service_area_id: [''],
+      name: [],
+      open_time: [],
+      close_time: [],
+      latitude: [],
+      longitude: [],
+      category_id: [],
+      shop_banner_media_id: [],
+      shop_land_line: [],
+      discount_amount: [],
+      discount_type: [],
+      service_area_id: [],
       owner: this._fb.group({
-        last_name: [''],
-        first_name: [''],
-        password: [''],
-        pan_id: [''],
-        pan_card: [''],
-        gst_info_id: [''],
-        gst_info: ['']
+        last_name: [],
+        first_name: [],
+        password: [],
+        pan_id: [],
+        pan_card: [],
+        gst_info_id: [],
+        gst_info: []
       }),
       address: this._fb.group({
         addressType: ['SHOP'],
-        address_line_1: [''],
-        address_line_2: [''],
-        city: [''],
-        pincode: [''],
-        state_id: ['']
+        address_line_1: [],
+        address_line_2: [],
+        city: [],
+        pincode: [],
+        state_id: []
       })
     })
 

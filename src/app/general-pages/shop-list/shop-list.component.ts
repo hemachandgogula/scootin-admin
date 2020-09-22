@@ -35,7 +35,6 @@ export class ShopListComponent implements OnInit {
   getShops() {
     this.shopService.getAllShop().subscribe(res => {
       this.shopList = res;
-      console.log(this.shopList.length);
     })
   }
 

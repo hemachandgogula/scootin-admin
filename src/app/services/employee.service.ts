@@ -18,6 +18,12 @@ export class EmployeeService {
     )
   }
 
+  updateEmployee(request: AddEmployeeRequest, employeeId: number) {
+    return this._http.post<any>(environment.apiURL + '/employee/modify/' + employeeId, request).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
+
   getAllEmployees() {
     return this._http.get<any>(environment.apiURL + '/employee/get-all').pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))

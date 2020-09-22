@@ -22,7 +22,7 @@
               <label class="col-sm-4 col-form-label">Role</label>
               <div class="col-sm-8 d-flex flex-column justify-content-between">
                   <div class="custom-control custom-radio" *ngFor="let r of roleList;let i=index">
-                    <input type="radio" [id]="'customRadio'+i" name="role" class="custom-control-input" [value]="r.key" formControlName="role">
+                    <input type="radio" [id]="'customRadio'+i" class="custom-control-input" [value]="r.key" formControlName="role">
                     <label class="custom-control-label" [for]="'customRadio'+i">{{r.value}}</label>
                   </div>
               </div>
@@ -62,7 +62,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Service Area</label>
               <div class="col-sm-8">
-                <app-select-dropdown [list]="serviceAreaList" [parentForm]="addRoleForm"[controlName]="'service_id'"></app-select-dropdown>
+                <app-select-dropdown [list]="serviceAreaList" [parentForm]="addRoleForm" [controlName]="'service_id'" [selected]="addRoleForm.value.service_id"></app-select-dropdown>
               </div>
             </div>
           </div>
@@ -70,8 +70,9 @@
         </div>
         <div class="row">
           <div class="col-md-12 text-right">
-            <button class="btn btn-success btn-sm">SAVE</button>
-            <button class="btn btn-success btn-sm" (click)="addRole()">SUBMIT</button>
+            <!-- <button class="btn btn-success btn-sm" *ngIf="!edit">SAVE</button> -->
+            <button class="btn btn-success btn-sm" (click)="updateRole()" *ngIf="edit" data-dismiss="modal">UPDATE</button>
+            <button class="btn btn-success btn-sm" (click)="addRole()" *ngIf="!edit">Submit</button>
           </div>
         </div>
       </form>

@@ -14,6 +14,7 @@ export class RiderListComponent implements OnInit {
   riderList: Rider[] = [];
   page = 1;
   pageSize = 10;
+  editRider;
   constructor(private riderService: RiderService,private utility:UtilityService,private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit() {

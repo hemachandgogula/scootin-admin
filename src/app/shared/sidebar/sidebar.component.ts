@@ -22,10 +22,12 @@ export class SidebarComponent implements OnInit {
   public paymentCollapsed = false;
   public loggginDetails;
 
-  constructor() { }
+  constructor() { 
+    this.loggginDetails = JSON.parse(localStorage.getItem('userDetails'));
+  }
 
   ngOnInit() {
-    this.loggginDetails = JSON.parse(localStorage.getItem('userDetails'));
+    
     const body = document.querySelector('body');
 
     // add class 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu

@@ -26,10 +26,10 @@ export class AuthInterceptor implements HttpInterceptor {
         if (!(request.url.includes('/auth/login/admin') || request.url.includes('/auth/refresh/admin')))
             return next.handle(this.addToken(request, this.authService.accessToken)).pipe(
                 catchError(error => {
-                    if (error.error instanceof ErrorEvent) {
+                    if (error.error instanceof ErrorEvent && error.status!=401) {
                         this.utility.showError(error.error.message);
                     }
-                    else {
+                    else if(error.status!=401) {
                         if (error.error)
                             this.utility.showError(error.error.error);
                         else

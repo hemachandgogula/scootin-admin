@@ -107,11 +107,14 @@ agm-map {
 .modal-dialog {
   max-width: 90% !important;
   .modal-body {
-    max-height: 90vh;
+    max-height: 80vh;
     overflow: hidden;
     overflow-y: auto;
   }
 }
 .modal-content {
   background-color: $white;
+}
+.c-pointer{
+  cursor:pointer
 }

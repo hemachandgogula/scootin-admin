@@ -37,13 +37,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let rider of riderList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                            <tr
+                                *ngFor="let rider of riderList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td>
                                     {{rider.id}}
                                 </td>
                                 <td>
                                     <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image">
-                                    {{rider.firstName}}  {{rider.lastName}}
+                                    {{rider.firstName}} {{rider.lastName}}
                                 </td>
                                 <td>
                                     {{rider.mobileNumber}}
@@ -56,16 +57,35 @@
                                     <label class="badge badge-danger" *ngIf="!rider.active">Disable</label>
                                 </td>
                                 <td class="d-flex justify-content-around">
-                                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                                    <i class="mdi mdi-delete mdi-24px text-danger" (click)="deleteRider(rider.id)"></i>
+                                    <i class="mdi mdi-pencil-box mdi-24px text-primary c-pointer" data-toggle="modal"
+                                        data-target="#editModal" (click)="editRider=rider"></i>
+                                    <i class="mdi mdi-delete mdi-24px text-danger c-pointer" (click)="deleteRider(rider.id)"></i>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <ngb-pagination class="d-flex justify-content-center" *ngIf="riderList != null && riderList.length>0" [collectionSize]="riderList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+                    <ngb-pagination class="d-flex justify-content-center"
+                        *ngIf="riderList != null && riderList.length>0" [collectionSize]="riderList.length"
+                        [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<app-confirm-dialog></app-confirm-dialog> 
+<app-confirm-dialog></app-confirm-dialog>
+<div class="modal" tabindex="-1" role="dialog" id="editModal" tabindex="-1" role="dialog"
+    aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Rider</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-rider [edit]="true" [editRider]="editRider" (updated)="getRiderList()"></app-add-rider>
+            </div>
+        </div>
+    </div>
+</div>

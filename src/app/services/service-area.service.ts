@@ -17,6 +17,11 @@ export class ServiceAreaService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
+  updateServiceArea(request: ServiceArea, serviceAreaId: number) {
+    return this._http.post<any>(environment.apiURL + '/service-area/update/'+serviceAreaId, request).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
   deleteServiceArea(id: number) {
     return this._http.delete<any>(environment.apiURL + '/service-area/delete/' + id).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))

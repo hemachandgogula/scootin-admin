@@ -1,6 +1,6 @@
 <div class="col-12 grid-margin">
     <div class="card">
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header d-flex justify-content-between" *ngIf="!edit">
             <h4 class="card-title m-0">Add New Rider</h4>
         </div>
         <div class="card-body">
@@ -32,7 +32,7 @@
                                     <label class="col-sm-4 col-form-label">Gender</label>
                                     <div class="col-sm-8">
                                         <app-select-dropdown [list]="genderList" [parentForm]="addRiderForm"
-                                            [controlName]="'gender'"></app-select-dropdown>
+                                            [controlName]="'gender'" [selected]="addRiderForm.value.gender"></app-select-dropdown>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                             <label class="col-sm-4 col-form-label">Service Area</label>
                             <div class="col-sm-8">
                                 <app-select-dropdown [list]="serviceAreaList" [parentForm]="addRiderForm"
-                                    [controlName]="'serviceAreaId'"></app-select-dropdown>
+                                    [controlName]="'serviceAreaId'" [selected]="addRiderForm.value.serviceAreaId"></app-select-dropdown>
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                                 <div class="col-sm-8">
                                     <app-select-dropdown [list]="stateList"
                                         [parentForm]="addRiderForm.controls['address']" [controlName]="'state_id'"
-                                        (valueChange)="setCountry($event)"></app-select-dropdown>
+                                        (valueChange)="setCountry($event)" [selected]="addRiderForm.value.address.state_id"></app-select-dropdown>
                                 </div>
                             </div>
                         </div>
@@ -212,8 +212,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button class="btn btn-success btn-sm">SAVE</button>
-                        <button class="btn btn-success btn-sm" (click)="addRider()">SUBMIT</button>
+                        <!-- <button class="btn btn-success btn-sm" *ngIf="!edit">SAVE</button> -->
+                        <button class="btn btn-success btn-sm" (click)="updateRider()" *ngIf="edit"
+                            data-dismiss="modal">UPDATE</button>
+                        <button class="btn btn-success btn-sm" (click)="addRider()" *ngIf="!edit">SUBMIT</button>
                     </div>
                 </div>
             </form>
