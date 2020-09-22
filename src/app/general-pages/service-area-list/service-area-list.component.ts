@@ -13,6 +13,7 @@ export class ServiceAreaListComponent implements OnInit {
   page = 1;
   pageSize = 10;
   serviceAreaList: ServiceArea[] = [];
+  editServiceArea;
   constructor(private serviceAreaService: ServiceAreaService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit() {

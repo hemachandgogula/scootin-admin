@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category';
@@ -8,6 +8,8 @@ import { ShopService } from 'src/app/services/shop.service';
 import { Dropdown } from 'src/app/models/dropdown';
 import { ServiceAreaService } from 'src/app/services/service-area.service';
 import { ServiceArea } from 'src/app/models/service-area';
+import { AddShopRequest } from 'src/app/models/request/add-shop-request';
+import { Shop } from 'src/app/models/shop';
 
 @Component({
   selector: 'app-add-shop',
@@ -19,6 +21,46 @@ export class AddShopComponent implements OnInit, AfterViewInit {
   lat = 0;
   lng = 0;
 
+  @Output() updated:EventEmitter<boolean>=new EventEmitter<boolean>();
+  @Input() edit: boolean = false;
+  @Input() set editShop(editShop: Shop) {
+    if (editShop) {
+      this.editShopId = editShop.id;
+      this.addShopForm.patchValue({
+        name: editShop.name,
+        open_time: editShop.openTime,
+        close_time: editShop.closeTime,
+        latitude: editShop.latitude,
+        longitude: editShop.longitude,
+        category_id: editShop.categoryDetails.id,
+        shop_banner_media_id: editShop.shopBannerReference ? editShop.shopBannerReference.id : null,
+        shop_land_line: editShop.shopOwner.mobile_number,
+        discount_amount: editShop.amount,
+        discount_type: editShop.discountType,
+        service_area_id: editShop.serviceID.id,
+        owner: {
+          last_name: editShop.shopOwner ? editShop.shopOwner.last_name : null,
+          first_name: editShop.shopOwner ? editShop.shopOwner.first_name : null,
+          password: editShop.shopOwner ? editShop.shopOwner.password : null,
+          pan_id: editShop.shopOwner.panReference ? editShop.shopOwner.panReference.id : null,
+          pan_card: editShop.shopOwner ? editShop.shopOwner.pan_card : null,
+          gst_info_id: editShop.shopOwner.gstInfoReference ? editShop.shopOwner.gstInfoReference.id : null,
+          gst_info: null
+        },
+        address: {
+          addressType: 'SHOP',
+          address_line_1: editShop.address ? editShop.address.addressLine1 : null,
+          address_line_2: editShop.address ? editShop.address.addressLine2 : null,
+          city: editShop.address ? editShop.address.city : null,
+          pincode: editShop.address ? editShop.address.pincode : null,
+          state_id: editShop.address ? editShop.address.stateDetails.id : null
+        }
+      });
+    }
+  };
+
+  editShopId: number;
+
   addShopForm: FormGroup;
   categoryList: Dropdown[] = [];
   serviceAreaList: Dropdown[] = [];
@@ -27,26 +69,8 @@ export class AddShopComponent implements OnInit, AfterViewInit {
   selectedBannerFile: string = '';
 
   openTime: Dropdown[] = [
-    { key: '00:00', value: '00:00' },
-    { key: '00:30', value: '00:30' },
-    { key: '01:00', value: '01:00' },
-    { key: '01:30', value: '01:30' },
-    { key: '02:00', value: '02:00' },
-    { key: '02:30', value: '02:30' },
-    { key: '03:00', value: '03:00' },
-    { key: '03:30', value: '03:30' },
-    { key: '04:00', value: '04:00' },
-    { key: '04:30', value: '04:30' },
-    { key: '05:00', value: '05:00' },
-    { key: '05:30', value: '05:30' },
-    { key: '06:00', value: '06:00' },
-    { key: '06:30', value: '06:30' },
-    { key: '07:00', value: '07:00' },
-    { key: '07:30', value: '07:30' },
-    { key: '08:00', value: '08:00' },
-    { key: '08:30', value: '08:30' },
-    { key: '09:00', value: '09:00' },
-    { key: '09:30', value: '09:30' },
+    { key: '9:00', value: '9:00' },
+    { key: '9:30', value: '9:30' },
     { key: '10:00', value: '10:00' },
     { key: '10:30', value: '10:30' },
     { key: '11:00', value: '11:00' },
@@ -145,35 +169,36 @@ export class AddShopComponent implements OnInit, AfterViewInit {
       this.stateList = this.utility.generateDropDownList('id', 'name', res);
     })
     this.addShopForm = this._fb.group({
-      name: [''],
-      open_time: [''],
-      close_time: [''],
-      latitude: [''],
-      longitude: [''],
-      category_id: [''],
-      shop_banner_media_id: [''],
-      shop_land_line: [''],
-      discount_amount: [''],
-      discount_type: [''],
-      service_area_id: [''],
+      name: [],
+      open_time: [],
+      close_time: [],
+      latitude: [],
+      longitude: [],
+      category_id: [],
+      shop_banner_media_id: [],
+      shop_land_line: [],
+      discount_amount: [],
+      discount_type: [],
+      service_area_id: [],
       owner: this._fb.group({
-        last_name: [''],
-        first_name: [''],
-        password: [''],
-        pan_id: [''],
-        pan_card: [''],
-        gst_info_id: [''],
-        gst_info: ['']
+        last_name: [],
+        first_name: [],
+        password: [],
+        pan_id: [],
+        pan_card: [],
+        gst_info_id: [],
+        gst_info: []
       }),
       address: this._fb.group({
-        addressType:['SHOP'],
-        address_line_1: [''],
-        address_line_2: [''],
-        city: [''],
-        pincode: [''],
-        state_id: ['']
+        addressType: ['SHOP'],
+        address_line_1: [],
+        address_line_2: [],
+        city: [],
+        pincode: [],
+        state_id: []
       })
     })
+
   }
   ngAfterViewInit() {
   }
@@ -210,6 +235,17 @@ export class AddShopComponent implements OnInit, AfterViewInit {
         this.utility.showSuccess("Successfully added")
       } else {
         this.utility.showError("Failed to add shop");
+      }
+    });
+  }
+  updateShop() {
+    this.shopService.updateShop(this.addShopForm.value, this.editShopId).subscribe(res => {
+      if (res.status) {
+        this.addShopForm.reset();
+        this.utility.showSuccess("Successfully Updated");
+        this.updated.emit(true);
+      } else {
+        this.utility.showError("Failed to update shop");
       }
     });
   }

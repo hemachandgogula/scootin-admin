@@ -48,5 +48,10 @@
         "target": "https://ferrous-agency-286401.el.r.appspot.com",
         "secure": true,
         "changeOrigin": true
+    },
+    "/employee/*": {
+        "target": "https://ferrous-agency-286401.el.r.appspot.com",
+        "secure": true,
+        "changeOrigin": true
     }
 }

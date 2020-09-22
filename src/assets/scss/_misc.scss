@@ -31,7 +31,8 @@ body {
 }
 
 .main-panel {
-  transition: width $action-transition-duration $action-transition-timing-function, margin $action-transition-duration $action-transition-timing-function;
+  transition: width $action-transition-duration $action-transition-timing-function,
+    margin $action-transition-duration $action-transition-timing-function;
   width: calc(100% - #{$sidebar-width-lg});
   min-height: calc(100vh - #{$navbar-height});
   @include display-flex();
@@ -46,7 +47,7 @@ body {
 }
 
 .content-wrapper {
-  background: linear-gradient(to bottom, theme-color(primary) 20%, $content-bg 0);;
+  background: linear-gradient(to bottom, theme-color(primary) 20%, $content-bg 0);
   padding: 0.75rem 2.25rem;
   width: 100%;
   @include flex-grow(1);
@@ -92,14 +93,28 @@ code {
     text-align: center;
     box-shadow: 0px 3px 8.3px 0.7px rgba(163, 93, 255, 0.35);
     i {
-      font-size: .9375rem;
+      font-size: 0.9375rem;
       line-height: 36px;
     }
   }
 }
-.form-control:disabled{
+.form-control:disabled {
   background-color: $white;
 }
 agm-map {
   height: 300px;
+}
+.modal-dialog {
+  max-width: 90% !important;
+  .modal-body {
+    max-height: 80vh;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+}
+.modal-content {
+  background-color: $white;
+}
+.c-pointer{
+  cursor:pointer
 }

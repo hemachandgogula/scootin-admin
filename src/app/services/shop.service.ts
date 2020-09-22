@@ -17,6 +17,11 @@ export class ShopService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
+  updateShop(request: AddShopRequest, shopId: number) {
+    return this._http.post<any>(environment.apiURL + '/shops/modify/' + shopId, request).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
   deleteShop(id: number) {
     return this._http.delete<any>(environment.apiURL + '/shops/delete/' + id).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))

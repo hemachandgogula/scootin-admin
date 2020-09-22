@@ -8,15 +8,14 @@
             <div class="input-group-text" id="btnGroupAddon">
               <i class="mdi mdi-magnify"></i>
             </div>
-          </div> -->
+          </div>
           <input type="text" class="form-control bg-light" placeholder="Search" aria-label="Search"
-            aria-describedby="btnGroupAddon">
+            aria-describedby="btnGroupAddon"> -->
         </div>
       </div>
-      <div class="card-body">
 
         <div class="card-body">
-          <div class="table-responsive" style="margin-top:30px">
+          <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
@@ -50,8 +49,9 @@
                     <span *ngIf="r.serviceID">{{r.serviceID.name}}</span>
                   </td>
                   <td class="d-flex justify-content-around">
-                    <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                    <i class="mdi mdi-delete mdi-24px text-danger" (click)="deleteUser(r.id)"></i>
+                    <i class="mdi mdi-pencil-box mdi-24px text-primary c-pointer" data-toggle="modal"
+                    data-target="#editModal" (click)="editRole=r"></i>
+                    <i class="mdi mdi-delete mdi-24px text-danger c-pointer" (click)="deleteUser(r.id)"></i>
                   </td>
                 </tr>
               </tbody>
@@ -61,8 +61,23 @@
               <ngb-pagination class="d-flex justify-content-center" *ngIf="roleList != null && roleList.length>0" [collectionSize]="roleList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
           </div>
         </div>
-      </div>
     </div>
 
   </div>
   <app-confirm-dialog></app-confirm-dialog> 
+  <div class="modal" tabindex="-1" role="dialog" id="editModal" tabindex="-1" role="dialog"
+    aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit User Role</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-role [edit]="true" [editRole]="editRole" (updated)="getUserList()"></app-add-role>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,9 @@ export class SelectDropdownComponent implements OnInit {
   @Input() controlName: string;
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
   selectedValue: string;
+  @Input() set selected(value) {
+    this.selectedValue = this.list.filter(f => f.key == value)[0] ? this.list.filter(f => f.key == value)[0].value : '';
+  }
 
   ChangeSortOrder(newValue) {
     this.selectedValue = newValue.value;

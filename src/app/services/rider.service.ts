@@ -18,12 +18,17 @@ export class RiderService {
     )
   }
   addRider(request: AddRiderRequest) {
-    return this._http.post<any>(environment.apiURL + '/register/rider/add',request).pipe(
+    return this._http.post<any>(environment.apiURL + '/register/rider/add', request).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
+  updateRider(request: AddRiderRequest, riderId: number) {
+    return this._http.post<any>(environment.apiURL + '/register/rider/update/' + riderId, request).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
   deleteRider(id) {
-    return this._http.delete<any>(environment.apiURL + '/register/rider/delete/'+id).pipe(
+    return this._http.delete<any>(environment.apiURL + '/register/rider/delete/' + id).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }

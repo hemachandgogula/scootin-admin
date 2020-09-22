@@ -1,6 +1,6 @@
 <div class="col-12 grid-margin">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" *ngIf="!edit">
       <h4 class="card-title m-0">Add Employee</h4>
     </div>
     <div class="card-body">
@@ -13,7 +13,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">First Name</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="firstName"/>
+                <input type="text" class="form-control" formControlName="first_name"/>
               </div>
             </div>
           </div>
@@ -21,7 +21,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Last Name</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="lastName"/>
+                <input type="text" class="form-control" formControlName="last_name"/>
               </div>
             </div>
           </div>
@@ -47,9 +47,9 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Service Area</label>
+              <label class="col-sm-4 col-form-label">Status</label>
               <div class="col-sm-8">
-                <app-select-dropdown></app-select-dropdown>
+                <input type="text" class="form-control" formControlName="employee_status">
               </div>
             </div>
           </div>
@@ -65,9 +65,9 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Status</label>
+              <label class="col-sm-4 col-form-label">PAN Number</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="employeeStatus">
+                <input type="text" class="form-control" formControlName="pan_number">
               </div>
             </div>
           </div>
@@ -76,8 +76,8 @@
               <label class="col-sm-4 col-form-label">Upload PAN Reference</label>
               <div class="col-sm-8">
                 <div class="d-flex">
-                  <input type="text" class="form-control" disabled>
-                  <input type="file" class="form-control">
+                  <input type="text" class="form-control" disabled [value]="selectedFile">
+                  <input type="file" class="form-control" (change)="uploadImage($event.target.files)">
                   <button class="btn btn-light btn-sm">Browse</button>
                 </div>
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
@@ -87,8 +87,8 @@
         </div>
         <div class="row">
           <div class="col-md-12 text-right">
-            <button class="btn btn-success btn-sm">SAVE</button>
-            <button class="btn btn-success btn-sm" (click)="onSubmit()">SUBMIT</button>
+            <button class="btn btn-success btn-sm" data-dismiss="modal" *ngIf="edit" (click)="updateEmployee()">UPDATE</button>
+            <button class="btn btn-success btn-sm" *ngIf="!edit" (click)="onSubmit()">SUBMIT</button>
           </div>
         </div>
       </form>

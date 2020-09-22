@@ -14,6 +14,7 @@ export class RoleListComponent implements OnInit {
   page = 1;
   pageSize = 5;
   roleList: Role[] = [];
+  editRole;
   constructor(private roleService: RoleService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit() {
