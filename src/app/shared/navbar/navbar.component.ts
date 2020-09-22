@@ -53,4 +53,9 @@ export class NavbarComponent implements OnInit {
     document.querySelector('#right-sidebar').classList.toggle('open');
   }
 
+  logoutUser() {
+    localStorage.clear();
+    location.reload();
+  }
+
 }

@@ -12,6 +12,7 @@ import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dial
 })
 export class RoleListComponent implements OnInit {
   page = 1;
+  pageSize = 5;
   roleList: Role[] = [];
   constructor(private roleService: RoleService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 

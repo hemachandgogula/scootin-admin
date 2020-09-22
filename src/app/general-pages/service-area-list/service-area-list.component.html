@@ -28,7 +28,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let s of serviceAreaList">
+              <tr *ngFor="let s of serviceAreaList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                 <td>
                   {{s.name}}
                 </td>
@@ -42,8 +42,9 @@
               </tr>
             </tbody>
           </table>
-          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5"
-            [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+          <!-- <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5"
+            [rotate]="true" [boundaryLinks]="true"></ngb-pagination> -->
+            <ngb-pagination class="d-flex justify-content-center" *ngIf="serviceAreaList != null && serviceAreaList.length>0" [collectionSize]="serviceAreaList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
         </div>
       </div>
     </div>

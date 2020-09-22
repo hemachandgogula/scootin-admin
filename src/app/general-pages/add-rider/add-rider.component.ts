@@ -59,6 +59,8 @@ export class AddRiderComponent implements OnInit {
       })
     })
   }
+  imagePath:any;
+  imgURL:any;
   uploadImage(file, type) {
     this.utility.uploadImage(file.item(0)).subscribe((res: Media) => {
       switch (type) {
@@ -76,6 +78,19 @@ export class AddRiderComponent implements OnInit {
           break;
         case 'profile':
           this.riderPhoto = file.item(0).name;
+          //this.profile = file.item(0);
+          var mimeType = file[0].type;
+          if (mimeType.match(/image\/*/) == null) {
+            alert("Only images are supported.");
+            return;
+          }
+      
+          var reader = new FileReader();
+          this.imagePath = file;
+          reader.readAsDataURL(file[0]); 
+          reader.onload = (_event) => { 
+            this.imgURL = reader.result; 
+          }
           this.addRiderForm.patchValue({
             profileMediaId: res.id
           });
@@ -83,6 +98,20 @@ export class AddRiderComponent implements OnInit {
       }
     })
   }
+
+  deleteProfile() {
+    this.utility.deleteImage(this.addRiderForm.get('profileMediaId').value).subscribe(
+      (res:any)=> {
+        this.imgURL = undefined;
+        this.imagePath = undefined;
+        this.utility.showSuccess("Image deleted Successfully");
+      },
+      (error:any)=> {
+        this.utility.showError("Error in deleting image");
+      }
+    )
+  }
+
   setCountry($event) {
 
   }

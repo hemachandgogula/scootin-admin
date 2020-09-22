@@ -33,7 +33,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let i of itemList">
+              <tr *ngFor="let i of itemList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                 <td>
                   {{i.categoryDetails.name}}
                 </td>
@@ -54,8 +54,9 @@
               </tr>
             </tbody>
           </table>
-          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5"
-            [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+          <!-- <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5"
+            [rotate]="true" [boundaryLinks]="true"></ngb-pagination> -->
+            <ngb-pagination class="d-flex justify-content-center" *ngIf="itemList != null && itemList.length>0" [collectionSize]="itemList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
         </div>
       </div>
     </div>

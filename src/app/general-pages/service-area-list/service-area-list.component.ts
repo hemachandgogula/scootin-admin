@@ -10,8 +10,8 @@ import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dial
   styleUrls: ['./service-area-list.component.scss']
 })
 export class ServiceAreaListComponent implements OnInit {
-
   page = 1;
+  pageSize = 10;
   serviceAreaList: ServiceArea[] = [];
   constructor(private serviceAreaService: ServiceAreaService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 

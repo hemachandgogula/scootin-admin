@@ -37,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let rider of riderList">
+                            <tr *ngFor="let rider of riderList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td>
                                     {{rider.id}}
                                 </td>
@@ -57,12 +57,12 @@
                                 </td>
                                 <td class="d-flex justify-content-around">
                                     <i class="mdi mdi-pencil-box mdi-24px text-primary"></i>
-                                    <i class="mdi mdi-delete mdi-24px text-danger" (click)="deleteRider(r.id)"></i>
+                                    <i class="mdi mdi-delete mdi-24px text-danger" (click)="deleteRider(rider.id)"></i>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+                    <ngb-pagination class="d-flex justify-content-center" *ngIf="riderList != null && riderList.length>0" [collectionSize]="riderList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
                 </div>
             </div>
         </div>
