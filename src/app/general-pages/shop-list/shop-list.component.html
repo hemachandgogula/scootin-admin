@@ -44,12 +44,15 @@
                   {{s.address.stateDetails.countryDetails.name}}
                 </td>
                 <td>
-                  <label class="badge badge-success">Enable</label>
+                  <label class="badge badge-success" *ngIf="s.status">Enabled</label>
+                  <label class="badge badge-danger" *ngIf="!s.status">Disabled</label>
                 </td>
                 <td class="d-flex justify-content-around">
                   <i class="mdi mdi-pencil-box mdi-24px text-primary c-pointer" data-toggle="modal" data-target="#editModal"
                     (click)="editShop=s"></i>
                   <i class="mdi mdi-delete mdi-24px text-danger c-pointer" (click)="deleteShop(s.id)"></i>
+                  <i class="mdi mdi-plus-circle mdi-24px text-info c-pointer" (click)="addItem(s.id)" title="Add Item"></i>
+                  <i class="mdi mdi-format-list-bulleted mdi-24px text-warning c-pointer" (click)="viewItems(s.id)" title="View Items"></i>
                 </td>
               </tr>
             </tbody>

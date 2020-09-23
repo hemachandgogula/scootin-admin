@@ -38,9 +38,13 @@ export class AuthenticationService {
   }
   checkSession() {
     let loggedinUser = localStorage.getItem('userDetails');
+    let serviceArea = localStorage.getItem('serviceArea');
+    let role = localStorage.getItem('role');
     if (loggedinUser != '' && loggedinUser != undefined && loggedinUser != null) {
       this.loggedInUser.next(JSON.parse(loggedinUser));
       this.accessToken = JSON.parse(loggedinUser).token;
+      this.loggedUserServiceArea = parseInt(serviceArea);
+      this.loggedUserRole = role;
       return true;
     } else {
       return false;

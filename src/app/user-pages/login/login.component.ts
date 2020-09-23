@@ -46,16 +46,17 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.value).subscribe((res: LoginResponse) => {
         this.authService.loggedInUser.next(res);
         this.authService.accessToken = res.token;
-       
-        localStorage.setItem('userDetails', JSON.stringify(res));
+        localStorage.setItem('userDetails', JSON.stringify(res));        
         this.router.navigate(['/dashboard']);
       });
   }
   serviceAreaChange(event){
     this.authService.loggedUserServiceArea = event;
+    localStorage.setItem('serviceArea',event );
   }
   roleChange(event){
     this.authService.loggedUserRole = event;
+    localStorage.setItem('role',event );
   }
 
 }

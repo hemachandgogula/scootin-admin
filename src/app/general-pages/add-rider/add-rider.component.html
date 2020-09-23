@@ -32,7 +32,8 @@
                                     <label class="col-sm-4 col-form-label">Gender</label>
                                     <div class="col-sm-8">
                                         <app-select-dropdown [list]="genderList" [parentForm]="addRiderForm"
-                                            [controlName]="'gender'" [selected]="addRiderForm.value.gender"></app-select-dropdown>
+                                            [controlName]="'gender'" [selected]="addRiderForm.value.gender">
+                                        </app-select-dropdown>
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +42,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-6 col-form-label">Upload Rider Photo</label>
-                            <div class="col-sm-6" *ngIf="!imgURL">
+                            <div class="col-sm-6" *ngIf="!profileImgURL">
                                 <div
                                     class="file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
                                     <i class="mdi mdi-upload"></i>
@@ -50,11 +51,11 @@
                                         (change)="uploadImage($event.target.files,'profile')" />
                                 </div>
                             </div>
-                            <div class="col-md-6" *ngIf="imgURL">
+                            <div class="col-md-6" *ngIf="profileImgURL">
                                 <div
                                     class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
-                                    <span class="close" (click)="deleteProfile()">&times;</span>
-                                    <img [src]="imgURL" style="width: 10rem;
+                                    <span class="close" (click)="deleteImage('profile')">&times;</span>
+                                    <img [src]="profileImgURL" style="width: 10rem;
                                     height: 10rem;">
                                 </div>
 
@@ -68,7 +69,8 @@
                             <label class="col-sm-4 col-form-label">Service Area</label>
                             <div class="col-sm-8">
                                 <app-select-dropdown [list]="serviceAreaList" [parentForm]="addRiderForm"
-                                    [controlName]="'serviceAreaId'" [selected]="addRiderForm.value.serviceAreaId"></app-select-dropdown>
+                                    [controlName]="'serviceAreaId'" [selected]="addRiderForm.value.serviceAreaId">
+                                </app-select-dropdown>
                             </div>
                         </div>
                     </div>
@@ -111,7 +113,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Upload DL Reference</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-8" *ngIf="!dlImgURL">
                                 <div class="d-flex">
                                     <input type="text" class="form-control" disabled [value]="selectedDLFile">
                                     <input type="file" class="form-control"
@@ -120,7 +122,15 @@
                                 </div>
                                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
                             </div>
+                            <div class="col-md-8" *ngIf="dlImgURL">
+                                <div
+                                    class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                                    <span class="close" (click)="deleteImage('dl')">&times;</span>
+                                    <img [src]="dlImgURL" style="width: 10rem;
+                                    height: 10rem;">
+                                </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -136,7 +146,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Upload Aadhar Reference</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-8" *ngIf="!aadharImgURL">
                                 <div class="d-flex">
                                     <input type="text" class="form-control" disabled [value]="selectedAadharFile">
                                     <input type="file" class="form-control"
@@ -145,7 +155,15 @@
                                 </div>
                                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
                             </div>
+                            <div class="col-md-8" *ngIf="aadharImgURL">
+                                <div
+                                    class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                                    <span class="close" (click)="deleteImage('aadhar')">&times;</span>
+                                    <img [src]="aadharImgURL" style="width: 10rem;
+                                    height: 10rem;">
+                                </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -168,7 +186,8 @@
                                 <div class="col-sm-8">
                                     <app-select-dropdown [list]="stateList"
                                         [parentForm]="addRiderForm.controls['address']" [controlName]="'state_id'"
-                                        (valueChange)="setCountry($event)" [selected]="addRiderForm.value.address.state_id"></app-select-dropdown>
+                                        (valueChange)="setCountry($event)"
+                                        [selected]="addRiderForm.value.address.state_id"></app-select-dropdown>
                                 </div>
                             </div>
                         </div>

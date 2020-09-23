@@ -45,14 +45,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Status</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="employee_status">
-              </div>
-            </div>
-          </div>
+          
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Description</label>
@@ -74,13 +67,54 @@
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Upload PAN Reference</label>
-              <div class="col-sm-8">
+              <div class="col-sm-8" *ngIf="!panImgURL">
                 <div class="d-flex">
-                  <input type="text" class="form-control" disabled [value]="selectedFile">
-                  <input type="file" class="form-control" (change)="uploadImage($event.target.files)">
+                  <input type="text" class="form-control" disabled [value]="selectedPANFile">
+                  <input type="file" class="form-control" (change)="uploadImage($event.target.files,'pan')">
                   <button class="btn btn-light btn-sm">Browse</button>
                 </div>
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
+              </div>
+              <div class="col-md-8" *ngIf="panImgURL">
+                <div
+                  class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                  <span class="close" (click)="deleteImage('pan')">&times;</span>
+                  <img [src]="panImgURL" style="width: 10rem;
+                  height: 10rem;">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Aadhar Number</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Upload Aadhar Reference</label>
+              <div class="col-sm-8" *ngIf="!aadharImgURL">
+                <div class="d-flex">
+                  <input type="text" class="form-control" disabled [value]="selectedAadharFile">
+                  <input type="file" class="form-control" (change)="uploadImage($event.target.files,'aadhar')">
+                  <button class="btn btn-light btn-sm">Browse</button>
+                </div>
+                <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
+              </div>
+              <div class="col-md-8" *ngIf="aadharImgURL">
+                <div
+                  class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                  <span class="close" (click)="deleteImage('aadhar')">&times;</span>
+                  <img [src]="aadharImgURL" style="width: 10rem;
+                  height: 10rem;">
+                </div>
+
               </div>
             </div>
           </div>

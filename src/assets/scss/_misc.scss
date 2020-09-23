@@ -118,3 +118,30 @@ agm-map {
 .c-pointer{
   cursor:pointer
 }
+.img-wrap{
+  width:fit-content;
+}
+.file{
+  width:10rem;
+  height:10rem;
+}
+
+.img-wrap {
+  position: relative;
+  background-color: transparent;
+}
+.img-wrap .close {
+  position: absolute;
+    top: -12px;
+    right: -7px;
+    z-index: 100;
+    color: red;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px 0px black;
+    padding: 0px;
+}
+app-select-dropdown{
+  min-width:150px;
+}

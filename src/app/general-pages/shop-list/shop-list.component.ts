@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ShopService } from 'src/app/services/shop.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dialog.service';
@@ -16,7 +17,7 @@ export class ShopListComponent implements OnInit {
 
   editShop;
 
-  constructor(private shopService: ShopService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
+  constructor(private shopService: ShopService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService, private router: Router) { }
 
   ngOnInit() {
     this.getShops();
@@ -36,6 +37,14 @@ export class ShopListComponent implements OnInit {
     this.shopService.getAllShop().subscribe(res => {
       this.shopList = res;
     })
+  }
+
+  addItem(shopId: number) {
+    this.router.navigate(['general-pages/add-item', { id: shopId }])
+  }
+
+  viewItems(shopId: number) {
+    this.router.navigate(['general-pages/item-list', { id: shopId }])
   }
 
 }
