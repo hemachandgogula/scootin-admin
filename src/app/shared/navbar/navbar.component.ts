@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit {
   public sidebarToggled = false;
   public userName: string;
 
-  constructor(config: NgbDropdownConfig, private authService: AuthenticationService) {
+  constructor(config: NgbDropdownConfig, private authService: AuthenticationService,private router:Router) {
     config.placement = 'bottom-right';
   }
 
@@ -55,7 +56,7 @@ export class NavbarComponent implements OnInit {
 
   logoutUser() {
     localStorage.clear();
-    location.reload();
+    this.router.navigate(['user-pages/login']);
   }
 
 }

@@ -17,6 +17,11 @@ export class ItemService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
+  getAllItemByShop(shopId: number) {
+    return this._http.get<any>(environment.apiURL + '/product/get-all-by-shop/' + shopId).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
   addItem(request: AddItemRequest) {
     return this._http.post<any>(environment.apiURL + '/product/add/' + request.shopManagementId, request).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))

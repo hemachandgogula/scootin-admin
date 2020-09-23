@@ -13,7 +13,13 @@ import { UtilityService } from 'src/app/services/utility.service';
 })
 export class AddEmployeeComponent implements OnInit {
   addEmployeeForm: FormGroup;
-  selectedFile: string = '';
+  selectedPANFile: string = '';
+  selectedAadharFile: string = '';
+
+  panImagePath: any;
+  panImgURL: any;
+  aadharImagePath: any;
+  aadharImgURL: any;
   @Output() updated: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() edit: boolean = false;
   @Input() set editEmployee(editEmployee: Employee) {
@@ -24,7 +30,7 @@ export class AddEmployeeComponent implements OnInit {
         email: editEmployee.email,
         description: editEmployee.description,
         mobileNumber: editEmployee.mobileNumber,
-        employee_status: editEmployee.employeeStatus,
+        //employee_status: editEmployee.employeeStatus,
         pan_number: editEmployee.panNumber,
         pan_number_reference: editEmployee.panReference ? editEmployee.panReference.id : null
       })
@@ -39,7 +45,7 @@ export class AddEmployeeComponent implements OnInit {
       email: [],
       description: [],
       mobileNumber: [],
-      employee_status: [],
+      // employee_status: [],
       pan_number: [],
       pan_number_reference: []
     })
@@ -69,13 +75,80 @@ export class AddEmployeeComponent implements OnInit {
       }
     )
   }
-  uploadImage(file) {
+  uploadImage(file, type) {
     this.utility.uploadImage(file.item(0)).subscribe((res: Media) => {
-      this.selectedFile = file.item(0).name;
-      this.addEmployeeForm.patchValue({
-        pan_number_reference: res.id
-      });
+      switch (type) {
+        case 'pan':
+          this.selectedPANFile = file.item(0).name;
+          var mimeType = file[0].type;
+          if (mimeType.match(/image\/*/) == null) {
+            alert("Only images are supported.");
+            return;
+          }
+          var reader = new FileReader();
+          this.panImagePath = file;
+          reader.readAsDataURL(file[0]);
+          reader.onload = (_event) => {
+            this.panImgURL = reader.result;
+          }
+          this.addEmployeeForm.patchValue({
+            pan_number_reference: res.id
+          });
+          break;
+        case 'aadhar':
+          this.selectedAadharFile = file.item(0).name;
+          var mimeType = file[0].type;
+          if (mimeType.match(/image\/*/) == null) {
+            alert("Only images are supported.");
+            return;
+          }
+          var reader = new FileReader();
+          this.aadharImagePath = file;
+          reader.readAsDataURL(file[0]);
+          reader.onload = (_event) => {
+            this.aadharImgURL = reader.result;
+          }
+          this.addEmployeeForm.patchValue({
+            aadhar_number_reference: res.id
+          });
+          break;
+      }
     })
+  }
+  deleteImage(type) {
+    switch (type) {
+      case 'pan':
+        this.utility.deleteImage(this.addEmployeeForm.get('pan_number_reference').value).subscribe(
+          (res: any) => {
+            this.panImgURL = undefined;
+            this.panImagePath = undefined;
+            this.selectedPANFile = '';
+            this.addEmployeeForm.patchValue({
+              pan_number_reference:null
+            })
+            this.utility.showSuccess("Image deleted Successfully");
+          },
+          (error: any) => {
+            this.utility.showError("Error in deleting image");
+          }
+        )
+        break;
+      case 'aadhar':
+        this.utility.deleteImage(this.addEmployeeForm.get('aadhar_number_reference').value).subscribe(
+          (res: any) => {
+            this.aadharImgURL = undefined;
+            this.aadharImagePath = undefined;
+            this.selectedAadharFile = '';
+            this.addEmployeeForm.patchValue({
+              aadhar_number_reference:null
+            })
+            this.utility.showSuccess("Image deleted Successfully");
+          },
+          (error: any) => {
+            this.utility.showError("Error in deleting image");
+          }
+        )
+    }
   }
 
 }

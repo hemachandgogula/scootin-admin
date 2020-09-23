@@ -21,7 +21,9 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Shop Name</label>
               <div class="col-sm-8">
-                <app-select-dropdown [list]="shopList" [parentForm]="addItemForm" [controlName]="'shopManagementId'"></app-select-dropdown>
+                <!-- <input type="text" []>              -->
+                <app-select-dropdown [list]="shopList" [parentForm]="addItemForm" [controlName]="'shopManagementId'"
+                  [selected]="addItemForm.value.shopManagementId"></app-select-dropdown>
               </div>
             </div>
           </div>
@@ -48,15 +50,23 @@
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Upload Photo</label>
-              <div class="col-sm-8">
-                <div class="col-sm-6">
-                  <div class="file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
-                      <i class="mdi mdi-upload"></i>
-                      UPLOAD
-                      <input type="file" name="file" class="form-control" (change)="uploadImage($event.target.files)"/>
+                <div class="col-sm-8" *ngIf="!imgURL">
+                  <div
+                    class="file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                    <i class="mdi mdi-upload"></i>
+                    UPLOAD
+                    <input type="file" name="file" class="form-control" (change)="uploadImage($event.target.files)" />
                   </div>
-              </div>
-              </div>
+                </div>
+                <div class="col-md-8" *ngIf="imgURL">
+                  <div
+                    class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                    <span class="close" (click)="deleteImage()">&times;</span>
+                    <img [src]="imgURL" style="width: 10rem;
+                    height: 10rem;">
+                  </div>
+
+                </div>
             </div>
           </div>
           <div class="col-md-6">

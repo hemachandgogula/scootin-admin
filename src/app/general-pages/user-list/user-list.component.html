@@ -19,9 +19,6 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        Id
-                                    </th>
-                                    <th>
                                         Name
                                     </th>
                                     <th>
@@ -38,9 +35,6 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let user of userList">
-                                    <td>
-                                        {{user.id}}
-                                    </td>
                                     <td>
                                         <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image">
                                         {{user.firstName}} {{user.lastName}}

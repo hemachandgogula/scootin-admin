@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './select-dropdown.component.html',
   styleUrls: ['./select-dropdown.component.scss']
 })
-export class SelectDropdownComponent implements OnInit {
+export class SelectDropdownComponent implements OnInit,OnChanges {
 
   @Input() list: any[] = [];
   @Input() placeholder: string;
@@ -14,7 +14,9 @@ export class SelectDropdownComponent implements OnInit {
   @Input() controlName: string;
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
   selectedValue: string;
+  selectedKey:number;
   @Input() set selected(value) {
+    this.selectedKey=value;
     this.selectedValue = this.list.filter(f => f.key == value)[0] ? this.list.filter(f => f.key == value)[0].value : '';
   }
 
@@ -30,6 +32,9 @@ export class SelectDropdownComponent implements OnInit {
 
   ngOnInit() {
     this.selectedValue = this.placeholder;
+  }
+  ngOnChanges(){
+    this.selectedValue = this.list.filter(f => f.key == this.selectedKey)[0] ? this.list.filter(f => f.key == this.selectedKey)[0].value : '';
   }
 
 }

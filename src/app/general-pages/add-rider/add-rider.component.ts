@@ -91,19 +91,45 @@ export class AddRiderComponent implements OnInit {
       })
     })
   }
-  imagePath: any;
-  imgURL: any;
+  dlImagePath: any;
+  dlImgURL: any;
+  aadharImagePath: any;
+  aadharImgURL: any;
+  profileImagePath: any;
+  profileImgURL: any;
   uploadImage(file, type) {
     this.utility.uploadImage(file.item(0)).subscribe((res: Media) => {
       switch (type) {
         case 'aadhar':
           this.selectedAadharFile = file.item(0).name;
+          var mimeType = file[0].type;
+          if (mimeType.match(/image\/*/) == null) {
+            alert("Only images are supported.");
+            return;
+          }
+          var reader = new FileReader();
+          this.aadharImagePath = file;
+          reader.readAsDataURL(file[0]);
+          reader.onload = (_event) => {
+            this.aadharImgURL = reader.result;
+          }
           this.addRiderForm.patchValue({
             aadharCardMediaId: res.id
           });
           break;
         case 'dl':
           this.selectedDLFile = file.item(0).name;
+          var mimeType = file[0].type;
+          if (mimeType.match(/image\/*/) == null) {
+            alert("Only images are supported.");
+            return;
+          }
+          var reader = new FileReader();
+          this.dlImagePath = file;
+          reader.readAsDataURL(file[0]);
+          reader.onload = (_event) => {
+            this.dlImgURL = reader.result;
+          }
           this.addRiderForm.patchValue({
             drivingLicenceMediaId: res.id
           });
@@ -118,10 +144,10 @@ export class AddRiderComponent implements OnInit {
           }
 
           var reader = new FileReader();
-          this.imagePath = file;
+          this.profileImagePath = file;
           reader.readAsDataURL(file[0]);
           reader.onload = (_event) => {
-            this.imgURL = reader.result;
+            this.profileImgURL = reader.result;
           }
           this.addRiderForm.patchValue({
             profileMediaId: res.id
@@ -130,18 +156,56 @@ export class AddRiderComponent implements OnInit {
       }
     })
   }
-
-  deleteProfile() {
-    this.utility.deleteImage(this.addRiderForm.get('profileMediaId').value).subscribe(
-      (res: any) => {
-        this.imgURL = undefined;
-        this.imagePath = undefined;
-        this.utility.showSuccess("Image deleted Successfully");
-      },
-      (error: any) => {
-        this.utility.showError("Error in deleting image");
-      }
-    )
+  deleteImage(type) {
+    switch (type) {
+      case 'dl':
+        this.utility.deleteImage(this.addRiderForm.get('drivingLicenceMediaId').value).subscribe(
+          (res: any) => {
+            this.dlImgURL = undefined;
+            this.dlImagePath = undefined;
+            this.selectedDLFile = '';
+            this.addRiderForm.patchValue({
+              drivingLicenceMediaId:null
+            })
+            this.utility.showSuccess("Image deleted Successfully");
+          },
+          (error: any) => {
+            this.utility.showError("Error in deleting image");
+          }
+        )
+        break;
+      case 'aadhar':
+        this.utility.deleteImage(this.addRiderForm.get('aadharCardMediaId').value).subscribe(
+          (res: any) => {
+            this.aadharImgURL = undefined;
+            this.aadharImagePath = undefined;
+            this.selectedAadharFile = '';
+            this.addRiderForm.patchValue({
+              aadharCardMediaId:null
+            })
+            this.utility.showSuccess("Image deleted Successfully");
+          },
+          (error: any) => {
+            this.utility.showError("Error in deleting image");
+          }
+        )
+        break;
+        case 'profile':
+        this.utility.deleteImage(this.addRiderForm.get('profileMediaId').value).subscribe(
+          (res: any) => {
+            this.aadharImgURL = undefined;
+            this.aadharImagePath = undefined;
+            this.addRiderForm.patchValue({
+              profileMediaId:null
+            })
+            this.utility.showSuccess("Image deleted Successfully");
+          },
+          (error: any) => {
+            this.utility.showError("Error in deleting image");
+          }
+        )
+        break;
+    }
   }
 
   setCountry($event) {

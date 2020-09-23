@@ -3,6 +3,11 @@
         <div class="card">
             <div class="card-header d-flex align-items-baseline">
                 <h4 class="card-title mr-2">Rider List</h4>
+                <div class="d-flex align-items-center">
+                    <label class="mr-2">Service Area</label>
+                    <app-select-dropdown [list]="serviceAreaList" [placeholder]="'Select Service Area'">
+                    </app-select-dropdown>
+                   </div>
                 <!-- <div class="input-group w-25">
                     <div class="input-group-prepend">
                         <div class="input-group-text" id="btnGroupAddon">
@@ -28,7 +33,7 @@
                                     Mobile
                                 </th>
                                 <th>
-                                    Service Area
+                                    Email
                                 </th>
                                 <th>
                                     Status
