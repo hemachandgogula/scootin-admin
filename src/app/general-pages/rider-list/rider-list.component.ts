@@ -37,10 +37,17 @@ export class RiderListComponent implements OnInit {
     })
 
   }
+  getAllRiderByServiceId(serviceId) {
 
+  }
   getRiderList() {
     this.riderService.getAllRider().subscribe((res: Rider[]) => {
       this.riderList = res;
+    })
+  }
+  toggleRider(event, riderId: number) {
+    this.riderService.toggleRider(event.target.checked, riderId).subscribe(res => {
+      event.target.checked ? this.utility.showSuccess("Successfully Enabled") : this.utility.showSuccess("Successfully Disabled")
     })
   }
 

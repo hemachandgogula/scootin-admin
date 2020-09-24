@@ -24,6 +24,12 @@ export class EmployeeService {
     )
   }
 
+  searchEmployee(query: string) {
+    return this._http.get<any>(environment.apiURL + '/search/get-all-employee?query=' + query).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
+
   getAllEmployees() {
     return this._http.get<any>(environment.apiURL + '/employee/get-all').pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))

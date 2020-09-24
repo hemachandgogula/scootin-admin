@@ -9,12 +9,16 @@ import { UtilityService } from './utility.service';
 })
 export class CategoryService {
 
-constructor(private _http: HttpClient, private utility: UtilityService) { }
+  constructor(private _http: HttpClient, private utility: UtilityService) { }
 
-getAllCategory() {
-  return this._http.get<any>(environment.apiURL + '/category/get-all-shop-category').pipe(
-    catchError((error: HttpErrorResponse) => this.utility.handleError(error))
-  )
-}
-
+  getAllCategory() {
+    return this._http.get<any>(environment.apiURL + '/category/get-all-shop-category').pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
+  toggleCategory(state: boolean, categoryId: number) {
+    return this._http.post<any>(environment.apiURL + '/category/active/' + categoryId, { active: state }).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
 }

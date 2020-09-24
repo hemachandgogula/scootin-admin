@@ -38,7 +38,11 @@ export class ShopListComponent implements OnInit {
       this.shopList = res;
     })
   }
-
+  toggleShop(event, shopId: number) {
+    this.shopService.toggleShop(event.target.checked, shopId).subscribe(res => {
+      event.target.checked ? this.utility.showSuccess("Successfully Enabled") : this.utility.showSuccess("Successfully Disabled")
+    })
+  }
   addItem(shopId: number) {
     this.router.navigate(['general-pages/add-item', { id: shopId }])
   }

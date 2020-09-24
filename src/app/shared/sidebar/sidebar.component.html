@@ -145,7 +145,7 @@
          </ul>
       </div>
     </li>
-    <!-- <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
+    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive }">
       <a class="nav-link" (click)="categoriesCollapsed = !categoriesCollapsed"  [attr.aria-expanded]="categoriesCollapsed" aria-controls="auth">
         <span class="menu-title">Categories</span>
         <i class="menu-arrow"></i>
@@ -153,11 +153,11 @@
       </a>
       <div class="collapse" id="auth" [ngbCollapse]="!categoriesCollapsed">
         <ul class="nav flex-column sub-menu">
-           <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-categories" routerLinkActive="active" #blankPage="routerLinkActive"> Add Categories </a></li>
+           <!-- <li class="nav-item"> <a class="nav-link" routerLink="general-pages/add-categories" routerLinkActive="active" #blankPage="routerLinkActive"> Add Categories </a></li> -->
           <li class="nav-item"> <a class="nav-link" routerLink="general-pages/categories-list" routerLinkActive="active" #login="routerLinkActive"> Categories List </a></li>
          </ul>
       </div>
-    </li> -->
+    </li>
    
     <!-- <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive || register.isActive || error404.isActive || error500.isActive }">
       <a class="nav-link" (click)="samplePagesCollapsed = !samplePagesCollapsed"  [attr.aria-expanded]="samplePagesCollapsed" aria-controls="auth">
