@@ -18,12 +18,14 @@
           <table class="table">
             <thead>
               <tr>
-
                 <th>
-                  Restaturant Name
+                  Shop Name
                 </th>
                 <th>
                   Address
+                </th>
+                <th>
+                  Service Area
                 </th>
                 <th>
                   Status
@@ -42,6 +44,9 @@
                   {{s.address.addressLine2}},
                   {{s.address.stateDetails.name}},
                   {{s.address.stateDetails.countryDetails.name}}
+                </td>
+                <td>
+                  {{s.serviceID.name}}
                 </td>
                 <td>
                   <label class="switch">
