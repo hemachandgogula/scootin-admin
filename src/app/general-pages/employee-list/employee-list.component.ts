@@ -13,6 +13,7 @@ export class EmployeeListComponent implements OnInit {
   pageSize = 10;
   employee: any = [];
   editEmployee;
+  searchText: string;
   constructor(private empService: EmployeeService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit() {
@@ -38,6 +39,14 @@ export class EmployeeListComponent implements OnInit {
     }, () => {
     })
 
+  }
+  searchByName() {
+    if (this.searchText != '' && this.searchText)
+      this.empService.searchEmployee(this.searchText).subscribe(res => {
+        this.employee = res;
+      })
+    else
+      this.getAllEmployees();
   }
 
 }

@@ -22,6 +22,11 @@ export class ShopService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
+  toggleShop(state: boolean, shopId: number) {
+    return this._http.post<any>(environment.apiURL + '/shops/active/' + shopId, { active: state }).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
   deleteShop(id: number) {
     return this._http.delete<any>(environment.apiURL + '/shops/delete/' + id).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))

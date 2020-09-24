@@ -21,7 +21,7 @@ export class AddShopComponent implements OnInit, AfterViewInit {
   lat = 0;
   lng = 0;
 
-  @Output() updated:EventEmitter<boolean>=new EventEmitter<boolean>();
+  @Output() updated: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() edit: boolean = false;
   @Input() set editShop(editShop: Shop) {
     if (editShop) {
@@ -67,7 +67,12 @@ export class AddShopComponent implements OnInit, AfterViewInit {
   selectedGSTFile: string = '';
   selectedPANFile: string = '';
   selectedBannerFile: string = '';
-
+  gstImgURL: any;
+  gstImgPath: any;
+  panImgURL: any;
+  panImgPath: any;
+  bannerImgURL: any;
+  bannerImgPath: any;
   openTime: Dropdown[] = [
     { key: '9:00', value: '9:00' },
     { key: '9:30', value: '9:30' },
@@ -153,8 +158,8 @@ export class AddShopComponent implements OnInit, AfterViewInit {
   ];
 
   discountTypes: any = [
-    {key:'FIXED', value: 'Fixed'},
-    {key:'PERCENTAGE', value: 'Percentage'}
+    { key: 'FIXED', value: 'Fixed' },
+    { key: 'PERCENTAGE', value: 'Percentage' }
   ]
   constructor(private _fb: FormBuilder, private serviceAreaService: ServiceAreaService, private categoryService: CategoryService, private utility: UtilityService, private shopService: ShopService) { }
 
@@ -208,18 +213,51 @@ export class AddShopComponent implements OnInit, AfterViewInit {
       switch (type) {
         case 'banner':
           this.selectedBannerFile = file.item(0).name;
+          var mimeType = file[0].type;
+          if (mimeType.match(/image\/*/) == null) {
+            alert("Only images are supported.");
+            return;
+          }
+          var reader = new FileReader();
+          this.bannerImgPath = file;
+          reader.readAsDataURL(file[0]);
+          reader.onload = (_event) => {
+            this.bannerImgURL = reader.result;
+          }
           this.addShopForm.patchValue({
             shop_banner_media_id: res.id
           });
           break;
         case 'gst':
           this.selectedGSTFile = file.item(0).name;
+          var mimeType = file[0].type;
+          if (mimeType.match(/image\/*/) == null) {
+            alert("Only images are supported.");
+            return;
+          }
+          var reader = new FileReader();
+          this.gstImgPath = file;
+          reader.readAsDataURL(file[0]);
+          reader.onload = (_event) => {
+            this.gstImgURL = reader.result;
+          }
           this.addShopForm.get('owner').patchValue({
             gst_info_id: res.id
           });
           break;
         case 'pan':
           this.selectedPANFile = file.item(0).name;
+          var mimeType = file[0].type;
+          if (mimeType.match(/image\/*/) == null) {
+            alert("Only images are supported.");
+            return;
+          }
+          var reader = new FileReader();
+          this.panImgPath = file;
+          reader.readAsDataURL(file[0]);
+          reader.onload = (_event) => {
+            this.panImgURL = reader.result;
+          }
           this.addShopForm.get('owner').patchValue({
             pan_id: res.id
           });
@@ -227,6 +265,62 @@ export class AddShopComponent implements OnInit, AfterViewInit {
       }
 
     })
+  }
+  deleteImage(type) {
+    switch (type) {
+      case 'banner':
+        this.utility.deleteImage(this.addShopForm.get('shop_banner_media_id').value).subscribe(
+          (res: any) => {
+            this.bannerImgURL = undefined;
+            this.bannerImgPath = undefined;
+            this.selectedBannerFile = '';
+            this.addShopForm.patchValue({
+              shop_banner_media_id: null
+            })
+            this.utility.showSuccess("Image deleted Successfully");
+          },
+          (error: any) => {
+            this.utility.showError("Error in deleting image");
+          }
+        )
+        break;
+      case 'pan':
+        this.utility.deleteImage(this.addShopForm.get('owner').get('pan_id').value).subscribe(
+          (res: any) => {
+            this.panImgURL = undefined;
+            this.panImgPath = undefined;
+            this.selectedPANFile = '';
+            this.addShopForm.patchValue({
+              owner: {
+                pan_id: null
+              }
+            })
+            this.utility.showSuccess("Image deleted Successfully");
+          },
+          (error: any) => {
+            this.utility.showError("Error in deleting image");
+          }
+        )
+        break;
+      case 'gst':
+        this.utility.deleteImage(this.addShopForm.get('owner').get('gst_info_id').value).subscribe(
+          (res: any) => {
+            this.gstImgPath = undefined;
+            this.gstImgURL = undefined;
+            this.selectedGSTFile = '';
+            this.addShopForm.patchValue({
+              owner: {
+                gst_info_id: null
+              }
+            })
+            this.utility.showSuccess("Image deleted Successfully");
+          },
+          (error: any) => {
+            this.utility.showError("Error in deleting image");
+          }
+        )
+        break;
+    }
   }
   addShop() {
     this.shopService.addShop(this.addShopForm.value).subscribe(res => {

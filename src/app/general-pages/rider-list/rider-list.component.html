@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-12 grid-margin">
         <div class="card">
-            <div class="card-header d-flex align-items-baseline">
+            <div class="card-header d-flex align-items-baseline justify-content-between">
                 <h4 class="card-title mr-2">Rider List</h4>
                 <div class="d-flex align-items-center">
                     <label class="mr-2">Service Area</label>
-                    <app-select-dropdown [list]="serviceAreaList" [placeholder]="'Select Service Area'">
+                    <app-select-dropdown [list]="serviceAreaList" [placeholder]="'Select Service Area'" (valueChange)="getAllRiderByServiceId($event)">
                     </app-select-dropdown>
-                   </div>
+                </div>
                 <!-- <div class="input-group w-25">
                     <div class="input-group-prepend">
                         <div class="input-group-text" id="btnGroupAddon">
@@ -36,6 +36,9 @@
                                     Email
                                 </th>
                                 <th>
+                                    Service Area
+                                </th>
+                                <th>
                                     Status
                                 </th>
                                 <th></th>
@@ -58,13 +61,21 @@
                                     {{rider.email}}
                                 </td>
                                 <td>
-                                    <label class="badge badge-success" *ngIf="rider.active">Enable</label>
-                                    <label class="badge badge-danger" *ngIf="!rider.active">Disable</label>
+                                    {{rider.serviceID?rider.serviceID.name:''}}
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox" [checked]="rider.active" (change)="toggleRider($event,rider.id)">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <!-- <label class="badge badge-success" *ngIf="rider.active">Enable</label>
+                                    <label class="badge badge-danger" *ngIf="!rider.active">Disable</label> -->
                                 </td>
                                 <td class="d-flex justify-content-around">
                                     <i class="mdi mdi-pencil-box mdi-24px text-primary c-pointer" data-toggle="modal"
                                         data-target="#editModal" (click)="editRider=rider"></i>
-                                    <i class="mdi mdi-delete mdi-24px text-danger c-pointer" (click)="deleteRider(rider.id)"></i>
+                                    <i class="mdi mdi-delete mdi-24px text-danger c-pointer"
+                                        (click)="deleteRider(rider.id)"></i>
                                 </td>
                             </tr>
                         </tbody>
