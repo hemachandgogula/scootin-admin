@@ -189,6 +189,7 @@ export class AddShopComponent implements OnInit, AfterViewInit {
         last_name: [],
         first_name: [],
         password: [],
+        mobile_number: [],
         pan_id: [],
         pan_card: [],
         gst_info_id: [],
