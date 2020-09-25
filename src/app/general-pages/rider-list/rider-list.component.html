@@ -100,7 +100,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <app-add-rider [edit]="true" [editRider]="editRider" (updated)="getRiderList()"></app-add-rider>
+                <app-add-rider [edit]="true" [editRider]="editRider" (updated)="getRiderList(selectedServiceId)"></app-add-rider>
             </div>
         </div>
     </div>
