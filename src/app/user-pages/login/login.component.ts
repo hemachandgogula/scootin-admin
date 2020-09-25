@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   serviceAreaList: Dropdown[] = [];
   roleList: Dropdown[] = [];
+  hideServiceArea: boolean = true;
   constructor(private _fb: FormBuilder, private serviceAreaService: ServiceAreaService, private authService: AuthenticationService, private router: Router, private utility: UtilityService) { }
 
   ngOnInit() {
@@ -26,9 +27,7 @@ export class LoginComponent implements OnInit {
       user: ['', Validators.required],
       pwd: ['', Validators.required]
     });
-    this.serviceAreaService.getAllServiceArea().subscribe(res => {
-      this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
-    })
+
     this.utility.getAllRole().subscribe((res: string[]) => {
       res.forEach(element => {
         this.roleList.push({
@@ -46,17 +45,25 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.value).subscribe((res: LoginResponse) => {
         this.authService.loggedInUser.next(res);
         this.authService.accessToken = res.token;
-        localStorage.setItem('userDetails', JSON.stringify(res));        
+        localStorage.setItem('userDetails', JSON.stringify(res));
         this.router.navigate(['/dashboard']);
       });
   }
-  serviceAreaChange(event){
+  serviceAreaChange(event) {
     this.authService.loggedUserServiceArea = event;
-    localStorage.setItem('serviceArea',event );
+    localStorage.setItem('serviceArea', event);
   }
-  roleChange(event){
+  roleChange(event) {
     this.authService.loggedUserRole = event;
-    localStorage.setItem('role',event );
+    if (UserRole[event] != UserRole.ROLE_SUPER_ADMIN) {
+      this.hideServiceArea = false;
+      this.serviceAreaService.getAllServiceArea().subscribe(res => {
+        this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
+      })
+    } else {
+      this.hideServiceArea = true;
+    }
+    localStorage.setItem('role', UserRole[event]);
   }
 
 }

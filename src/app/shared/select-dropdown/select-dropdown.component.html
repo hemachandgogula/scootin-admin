@@ -5,7 +5,8 @@
   </div>
 </div> -->
 <div ngbDropdown class="d-inline-block w-100">
-  <button class="btn border w-100 text-left" [id]="controlName" ngbDropdownToggle>{{selectedValue}}</button>
+  <button class="btn border w-100 text-left" ngbDropdownToggle *ngIf="!selectedValue">{{placeholder}}</button>
+  <button class="btn border w-100 text-left" [id]="controlName" ngbDropdownToggle *ngIf="selectedValue">{{selectedValue}}</button>
   <div ngbDropdownMenu [attr.aria-labelledby]="controlName" class="force-scroll">
     <button ngbDropdownItem (click)="ChangeSortOrder(l)" *ngFor="let l of list">{{l.value}}</button>
   </div>
