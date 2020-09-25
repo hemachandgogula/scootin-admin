@@ -36,7 +36,7 @@
             <tbody>
               <tr *ngFor="let s of shopList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                 <td>
-                  <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image">
+                  <img [src]="s.shopBannerReference.url" class="mr-2" alt="image">
                   {{s.name}}
                 </td>
                 <td>

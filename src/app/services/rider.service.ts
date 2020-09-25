@@ -12,8 +12,8 @@ export class RiderService {
 
   constructor(private _http: HttpClient, private utility: UtilityService) { }
 
-  getAllRider() {
-    return this._http.get<any>(environment.apiURL + '/register/rider/get-all').pipe(
+  getAllRider(serviceId: number) {
+    return this._http.get<any>(environment.apiURL + '/register/rider/get-all/' + serviceId).pipe(
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }

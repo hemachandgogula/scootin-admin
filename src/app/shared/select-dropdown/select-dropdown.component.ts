@@ -31,7 +31,7 @@ export class SelectDropdownComponent implements OnInit,OnChanges {
   constructor() { }
 
   ngOnInit() {
-    this.selectedValue = this.placeholder;
+    //this.selectedValue = this.placeholder;
   }
   ngOnChanges(){
     this.selectedValue = this.list.filter(f => f.key == this.selectedKey)[0] ? this.list.filter(f => f.key == this.selectedKey)[0].value : '';

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { UserRole } from 'src/app/enums/user-role.enum';
 import { Dropdown } from 'src/app/models/dropdown';
 import { Item } from 'src/app/models/item';
 import { ServiceArea } from 'src/app/models/service-area';
@@ -20,17 +21,24 @@ export class ItemListComponent implements OnInit {
   itemList: Item[] = [];
   selectedShopId: number;
   serviceAreaList: Dropdown[] = [];
-  constructor(private itemService: ItemService, private route: ActivatedRoute, private utility: UtilityService, private auth: AuthenticationService, private serviceAreaService: ServiceAreaService) { }
+  isSuperAdmin:boolean=false;
+  selectedServiceId: number;
+  constructor(private itemService: ItemService, private route: ActivatedRoute,private authService:AuthenticationService, private utility: UtilityService, private auth: AuthenticationService, private serviceAreaService: ServiceAreaService) { }
 
   ngOnInit() {
     this.serviceAreaService.getAllServiceArea().subscribe((res: ServiceArea[]) => {
       this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
+      if (this.authService.loggedUserRole == UserRole.ROLE_SUPER_ADMIN) {
+        this.getItemList(this.serviceAreaList[0].key);
+        this.isSuperAdmin=true;
+      }else{
+        this.getItemList(this.authService.loggedUserServiceArea);        
+      }
     });
 
     this.route.params.subscribe(params => {
       this.selectedShopId = params.id;
     })
-    this.getItemList();
   }
   // deleteItem(id) {
   //   this.itemService.deleteItem(id).subscribe(res => {
@@ -38,20 +46,19 @@ export class ItemListComponent implements OnInit {
   //     this.getItemList();
   //   });
   // }
-  getAllItemByServiceId(serviceId: number) {
-    this.itemService.getAllItem(serviceId).subscribe((res: Item[]) => {
-      this.itemList = res;
-    })
-  }
-  getItemList() {
+  getItemList(serviceId) {
     if (this.selectedShopId)
       this.itemService.getAllItemByShop(this.selectedShopId).subscribe((res: Item[]) => {
         this.itemList = res;
       })
     else
-      this.itemService.getAllItem(this.auth.loggedUserServiceArea).subscribe((res: Item[]) => {
+    {
+      this.selectedServiceId=serviceId;
+      this.itemService.getAllItem(this.selectedServiceId).subscribe((res: Item[]) => {
         this.itemList = res;
       })
+    }
+    
   }
 
 }
