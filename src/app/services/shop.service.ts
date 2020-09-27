@@ -37,4 +37,9 @@ export class ShopService {
       catchError((error: HttpErrorResponse) => this.utility.handleError(error))
     )
   }
+  getAllShopFilter(service_id: number) {
+    return this._http.get<any>(environment.apiURL + `/shops/get-all-shop/${service_id}?offset=5&pageNumber=1&pageSize=5`).pipe(
+      catchError((error: HttpErrorResponse) => this.utility.handleError(error))
+    )
+  }
 }

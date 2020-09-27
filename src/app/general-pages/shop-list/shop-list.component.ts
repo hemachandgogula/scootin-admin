@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { ShopService } from 'src/app/services/shop.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dialog.service';
+import { Dropdown } from 'src/app/models/dropdown';
+import { ServiceAreaService } from 'src/app/services/service-area.service';
+import { ServiceArea } from 'src/app/models/service-area';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserRole } from 'src/app/enums/user-role.enum';
 
 @Component({
   selector: 'app-shop-list',
@@ -14,13 +19,20 @@ export class ShopListComponent implements OnInit {
   shopList
   page = 1
   pageSize = 10;
-
+  serviceAreaList: Dropdown[] = [];
   editShop;
 
-  constructor(private shopService: ShopService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService, private router: Router) { }
+  constructor(private shopService: ShopService, private authService: AuthenticationService, private serviceAreaService: ServiceAreaService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService, private router: Router) { }
 
   ngOnInit() {
-    this.getShops();
+    this.serviceAreaService.getAllServiceArea().subscribe((res: ServiceArea[]) => {
+      this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
+      if (this.authService.loggedUserRole == UserRole.ROLE_SUPER_ADMIN) {
+        this.getShops();
+      } else {
+        this.getShops();
+      }
+    })
   }
 
   deleteShop(id: number) {
@@ -35,6 +47,11 @@ export class ShopListComponent implements OnInit {
   }
   getShops() {
     this.shopService.getAllShop().subscribe(res => {
+      this.shopList = res;
+    })
+  }
+  getShopFilter(id: number) {
+    this.shopService.getAllShopFilter(id).subscribe(res => {
       this.shopList = res;
     })
   }
