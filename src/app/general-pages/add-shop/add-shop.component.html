@@ -2,8 +2,8 @@
   <div class="card">
     <div class="card-header d-flex justify-content-between" *ngIf="!edit">
       <h4 class="card-title m-0">Add New Shop</h4>
-      <button class="btn btn-sm btn-light btn-outline-secondary text-success font-weight-bold"
-        routerLink="/general-pages/upload-shop"><i class="mdi mdi-upload"></i> UPLOAD FILE</button>
+      <button class="btn btn-sm btn-light btn-outline-secondary text-success font-weight-bold" routerLink="/general-pages/upload-shop"><i
+          class="mdi mdi-upload"></i> UPLOAD FILE</button>
     </div>
     <div class="card-body">
       <form class="form-sample" [formGroup]="addShopForm">
@@ -13,16 +13,15 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Shop Name</label>
+              <label class="col-sm-4 col-form-label">Shop Name <span>*</span></label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" formControlName="name" />
               </div>
             </div>
           </div>
-
           <div class="col-md-6" formGroupName="owner">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Shop Owner`s Name</label>
+              <label class="col-sm-4 col-form-label">Shop Owner`s Name <span>*</span></label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" formControlName="first_name" />
               </div>
@@ -30,7 +29,15 @@
           </div>
           <div class="col-md-6" formGroupName="owner">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Password</label>
+              <label class="col-sm-4 col-form-label">Mobile Number <span>*</span></label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="mobile_number">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6" formGroupName="owner">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Password <span>*</span></label>
               <div class="col-sm-8">
                 <input type="password" class="form-control" formControlName="password" />
               </div>
@@ -41,18 +48,20 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Shop Open Time</label>
+              <label class="col-sm-4 col-form-label">Shop Open Time <span>*</span></label>
               <div class="col-sm-8">
-                <app-select-dropdown [list]="openTime" [parentForm]="addShopForm" [controlName]="'open_time'" [selected]="addShopForm.value.open_time">
+                <app-select-dropdown [list]="openTime" [parentForm]="addShopForm" [controlName]="'open_time'"
+                  [selected]="addShopForm.value.open_time">
                 </app-select-dropdown>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Shop Close Time</label>
+              <label class="col-sm-4 col-form-label">Shop Close Time <span>*</span></label>
               <div class="col-sm-8">
-                <app-select-dropdown [list]="closeTime" [parentForm]="addShopForm" [controlName]="'close_time'" [selected]="addShopForm.value.close_time">
+                <app-select-dropdown [list]="closeTime" [parentForm]="addShopForm" [controlName]="'close_time'"
+                  [selected]="addShopForm.value.close_time">
                 </app-select-dropdown>
               </div>
             </div>
@@ -61,17 +70,30 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Shop Landline Number</label>
+              <label class="col-sm-4 col-form-label">Shop Landline Number <span>*</span></label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" formControlName="shop_land_line">
               </div>
             </div>
           </div>
-          <div class="col-md-6" formGroupName="owner">
-            <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Cell Number</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="mobile_number">
+          <div class="col-md-6">
+            <div class="form-group row mb-auto">
+              <label class="col-sm-4 col-form-label">Shop Banner Image</label>
+              <div class="col-sm-8" *ngIf="!bannerImgURL">
+                <div class="d-flex">
+                  <input type="text" class="form-control" [value]="selectedBannerFile" disabled>
+                  <input type="file" class="form-control" (change)="uploadImage($event.target.files,'banner')">
+                  <button class="btn btn-light btn-sm">Browse</button>
+                </div>
+                <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
+              </div>
+              <div class="col-md-8" *ngIf="bannerImgURL">
+                <div class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                  <span class="close" (click)="deleteImage('banner')">&times;</span>
+                  <img [src]="bannerImgURL" style="width: 10rem;
+                    height: 10rem;">
+                </div>
+
               </div>
             </div>
           </div>
@@ -97,14 +119,13 @@
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
               </div>
               <div class="col-md-8" *ngIf="gstImgURL">
-                <div
-                    class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
-                    <span class="close" (click)="deleteImage('gst')">&times;</span>
-                    <img [src]="gstImgURL" style="width: 10rem;
+                <div class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                  <span class="close" (click)="deleteImage('gst')">&times;</span>
+                  <img [src]="gstImgURL" style="width: 10rem;
                     height: 10rem;">
                 </div>
 
-            </div>
+              </div>
             </div>
           </div>
         </div>
@@ -129,32 +150,32 @@
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
               </div>
               <div class="col-md-8" *ngIf="panImgURL">
-                <div
-                    class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
-                    <span class="close" (click)="deleteImage('pan')">&times;</span>
-                    <img [src]="panImgURL" style="width: 10rem;
+                <div class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                  <span class="close" (click)="deleteImage('pan')">&times;</span>
+                  <img [src]="panImgURL" style="width: 10rem;
                     height: 10rem;">
                 </div>
 
-            </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Service Area</label>
+              <label class="col-sm-4 col-form-label">Service Area <span>*</span></label>
               <div class="col-sm-8">
-                <app-select-dropdown [list]="serviceAreaList" [parentForm]="addShopForm"
-                  [controlName]="'service_area_id'" [selected]="addShopForm.value.service_area_id"></app-select-dropdown>
+                <app-select-dropdown [list]="serviceAreaList" [parentForm]="addShopForm" [controlName]="'service_area_id'"
+                  [selected]="addShopForm.value.service_area_id"></app-select-dropdown>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Category</label>
+              <label class="col-sm-4 col-form-label">Category <span>*</span></label>
               <div class="col-sm-8">
-                <app-select-dropdown [list]="categoryList" [parentForm]="addShopForm" [controlName]="'category_id'" [selected]="addShopForm.value.category_id">
+                <app-select-dropdown [list]="categoryList" [parentForm]="addShopForm" [controlName]="'category_id'"
+                  [selected]="addShopForm.value.category_id">
                 </app-select-dropdown>
 
               </div>
@@ -168,7 +189,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Address 1</label>
+                <label class="col-sm-4 col-form-label">Address 1 <span>*</span></label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" formControlName="address_line_1" />
                 </div>
@@ -176,10 +197,10 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">State</label>
+                <label class="col-sm-4 col-form-label">State <span>*</span></label>
                 <div class="col-sm-8">
-                  <app-select-dropdown [list]="stateList" [parentForm]="addShopForm.controls['address']"
-                    [controlName]="'state_id'" [selected]="addShopForm.value.address.state_id">
+                  <app-select-dropdown [list]="stateList" [parentForm]="addShopForm.controls['address']" [controlName]="'state_id'"
+                    [selected]="addShopForm.value.address.state_id">
                   </app-select-dropdown>
                 </div>
               </div>
@@ -188,7 +209,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Address 2</label>
+                <label class="col-sm-4 col-form-label">Address 2 <span>*</span></label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" formControlName="address_line_2" />
                 </div>
@@ -196,7 +217,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Postcode</label>
+                <label class="col-sm-4 col-form-label">Postcode <span>*</span></label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" formControlName="pincode" />
                 </div>
@@ -206,7 +227,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">City</label>
+                <label class="col-sm-4 col-form-label">City <span>*</span></label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" formControlName="city" />
                 </div>
@@ -220,9 +241,8 @@
             <div class="form-group row">
               <label class="col-12 col-form-label">Shop Location <i class="mdi mdi-crosshairs-gps"></i></label>
               <div class="col-sm-12">
-                <agm-map [latitude]="lat" [longitude]="lng">
-                  <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true"
-                    (dragEnd)="selectMarker($event)"></agm-marker>
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="5">
+                  <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="selectMarker($event)"></agm-marker>
                 </agm-map>
               </div>
             </div>
@@ -241,7 +261,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <div class="form-group row mb-auto">
               <label class="col-sm-4 col-form-label">Shop Banner Image</label>
               <div class="col-sm-8" *ngIf="!bannerImgURL">
@@ -253,16 +273,15 @@
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
               </div>
               <div class="col-md-8" *ngIf="bannerImgURL">
-                <div
-                    class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
-                    <span class="close" (click)="deleteImage('banner')">&times;</span>
-                    <img [src]="bannerImgURL" style="width: 10rem;
+                <div class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                  <span class="close" (click)="deleteImage('banner')">&times;</span>
+                  <img [src]="bannerImgURL" style="width: 10rem;
                     height: 10rem;">
                 </div>
 
+              </div>
             </div>
-            </div>
-          </div>
+          </div> -->
           <div class="col-md-6 text-right">
             <!-- <button class="btn btn-success btn-sm" *ngIf="!edit">SAVE</button> -->
             <button class="btn btn-success btn-sm" (click)="updateShop()" *ngIf="edit" data-dismiss="modal">UPDATE</button>

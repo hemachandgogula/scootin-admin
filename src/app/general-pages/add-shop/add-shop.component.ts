@@ -18,8 +18,8 @@ import { Shop } from 'src/app/models/shop';
 })
 export class AddShopComponent implements OnInit, AfterViewInit {
 
-  lat = 0;
-  lng = 0;
+  lat = 28.207609;
+  lng = 79.826660;
 
   @Output() updated: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() edit: boolean = false;

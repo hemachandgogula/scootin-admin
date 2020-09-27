@@ -29,7 +29,7 @@ export class AddEmployeeComponent implements OnInit {
         last_name: editEmployee.lastName,
         email: editEmployee.email,
         description: editEmployee.description,
-        mobileNumber: editEmployee.mobileNumber,
+        mobile_number: editEmployee.mobileNumber,
         //employee_status: editEmployee.employeeStatus,
         pan_number: editEmployee.panNumber,
         pan_number_reference: editEmployee.panReference ? editEmployee.panReference.id : null
@@ -44,7 +44,7 @@ export class AddEmployeeComponent implements OnInit {
       last_name: [],
       email: [],
       description: [],
-      mobileNumber: [],
+      mobile_number: [],
       // employee_status: [],
       pan_number: [],
       pan_number_reference: []
@@ -57,18 +57,19 @@ export class AddEmployeeComponent implements OnInit {
   onSubmit() {
     this.empService.addEmployee(this.addEmployeeForm.value).subscribe(
       (res: any) => {
-        this.addEmployeeForm.reset();
         this.utility.showSuccess("Successfully Added");
-        this.router.navigate(['/employee-list']);
+        this.router.navigate(['/general-pages/employee-list']);
+      }, (error: any) => {
+        this.utility.showError("Failed to add Employee");
       }
     )
   }
   updateEmployee() {
     this.empService.updateEmployee(this.addEmployeeForm.value, this.editEmployeeId).subscribe(
       (res: any) => {
-        this.addEmployeeForm.reset();
         this.utility.showSuccess("Successfully updated");
-        this.router.navigate(['/employee-list']);
+        window.location.reload();
+        this.router.navigate(['/general-pages/employee-list']);
       },
       (error: any) => {
         this.utility.showError("Failed to add Employee");
@@ -124,7 +125,7 @@ export class AddEmployeeComponent implements OnInit {
             this.panImagePath = undefined;
             this.selectedPANFile = '';
             this.addEmployeeForm.patchValue({
-              pan_number_reference:null
+              pan_number_reference: null
             })
             this.utility.showSuccess("Image deleted Successfully");
           },
@@ -140,7 +141,7 @@ export class AddEmployeeComponent implements OnInit {
             this.aadharImagePath = undefined;
             this.selectedAadharFile = '';
             this.addEmployeeForm.patchValue({
-              aadhar_number_reference:null
+              aadhar_number_reference: null
             })
             this.utility.showSuccess("Image deleted Successfully");
           },
