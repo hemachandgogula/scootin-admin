@@ -21,6 +21,7 @@ export class ShopListComponent implements OnInit {
   pageSize = 10;
   serviceAreaList: Dropdown[] = [];
   editShop;
+  pageLoaded = false;
 
   constructor(private shopService: ShopService, private authService: AuthenticationService, private serviceAreaService: ServiceAreaService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService, private router: Router) { }
 
@@ -28,8 +29,10 @@ export class ShopListComponent implements OnInit {
     this.serviceAreaService.getAllServiceArea().subscribe((res: ServiceArea[]) => {
       this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
       if (this.authService.loggedUserRole == UserRole.ROLE_SUPER_ADMIN) {
+        this.pageLoaded = true;
         this.getShops();
       } else {
+        this.pageLoaded = true;
         this.getShops();
       }
     })
@@ -46,13 +49,21 @@ export class ShopListComponent implements OnInit {
 
   }
   getShops() {
+    this.pageLoaded = true;
     this.shopService.getAllShop().subscribe(res => {
+      this.pageLoaded = false;
       this.shopList = res;
+    }, error => {
+      this.pageLoaded = false;
     })
   }
   getShopFilter(id: number) {
+    this.pageLoaded = true;
     this.shopService.getAllShopFilter(id).subscribe(res => {
+      this.pageLoaded = false;
       this.shopList = res;
+    }, error => {
+      this.pageLoaded = false;
     })
   }
   toggleShop(event, shopId: number) {
