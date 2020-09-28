@@ -39,7 +39,7 @@ export class AddShopComponent implements OnInit, AfterViewInit {
         discount_type: editShop.discountType,
         service_area_id: editShop.serviceID.id,
         owner: {
-          last_name: editShop.shopOwner ? editShop.shopOwner.last_name : null,
+          // last_name: editShop.shopOwner ? editShop.shopOwner.last_name : null,
           first_name: editShop.shopOwner ? editShop.shopOwner.first_name : null,
           password: editShop.shopOwner ? editShop.shopOwner.password : null,
           pan_id: editShop.shopOwner.panReference ? editShop.shopOwner.panReference.id : null,
@@ -186,7 +186,7 @@ export class AddShopComponent implements OnInit, AfterViewInit {
       discount_type: [],
       service_area_id: [],
       owner: this._fb.group({
-        last_name: [],
+        // last_name: [],
         first_name: [],
         password: [],
         mobile_number: [],
@@ -324,7 +324,9 @@ export class AddShopComponent implements OnInit, AfterViewInit {
     }
   }
   addShop() {
+    console.log('add data=>', this.addShopForm.value)
     this.shopService.addShop(this.addShopForm.value).subscribe(res => {
+      console.log('status:', res.status)
       if (res.status) {
         this.addShopForm.reset();
         this.utility.showSuccess("Successfully added")
@@ -334,6 +336,7 @@ export class AddShopComponent implements OnInit, AfterViewInit {
     });
   }
   updateShop() {
+    console.log('update data:', this.addShopForm.value, this.editShopId)
     this.shopService.updateShop(this.addShopForm.value, this.editShopId).subscribe(res => {
       if (res.status) {
         this.addShopForm.reset();

@@ -88,10 +88,9 @@
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
               </div>
               <div class="col-md-8" *ngIf="bannerImgURL">
-                <div class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                <div class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center imagebox">
                   <span class="close" (click)="deleteImage('banner')">&times;</span>
-                  <img [src]="bannerImgURL" style="width: 10rem;
-                    height: 10rem;">
+                  <img [src]="bannerImgURL" alt=""/>
                 </div>
 
               </div>
@@ -119,10 +118,9 @@
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
               </div>
               <div class="col-md-8" *ngIf="gstImgURL">
-                <div class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                <div class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center imagebox">
                   <span class="close" (click)="deleteImage('gst')">&times;</span>
-                  <img [src]="gstImgURL" style="width: 10rem;
-                    height: 10rem;">
+                  <img [src]="gstImgURL" alt=""/>
                 </div>
 
               </div>
@@ -150,10 +148,9 @@
                 <sub>Upload file format JPEG, PNG, GIF, Should not exceed 20MB</sub>
               </div>
               <div class="col-md-8" *ngIf="panImgURL">
-                <div class="img-wrap file btn btn-lg btn-secondary d-flex align-items-center justify-content-center text-success font-weight-bold">
+                <div class="img-wrap file d-flex align-items-center justify-content-center imagebox">
                   <span class="close" (click)="deleteImage('pan')">&times;</span>
-                  <img [src]="panImgURL" style="width: 10rem;
-                    height: 10rem;">
+                  <img [src]="panImgURL" alt=""/>
                 </div>
 
               </div>

@@ -2,3 +2,13 @@
     height:10rem;
 }
 label span { color: red; }
+
+.imagebox {
+    width: 340px;
+    border: 1px solid #cccc;
+    padding: 7px;
+    height: auto;
+        img {
+             max-width: 100%;
+            }
+}
