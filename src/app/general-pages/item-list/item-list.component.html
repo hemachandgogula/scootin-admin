@@ -32,15 +32,15 @@
                 <th>
                   Category Name
                 </th>
-                <th>
+                <!-- <th>
                   Service Area
-                </th>
+                </th> -->
                 <th>
-                  Price
+                  Value
                 </th>
-                <th>
+                <!-- <th>
                   Quantity
-                </th>
+                </th> -->
                 <th>
                   Status
                 </th>
@@ -58,15 +58,15 @@
                 <td>
                   {{i.categoryDetails.name}}
                 </td>
-                <td>
+                <!-- <td>
                   {{i.serviceID.name}}
-                </td>
+                </td> -->
                 <td>
                   {{i.price}}
                 </td>
-                <td>
+                <!-- <td>
                   {{i.quantity}}
-                </td>
+                </td> -->
                 <td>
                   <label class="badge badge-success" *ngIf="i.active">Available</label>
                   <label class="badge badge-danger" *ngIf="!i.active">UnAvailable</label>
