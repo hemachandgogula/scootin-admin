@@ -67,6 +67,7 @@ export interface ShopOwner {
     active: boolean;
     deleted: boolean;
     id: number;
+    gst_info: string;
     last_name: string;
     panReference: PanReference;
     gstInfoReference: GstInfoReference;

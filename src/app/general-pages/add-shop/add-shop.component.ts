@@ -10,6 +10,7 @@ import { ServiceAreaService } from 'src/app/services/service-area.service';
 import { ServiceArea } from 'src/app/models/service-area';
 import { AddShopRequest } from 'src/app/models/request/add-shop-request';
 import { Shop } from 'src/app/models/shop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-shop',
@@ -20,6 +21,7 @@ export class AddShopComponent implements OnInit, AfterViewInit {
 
   lat = 28.207609;
   lng = 79.826660;
+  disc_amt = 0;
 
   @Output() updated: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() edit: boolean = false;
@@ -39,13 +41,13 @@ export class AddShopComponent implements OnInit, AfterViewInit {
         discount_type: editShop.discountType,
         service_area_id: editShop.serviceID.id,
         owner: {
-          last_name: editShop.shopOwner ? editShop.shopOwner.last_name : null,
+          // last_name: editShop.shopOwner ? editShop.shopOwner.last_name : null,
           first_name: editShop.shopOwner ? editShop.shopOwner.first_name : null,
           password: editShop.shopOwner ? editShop.shopOwner.password : null,
           pan_id: editShop.shopOwner.panReference ? editShop.shopOwner.panReference.id : null,
           pan_card: editShop.shopOwner ? editShop.shopOwner.pan_card : null,
           gst_info_id: editShop.shopOwner.gstInfoReference ? editShop.shopOwner.gstInfoReference.id : null,
-          gst_info: null
+          gst_info: editShop.shopOwner.gst_info ? editShop.shopOwner.gst_info : null
         },
         address: {
           addressType: 'SHOP',
@@ -161,7 +163,7 @@ export class AddShopComponent implements OnInit, AfterViewInit {
     { key: 'FIXED', value: 'Fixed' },
     { key: 'PERCENTAGE', value: 'Percentage' }
   ]
-  constructor(private _fb: FormBuilder, private serviceAreaService: ServiceAreaService, private categoryService: CategoryService, private utility: UtilityService, private shopService: ShopService) { }
+  constructor(private _fb: FormBuilder, private router: Router, private serviceAreaService: ServiceAreaService, private categoryService: CategoryService, private utility: UtilityService, private shopService: ShopService) { }
 
   ngOnInit() {
     this.categoryService.getAllCategory().subscribe((res: Category[]) => {
@@ -186,7 +188,7 @@ export class AddShopComponent implements OnInit, AfterViewInit {
       discount_type: [],
       service_area_id: [],
       owner: this._fb.group({
-        last_name: [],
+        // last_name: [],
         first_name: [],
         password: [],
         mobile_number: [],
@@ -324,10 +326,15 @@ export class AddShopComponent implements OnInit, AfterViewInit {
     }
   }
   addShop() {
+    if (this.addShopForm.value.latitude == null)
+      this.addShopForm.value.latitude = 0;
+    if (this.addShopForm.value.longitude == null)
+      this.addShopForm.value.longitude = 0;
+    this.addShopForm.value.discount_amount = this.disc_amt;
     this.shopService.addShop(this.addShopForm.value).subscribe(res => {
       if (res.status) {
-        this.addShopForm.reset();
         this.utility.showSuccess("Successfully added")
+        this.router.navigate(['/general-pages/shop-list']);
       } else {
         this.utility.showError("Failed to add shop");
       }
@@ -336,9 +343,9 @@ export class AddShopComponent implements OnInit, AfterViewInit {
   updateShop() {
     this.shopService.updateShop(this.addShopForm.value, this.editShopId).subscribe(res => {
       if (res.status) {
-        this.addShopForm.reset();
         this.utility.showSuccess("Successfully Updated");
         this.updated.emit(true);
+        this.router.navigate(['/general-pages/shop-list']);
       } else {
         this.utility.showError("Failed to update shop");
       }

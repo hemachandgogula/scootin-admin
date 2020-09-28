@@ -1,3 +1,10 @@
+<div class="loader-wrapper" *ngIf="pageLoaded">
+    <div class="loader-container">
+      <div class="dot dot-1"></div>
+      <div class="dot dot-2"></div>
+      <div class="dot dot-3"></div>
+    </div>
+  </div>
 <div class="row">
   <div class="col-12 grid-margin">
     <div class="card">
@@ -41,7 +48,7 @@
             <tbody>
               <tr *ngFor="let s of shopList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                 <td>
-                  <img [src]="s.shopBannerReference.url" class="mr-2" alt="image">
+                  <img [src]="s.shopBannerReference.url" style="width: 80px;height: 80px;" class="mr-2" alt="image">
                   {{s.name}}
                 </td>
                 <td>
@@ -61,7 +68,8 @@
                   <!-- <label class="badge badge-success" *ngIf="s.status">Enabled</label>
                   <label class="badge badge-danger" *ngIf="!s.status">Disabled</label> -->
                 </td>
-                <td class="d-flex justify-content-around">
+                <!-- <td class="d-flex justify-content-around"> -->
+                <td>
                   <i class="mdi mdi-pencil-box mdi-24px text-primary c-pointer" data-toggle="modal" data-target="#editModal"
                     (click)="editShop=s"></i>
                   <i class="mdi mdi-delete mdi-24px text-danger c-pointer" (click)="deleteShop(s.id)"></i>

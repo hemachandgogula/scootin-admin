@@ -4,17 +4,18 @@
             <div class="card-header d-flex align-items-baseline">
                 <div class="card-header d-flex">
                     <div class="newinput" style="display: inherit;margin: 0 23px 0 0;">
-                        <input type="file" style="padding: 7px" class="form-control" id="input">
-                        <label class="btn btn-light btn-sm" for="input" style="height: 35px;"> Browse</label>
+                        <input type="file" style="padding: 7px" (change)="uploadImage($event.target.files,'shop')"
+                            class="form-control" id="input">
+                        <!-- <label class="btn btn-light btn-sm" for="input" style="height: 35px;"> Browse</label> -->
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-2">
-                        <button class="btn btn-sm btn-light">Upload</button>
+                        <button (click)="upload_csv('csv')" class="btn btn-sm btn-light">Upload</button>
                     </div>
-                    <div class="col-sm-4">
+                    <!-- <div class="col-sm-4">
                         <p class="bg-light text-danger p-1">No files selected</p>
                         <div class="row">
                             <div class="col-sm-12">
@@ -28,7 +29,7 @@
                                 <button class="btn btn-sm bg-dark text-white">DONE</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
