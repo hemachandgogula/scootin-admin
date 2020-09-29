@@ -30,8 +30,8 @@ export class ShopListComponent implements OnInit {
       this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
       if (this.authService.loggedUserRole == UserRole.ROLE_SUPER_ADMIN) {
         this.pageLoaded = true;
-        // this.getShopFilter(this.serviceAreaList[0].key);
-        this.getShops();
+        this.getShopFilter(this.serviceAreaList[0].key);
+        // this.getShops();
         this.isSuperAdmin = true;
       } else {
         this.pageLoaded = true;
@@ -59,7 +59,7 @@ export class ShopListComponent implements OnInit {
       this.pageLoaded = false;
     })
   }
-  getShopFilter(id: number) {
+  getShopFilter(id) {
     this.pageLoaded = true;
     this.shopService.getAllShopFilter(id).subscribe(res => {
       this.pageLoaded = false;

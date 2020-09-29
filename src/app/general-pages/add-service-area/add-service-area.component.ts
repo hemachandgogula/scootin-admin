@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServiceArea } from 'src/app/models/service-area';
 import { ServiceAreaService } from 'src/app/services/service-area.service';
 import { UtilityService } from 'src/app/services/utility.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-service-area',
@@ -28,7 +29,7 @@ export class AddServiceAreaComponent implements OnInit {
   editServiceAreaId: number;
   addServiceAreaForm: FormGroup;
   marker = { lat: 28.207609, lng: 79.826660 }
-  constructor(private _fb: FormBuilder, private service: ServiceAreaService, private utility: UtilityService) { }
+  constructor(private _fb: FormBuilder, private router: Router, private service: ServiceAreaService, private utility: UtilityService) { }
 
   ngOnInit() {
     this.addServiceAreaForm = this._fb.group({
@@ -52,14 +53,18 @@ export class AddServiceAreaComponent implements OnInit {
   addServiceArea() {
     this.service.addServiceArea(this.addServiceAreaForm.value).subscribe(res => {
       this.utility.showSuccess("Successfully added");
-      this.addServiceAreaForm.reset();
+      // this.addServiceAreaForm.reset();
+      this.router.navigate(['/general-pages/service-area-list']);
     })
   }
   updateServiceArea() {
     this.service.updateServiceArea(this.addServiceAreaForm.value, this.editServiceAreaId).subscribe(res => {
       this.utility.showSuccess("Successfully updated");
-      this.addServiceAreaForm.reset();
+      console.log('44')
+      // this.addServiceAreaForm.reset();
       this.updated.emit(true);
+      console.log('sdfdsf')
+      this.router.navigate(['/general-pages/service-area-list']);
     })
   }
 }

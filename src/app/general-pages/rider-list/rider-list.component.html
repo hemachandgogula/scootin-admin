@@ -1,3 +1,10 @@
+<div class="loader-wrapper" *ngIf="pageLoaded">
+    <div class="loader-container">
+        <div class="dot dot-1"></div>
+        <div class="dot dot-2"></div>
+        <div class="dot dot-3"></div>
+    </div>
+</div>
 <div class="row">
     <div class="col-12 grid-margin">
         <div class="card">
@@ -5,7 +12,8 @@
                 <h4 class="card-title mr-2">Rider List</h4>
                 <div class="d-flex align-items-center" *ngIf="isSuperAdmin">
                     <label class="mr-2">Service Area</label>
-                    <app-select-dropdown [list]="serviceAreaList" [selected]="serviceAreaList[0].key" [placeholder]="'Select Service Area'" (valueChange)="getRiderList($event)">
+                    <app-select-dropdown [list]="serviceAreaList" [selected]="serviceAreaList[0].key" [placeholder]="'Select Service Area'"
+                        (valueChange)="getRiderList($event)">
                     </app-select-dropdown>
                 </div>
                 <!-- <div class="input-group w-25">
@@ -45,8 +53,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                *ngFor="let rider of riderList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                            <tr *ngFor="let rider of riderList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td>
                                     {{rider.id}}
                                 </td>
@@ -74,23 +81,21 @@
                                 <td class="d-flex justify-content-around">
                                     <i class="mdi mdi-pencil-box mdi-24px text-primary c-pointer" data-toggle="modal"
                                         data-target="#editModal" (click)="editRider=rider"></i>
-                                    <i class="mdi mdi-delete mdi-24px text-danger c-pointer"
-                                        (click)="deleteRider(rider.id)"></i>
+                                    <i class="mdi mdi-delete mdi-24px text-danger c-pointer" (click)="deleteRider(rider.id)"></i>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <ngb-pagination class="d-flex justify-content-center"
-                        *ngIf="riderList != null && riderList.length>0" [collectionSize]="riderList.length"
-                        [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+                    <ngb-pagination class="d-flex justify-content-center" *ngIf="riderList != null && riderList.length>0"
+                        [collectionSize]="riderList.length" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <app-confirm-dialog></app-confirm-dialog>
-<div class="modal" tabindex="-1" role="dialog" id="editModal" tabindex="-1" role="dialog"
-    aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal" tabindex="-1" role="dialog" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

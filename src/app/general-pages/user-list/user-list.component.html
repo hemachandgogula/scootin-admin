@@ -1,8 +1,27 @@
+<div class="loader-wrapper" *ngIf="pageLoaded">
+    <div class="loader-container">
+        <div class="dot dot-1"></div>
+        <div class="dot dot-2"></div>
+        <div class="dot dot-3"></div>
+    </div>
+</div>
 <div class="row">
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <div class="search-field d-none d-md-block">
+                <div class="card-header d-flex align-items-baseline">
+                    <h4 class="card-title mr-2">User List</h4>
+                    <div class="input-group w-25">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" id="btnGroupAddon">
+                                <i class="mdi mdi-magnify"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control bg-light" placeholder="Search" aria-label="Search"
+                            aria-describedby="btnGroupAddon" [(ngModel)]="searchText" (keyup)="searchByName()">
+                    </div>
+                </div>
+                <!-- <div class="search-field d-none d-md-block">
                     <form class="d-flex align-items-center h-100" action="#">
                         <div class="input-group">
 
@@ -12,7 +31,7 @@
                             <input type="text" class="form-control border-1" placeholder="Search User">
                         </div>
                     </form>
-                </div>
+                </div> -->
                 <div class="table-margin">
                     <div class="table-responsive">
                         <table class="table">

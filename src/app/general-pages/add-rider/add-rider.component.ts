@@ -7,6 +7,7 @@ import { ServiceArea } from 'src/app/models/service-area';
 import { RiderService } from 'src/app/services/rider.service';
 import { ServiceAreaService } from 'src/app/services/service-area.service';
 import { UtilityService } from 'src/app/services/utility.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-rider',
@@ -57,7 +58,7 @@ export class AddRiderComponent implements OnInit {
   ]
   stateList: Dropdown[] = [];
   selectedCountry: string = 'India';
-  constructor(private fb: FormBuilder, private serviceAreaService: ServiceAreaService, private riderService: RiderService, private utility: UtilityService) { }
+  constructor(private fb: FormBuilder, private router: Router, private serviceAreaService: ServiceAreaService, private riderService: RiderService, private utility: UtilityService) { }
 
   ngOnInit() {
     this.serviceAreaService.getAllServiceArea().subscribe((res: ServiceArea[]) => {
@@ -165,7 +166,7 @@ export class AddRiderComponent implements OnInit {
             this.dlImagePath = undefined;
             this.selectedDLFile = '';
             this.addRiderForm.patchValue({
-              drivingLicenceMediaId:null
+              drivingLicenceMediaId: null
             })
             this.utility.showSuccess("Image deleted Successfully");
           },
@@ -181,7 +182,7 @@ export class AddRiderComponent implements OnInit {
             this.aadharImagePath = undefined;
             this.selectedAadharFile = '';
             this.addRiderForm.patchValue({
-              aadharCardMediaId:null
+              aadharCardMediaId: null
             })
             this.utility.showSuccess("Image deleted Successfully");
           },
@@ -190,13 +191,13 @@ export class AddRiderComponent implements OnInit {
           }
         )
         break;
-        case 'profile':
+      case 'profile':
         this.utility.deleteImage(this.addRiderForm.get('profileMediaId').value).subscribe(
           (res: any) => {
             this.aadharImgURL = undefined;
             this.aadharImagePath = undefined;
             this.addRiderForm.patchValue({
-              profileMediaId:null
+              profileMediaId: null
             })
             this.utility.showSuccess("Image deleted Successfully");
           },
@@ -215,8 +216,9 @@ export class AddRiderComponent implements OnInit {
     if (this.addRiderForm.valid) {
       this.riderService.addRider(this.addRiderForm.value).subscribe(res => {
         if (res) {
-          this.addRiderForm.reset();
+          // this.addRiderForm.reset();
           this.utility.showSuccess("Successfully Added");
+          this.router.navigate(['/general-pages/rider-list']);
         }
       })
     }
@@ -225,9 +227,10 @@ export class AddRiderComponent implements OnInit {
     if (this.addRiderForm.valid) {
       this.riderService.updateRider(this.addRiderForm.value, this.editRiderId).subscribe(res => {
         if (res) {
-          this.addRiderForm.reset();
+          // this.addRiderForm.reset();
           this.utility.showSuccess("Successfully Updated");
           this.updated.emit(true);
+          this.router.navigate(['/general-pages/rider-list']);
         }
       })
     }

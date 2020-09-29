@@ -10,10 +10,13 @@ import { UserService } from 'src/app/services/user.service';
 export class UserListComponent implements OnInit {
 
   userList: User[] = [];
+  pageLoaded = false;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.pageLoaded = true;
     this.userService.getAllUser().subscribe((res: User[]) => {
+      this.pageLoaded = false;
       this.userList = res;
     })
   }

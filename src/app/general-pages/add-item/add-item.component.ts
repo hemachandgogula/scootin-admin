@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Dropdown } from 'src/app/models/dropdown';
 import { Media } from 'src/app/models/media';
 import { ItemService } from 'src/app/services/item.service';
@@ -20,7 +20,7 @@ export class AddItemComponent implements OnInit {
   selectedShopId: number;
   imagePath: any;
   imgURL: any;
-  constructor(private _fb: FormBuilder, private shopService: ShopService, private utility: UtilityService, private itemService: ItemService, private route: ActivatedRoute) { }
+  constructor(private _fb: FormBuilder, private router: Router, private shopService: ShopService, private utility: UtilityService, private itemService: ItemService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.addItemForm = this._fb.group({
@@ -68,10 +68,11 @@ export class AddItemComponent implements OnInit {
     if (this.addItemForm.valid) {
       this.itemService.addItem(this.addItemForm.value).subscribe(res => {
         if (res) {
-          this.addItemForm.reset();
+          // this.addItemForm.reset();
           this.imgURL = undefined;
           this.imagePath = undefined;
           this.utility.showSuccess("Successfully Added");
+          this.router.navigate(['/general-pages/item-list']);
         }
       })
     }

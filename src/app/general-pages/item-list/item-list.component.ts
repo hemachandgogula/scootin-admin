@@ -21,18 +21,19 @@ export class ItemListComponent implements OnInit {
   itemList: Item[] = [];
   selectedShopId: number;
   serviceAreaList: Dropdown[] = [];
-  isSuperAdmin:boolean=false;
+  isSuperAdmin: boolean = false;
   selectedServiceId: number;
-  constructor(private itemService: ItemService, private route: ActivatedRoute,private authService:AuthenticationService, private utility: UtilityService, private auth: AuthenticationService, private serviceAreaService: ServiceAreaService) { }
+  pageLoaded = false;
+  constructor(private itemService: ItemService, private route: ActivatedRoute, private authService: AuthenticationService, private utility: UtilityService, private auth: AuthenticationService, private serviceAreaService: ServiceAreaService) { }
 
   ngOnInit() {
     this.serviceAreaService.getAllServiceArea().subscribe((res: ServiceArea[]) => {
       this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
       if (this.authService.loggedUserRole == UserRole.ROLE_SUPER_ADMIN) {
         this.getItemList(this.serviceAreaList[0].key);
-        this.isSuperAdmin=true;
-      }else{
-        this.getItemList(this.authService.loggedUserServiceArea);        
+        this.isSuperAdmin = true;
+      } else {
+        this.getItemList(this.authService.loggedUserServiceArea);
       }
     });
 
@@ -47,18 +48,24 @@ export class ItemListComponent implements OnInit {
   //   });
   // }
   getItemList(serviceId) {
+    this.pageLoaded = true;
     if (this.selectedShopId)
       this.itemService.getAllItemByShop(this.selectedShopId).subscribe((res: Item[]) => {
+        this.pageLoaded = false;
         this.itemList = res;
+      }, error => {
+        this.pageLoaded = false;
       })
-    else
-    {
-      this.selectedServiceId=serviceId;
+    else {
+      this.selectedServiceId = serviceId;
       this.itemService.getAllItem(this.selectedServiceId).subscribe((res: Item[]) => {
+        this.pageLoaded = false;
         this.itemList = res;
+      }, error => {
+        this.pageLoaded = false;
       })
     }
-    
+
   }
 
 }

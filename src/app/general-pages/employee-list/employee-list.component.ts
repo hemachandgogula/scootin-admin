@@ -14,6 +14,7 @@ export class EmployeeListComponent implements OnInit {
   employee: any = [];
   editEmployee;
   searchText: string;
+  pageLoaded = false;
   constructor(private empService: EmployeeService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit() {
@@ -21,9 +22,13 @@ export class EmployeeListComponent implements OnInit {
   }
 
   getAllEmployees() {
+    this.pageLoaded = true;
     this.empService.getAllEmployees().subscribe(
       (employee: any) => {
+        this.pageLoaded = false;
         this.employee = employee;
+      }, error => {
+        this.pageLoaded = false;
       }
     )
   }

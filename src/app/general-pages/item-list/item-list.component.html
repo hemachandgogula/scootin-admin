@@ -1,13 +1,21 @@
+<div class="loader-wrapper" *ngIf="pageLoaded">
+  <div class="loader-container">
+    <div class="dot dot-1"></div>
+    <div class="dot dot-2"></div>
+    <div class="dot dot-3"></div>
+  </div>
+</div>
 <div class="row">
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-header d-flex align-items-baseline justify-content-between">
         <h4 class="card-title mr-2">Item List</h4>
-       <div class="d-flex align-items-center" *ngIf="isSuperAdmin">
-        <label class="mr-2">Service Area</label>
-        <app-select-dropdown [list]="serviceAreaList"  [selected]="serviceAreaList[0].key" [placeholder]="'Select Service Area'" (valueChange)="getItemList($event)">
-        </app-select-dropdown>
-       </div>
+        <div class="d-flex align-items-center" *ngIf="isSuperAdmin">
+          <label class="mr-2">Service Area</label>
+          <app-select-dropdown [list]="serviceAreaList" [selected]="serviceAreaList[0].key" [placeholder]="'Select Service Area'"
+            (valueChange)="getItemList($event)">
+          </app-select-dropdown>
+        </div>
         <!-- <div class="input-group w-25">
             <div class="input-group-prepend">
                 <div class="input-group-text" id="btnGroupAddon">

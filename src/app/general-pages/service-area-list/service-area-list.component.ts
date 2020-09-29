@@ -14,9 +14,11 @@ export class ServiceAreaListComponent implements OnInit {
   pageSize = 10;
   serviceAreaList: ServiceArea[] = [];
   editServiceArea;
+  pageLoaded = false;
   constructor(private serviceAreaService: ServiceAreaService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit() {
+    this.pageLoaded = true;
     this.getServiceArea();
   }
   deleteServiceArea(id: number) {
@@ -31,8 +33,12 @@ export class ServiceAreaListComponent implements OnInit {
   }
 
   getServiceArea() {
+    this.pageLoaded = true;
     this.serviceAreaService.getAllServiceArea().subscribe((res: ServiceArea[]) => {
+      this.pageLoaded = false;
       this.serviceAreaList = res;
+    }, error => {
+      this.pageLoaded = false;
     })
   }
 

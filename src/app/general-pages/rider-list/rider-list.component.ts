@@ -21,8 +21,9 @@ export class RiderListComponent implements OnInit {
   pageSize = 10;
   editRider;
   serviceAreaList: Dropdown[] = [];
-  isSuperAdmin: boolean=false;
+  isSuperAdmin: boolean = false;
   selectedServiceId: number;
+  pageLoaded = false;
   constructor(private riderService: RiderService, private authService: AuthenticationService, private utility: UtilityService, private confirmDialogService: ConfirmDialogService, private serviceAreaService: ServiceAreaService) { }
 
   ngOnInit() {
@@ -30,11 +31,11 @@ export class RiderListComponent implements OnInit {
       this.serviceAreaList = this.utility.generateDropDownList('id', 'name', res);
       if (this.authService.loggedUserRole == UserRole.ROLE_SUPER_ADMIN) {
         this.getRiderList(this.serviceAreaList[0].key);
-        this.isSuperAdmin=true;
-      }else{
-        this.getRiderList(this.authService.loggedUserServiceArea);       
+        this.isSuperAdmin = true;
+      } else {
+        this.getRiderList(this.authService.loggedUserServiceArea);
       }
-    });    
+    });
   }
   deleteRider(id) {
     this.confirmDialogService.confirmThis("Are you sure to delete?", () => {
@@ -51,9 +52,13 @@ export class RiderListComponent implements OnInit {
 
   }
   getRiderList(serviceId) {
-    this.selectedServiceId=serviceId;
+    this.pageLoaded = true;
+    this.selectedServiceId = serviceId;
     this.riderService.getAllRider(this.selectedServiceId).subscribe((res: Rider[]) => {
+      this.pageLoaded = false;
       this.riderList = res;
+    }, error => {
+      this.pageLoaded = false;
     })
   }
   toggleRider(event, riderId: number) {
